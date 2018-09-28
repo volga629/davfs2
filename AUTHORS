@@ -1,0 +1,90 @@
+davfs2 AUTHORS 2014-04-21
+-------------------------
+
+This package is based on davfs2 0.2.3 by
+Sun Kim <hunkim@cs.ucsc.edu> and
+Robert Spier <robrt@users.sourceforge.net>.
+This version is a complete rewrite by Werner Baumann.
+The kernel interface definitions are copyright by
+Miklos Szeredi and Carnegie Mellon University, respectively.
+
+
+Copyright:
+==========
+
+Copyright (c) 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014
+              Werner Baumann <werner.baumann@onlinehome.de>
+
+    davfs2 is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
+
+    davfs2 is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with davfs2; if not, write to the Free Software Foundation,
+    Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+
+The complete text of the GNU General Public License can be found in `COPYING'.
+
+
+Copyright for the interface to the Fuse kernel module (fuse_kernel.h):
+======================================================================
+
+    Copyright (C) 2001-2007 Miklos Szeredi. All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
+
+    THIS SOFTWARE IS PROVIDED BY AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED.  IN NO EVENT SHALL AUTHOR OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+    OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+    HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+    LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+    OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+    SUCH DAMAGE.
+
+
+Copyright for the interface to the Coda kernel module (coda.h):
+===============================================================
+
+            Coda: an Experimental Distributed File System
+                             Release 4.0
+
+          Copyright (c) 1987-1999 Carnegie Mellon University
+                         All Rights Reserved
+
+Permission  to  use, copy, modify and distribute this software and its
+documentation is hereby granted,  provided  that  both  the  copyright
+notice  and  this  permission  notice  appear  in  all  copies  of the
+software, derivative works or  modified  versions,  and  any  portions
+thereof, and that both notices appear in supporting documentation, and
+that credit is given to Carnegie Mellon University  in  all  documents
+and publicity pertaining to direct or indirect use of this code or its
+derivatives.
+
+CODA IS AN EXPERIMENTAL SOFTWARE SYSTEM AND IS  KNOWN  TO  HAVE  BUGS,
+SOME  OF  WHICH MAY HAVE SERIOUS CONSEQUENCES.  CARNEGIE MELLON ALLOWS
+FREE USE OF THIS SOFTWARE IN ITS "AS IS" CONDITION.   CARNEGIE  MELLON
+DISCLAIMS  ANY  LIABILITY  OF  ANY  KIND  FOR  ANY  DAMAGES WHATSOEVER
+RESULTING DIRECTLY OR INDIRECTLY FROM THE USE OF THIS SOFTWARE  OR  OF
+ANY DERIVATIVE WORK.
+
+Carnegie  Mellon  encourages  users  of  this  software  to return any
+improvements or extensions that  they  make,  and  to  grant  Carnegie
+Mellon the rights to redistribute these changes without encumbrance.
+

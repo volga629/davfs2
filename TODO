@@ -1,0 +1,9 @@
+davfs2 TODO 2014-04-21
+----------------------
+
+- write a GNU-style manual
+
+- multithreading for HTTP-requests and cache maintainance
+
+- restructure file name extraction and href construction
+

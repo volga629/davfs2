@@ -1,0 +1,284 @@
+# #-#-#-#-#  umount.davfs.8.po (davfs2)  #-#-#-#-#
+# German translation of umount.davfs(8) man page.
+# Copyright (C) 2007, 2914 Werner Baumann
+# Werner Baumann <werner.baumann@onlinehome.de>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: davfs2 1.4.0\n"
+"POT-Creation-Date: 2015-02-01 11:54+0100\n"
+"PO-Revision-Date: 2014-08-23 20:16+0200\n"
+"Last-Translator: Werner Baumann <werner.baumann@onlinehome.de>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# type: TH
+#. type: TH
+#: davfs2.conf.5:1 mount.davfs.8:1 umount.davfs.8:1
+#, no-wrap
+msgid "@PACKAGE_STRING@"
+msgstr "@PACKAGE_STRING@"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:4 mount.davfs.8:3 umount.davfs.8:3
+#, no-wrap
+msgid "NAME"
+msgstr "BEZEICHNUNG"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:9 mount.davfs.8:22 umount.davfs.8:20
+#, no-wrap
+msgid "DESCRIPTION"
+msgstr "BESCHREIBUNG"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:568 mount.davfs.8:547 umount.davfs.8:79
+#, no-wrap
+msgid "AUTHORS"
+msgstr "AUTOREN"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:574 mount.davfs.8:564 umount.davfs.8:84
+#, no-wrap
+msgid "DAVFS2 HOME"
+msgstr "DAVFS2 HOME"
+
+# type: TH
+#. type: Plain text
+#: davfs2.conf.5:577 mount.davfs.8:567 umount.davfs.8:87
+msgid "@PACKAGE_BUGREPORT@"
+msgstr "@PACKAGE_BUGREPORT@"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:579 mount.davfs.8:569 umount.davfs.8:89
+#, no-wrap
+msgid "SEE ALSO"
+msgstr "SIEHE AUCH"
+
+# type: SH
+#. type: SH
+#: mount.davfs.8:8 umount.davfs.8:8
+#, no-wrap
+msgid "SYNOPSIS"
+msgstr "ÜBERSICHT"
+
+# type: SH
+#. type: SH
+#: mount.davfs.8:15 umount.davfs.8:15
+#, no-wrap
+msgid "SYNOPSIS (root only)"
+msgstr "ÜBERSICHT (nur für root)"
+
+# type: Plain text
+#. type: Plain text
+#: mount.davfs.8:60 umount.davfs.8:30
+msgid ""
+"I<dir> is the mountpoint where the WebDAV resource is mounted on.  It may be "
+"an absolute or relative path."
+msgstr ""
+"I<dir> ist der Einhängepunkt. Es kann eine absolute oder relative Pfadangabe "
+"sein."
+
+# type: SH
+#. type: SH
+#: mount.davfs.8:67 umount.davfs.8:51
+#, no-wrap
+msgid "OPTIONS"
+msgstr "OPTIONEN"
+
+# type: TP
+#. type: TP
+#: mount.davfs.8:69 umount.davfs.8:53
+#, no-wrap
+msgid "B<-V --version>"
+msgstr "B<-V --version>"
+
+# type: Plain text
+#. type: Plain text
+#: mount.davfs.8:72 umount.davfs.8:56
+msgid "Output version."
+msgstr "Zeige die Version an."
+
+# type: TP
+#. type: TP
+#: mount.davfs.8:73 umount.davfs.8:57
+#, no-wrap
+msgid "B<-h --help>"
+msgstr "B<-h --help>"
+
+# type: Plain text
+#. type: Plain text
+#: mount.davfs.8:76 umount.davfs.8:60
+msgid "Print a help message."
+msgstr "Zeige einen Hilfe-Text an."
+
+# type: SH
+#. type: SH
+#: mount.davfs.8:376 umount.davfs.8:67
+#, no-wrap
+msgid "FILES"
+msgstr "DATEIEN"
+
+# type: TP
+#. type: TP
+#: mount.davfs.8:437 umount.davfs.8:69
+#, no-wrap
+msgid "I<@SYS_RUN@>"
+msgstr "I<@SYS_RUN@>"
+
+# type: SH
+#. type: SH
+#: mount.davfs.8:540 umount.davfs.8:74
+#, no-wrap
+msgid "BUGS"
+msgstr "FEHLER"
+
+# type: TH
+#. type: TH
+#: umount.davfs.8:1
+#, no-wrap
+msgid "u@PROGRAM_NAME@"
+msgstr "u@PROGRAM_NAME@"
+
+# type: TH
+#. type: TH
+#: umount.davfs.8:1
+#, no-wrap
+msgid "2014-08-23"
+msgstr "2014-08-23"
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:6
+msgid "u@PROGRAM_NAME@ - Umount-helper to unmount a @PACKAGE@ file system"
+msgstr "u@PROGRAM_NAME@ - Umount-Hilfsprogramm für @PACKAGE@ Dateisysteme"
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:11
+msgid "B<u@PROGRAM_NAME@ [-h | --help] [-V | --version]>"
+msgstr "B<u@PROGRAM_NAME@ [-h | --help] [-V | --version]>"
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:13
+msgid "B<umount >I<dir>"
+msgstr "B<umount >I<dir>"
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:18
+msgid "B<u@PROGRAM_NAME@ >I<dir>"
+msgstr "B<u@PROGRAM_NAME@ >I<dir>"
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:26
+msgid ""
+"B<u@PROGRAM_NAME@> is a umount helper program. It is called by the "
+"B<umount>(8) command. Its purpose is to prevent the umount command from "
+"returning unless B<@PROGRAM_NAME@> has synchronized all its cached files "
+"with the webdav server."
+msgstr ""
+"B<u@PROGRAM_NAME@> ist ein Hilfsprogramm, das von B<umount>(8)  aufgerufen "
+"wird. Es soll verhindern, dass das umount-Kommando zurück kehrt, bevor "
+"B<@PROGRAM_NAME@> alle geänderten Dateien aus dem Cache auf den WebDAV-"
+"Server zurück sichern konnte."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:39
+msgid ""
+"While for local file systems B<umount>(8) will only return when all cached "
+"data have been written to disk, this is not automatically true for a mounted "
+"B<@PACKAGE@> file system. With this umount helper the user can rely on the "
+"familiar behaviour of B<umount>(8). To inform the operating system that the "
+"file system uses a network connection, you should always use the B<_netdev> "
+"option, when mounting as B<@PACKAGE@> file system."
+msgstr ""
+"Bei lokalen Dateisystemen kehrt B<umount>(8) erst zurück, wenn alle Daten "
+"aus dem Cache auf die Festplatte geschrieben sind. Dies funkioniert bei "
+"einem B<@PACKAGE@>-Dateisystem nicht automatisch. Mit diesem Hilfsprogramm "
+"kann sich der Benutzer auf das bekannte Verhalten von B<umount>(8) "
+"verlassen. Es sollte auch immer mit der Option B<_netdev> eingehängt werden, "
+"damit das Betriebssystem darüber informiert wird, dass das B<@PACKAGE@>-"
+"Dateisystem eine Netzwerkverbindung braucht."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:43
+msgid ""
+"Depending on the amount of data and the quality of the connection, "
+"unmounting a B<@PACKAGE@> file system may take some seconds up to some hours."
+msgstr ""
+"Abhängig von der Datenmenge und der Qualität der Netzwerkverbindung kann das "
+"Aushängen ein paar Sekunden, aber auch einige Stunden dauern."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:49
+msgid ""
+"If the B<@PROGRAM_NAME@> daemon encountered serious errors, "
+"B<u@PROGRAM_NAME@> may return an error instead of unmounting the file "
+"system. In this case try B<umount -i>. The B<-i> option will prevent "
+"B<umount>(8) from calling B<u@PROGRAM_NAME@>."
+msgstr ""
+"Wenn der B<@PROGRAM_NAME@>-Hintergrundprozess ernste Probleme hat, kann "
+"B<u@PROGRAM_NAME@> möglicherweise das Dateisystem nicht aushängen, sondern "
+"meldet einen Fehler. Versuche es in diesem Fall mit B<umount -i>. Die Option "
+"B<-i> hindert B<umount>(8) daran, B<u@PROGRAM_NAME@> aufzurufen."
+
+# type: TP
+#. type: TP
+#: umount.davfs.8:61
+#, no-wrap
+msgid "B<-f -l -n -r -v -t>"
+msgstr "B<-f -l -n -r -v -t>"
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:65
+msgid ""
+"This options are B<ignored>. They are only recognized for compatibility with "
+"B<umount>(8)."
+msgstr ""
+"Dies Optionen dienen nur der Kompatibilität mit B<umount>(8) und werden "
+"ignoriert."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:72
+msgid "PID-files of running B<u@PROGRAM_NAME@> processes are looked up here."
+msgstr ""
+"Die PID-Dateien der laufenden B<@PROGRAM_NAME@>-Hintergrundprozesse werden "
+"in diesem Verzeichnis gesucht."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:77
+msgid "No known bugs."
+msgstr "Derzeit keine bekannten."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:82
+msgid ""
+"This man page was written by Werner Baumann E<lt>werner.baumann@onlinehome."
+"deE<gt>."
+msgstr ""
+"Diese Handbuch hat Werner Baumann E<lt>werner.baumann@onlinehome.deE<gt> "
+"geschrieben."
+
+# type: Plain text
+#. type: Plain text
+#: umount.davfs.8:94
+msgid "B<@PROGRAM_NAME@>(8), B<umount>(8), B<@CONFIGFILE@>(5), B<fstab>(5)"
+msgstr "B<@PROGRAM_NAME@>(8), B<umount>(8), B<@CONFIGFILE@>(5), B<fstab>(5)"

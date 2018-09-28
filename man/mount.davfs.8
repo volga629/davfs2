@@ -1,0 +1,579 @@
+.TH @PROGRAM_NAME@ 8 "2016\-04\-15" @PACKAGE_STRING@
+
+.SH NAME
+
+@PROGRAM_NAME@ \- Mount a WebDAV resource as @PACKAGE@ file system
+
+
+.SH SYNOPSIS
+
+.B @PROGRAM_NAME@ [\-h | \-\-help] [\-V | \-\-version]
+.br
+.BI "mount {" dir " | " webdavserver }
+
+
+.SH SYNOPSIS (root only)
+
+.BI "mount \-t davfs [\-o " option [,...]] " webdavserver dir"
+.br
+.BI "@PROGRAM_NAME@ [\-o " option [,...]] " webdavserver dir"
+
+
+.SH DESCRIPTION
+
+\fB@PROGRAM_NAME@\fR allows you to mount the WebDAV resource identified by
+.I webdavserver
+into the local filesystem at
+.I dir.
+WebDAV is an extension to HTTP that allows remote, collaborative authoring
+of Web resources, defined in RFC 4918.
+\fB@PROGRAM_NAME@\fR is part of \fB@PACKAGE@\fR.
+
+.PP
+\fB@PACKAGE@\fR allows documents on a remote Web server to be edited using
+standard applications. For example, a remote Web site could be updated
+in\-place using the same development tools that initially created the site.
+Or you may use a WebDAV resource for documents you want to access and edited
+from different locations.
+
+.PP
+\fB@PACKAGE@\fR supports \fBTLS/SSL\fR (if the neon library supports it) and
+proxies. \fB@PROGRAM_NAME@\fR runs as a daemon in userspace. It integrates into the
+virtual file system by either the coda or the fuse kernel files system.
+Currently CODA_KERNEL_VERSION 3 and FUSE_KERNEL_VERSION 7 are supported.
+
+.PP
+\fB@PROGRAM_NAME@\fR is usually invoked by the \fBmount\fR(8) command when
+using the \fI\-t davfs\fP option. After mounting it runs as a daemon. To unmount
+the \fBumount\fR(8) command is used.
+
+.PP
+\fIwebdavserver\fP is the URL of the server. It must at least contain the
+host name. It may additionally contain the scheme, the port and the path.
+Missing components are set to sensible default values. The path component must
+\fBnot\fR be %-encoded, but when entering the URL at the command line or in
+/etc/fstab the escaping rules of the shell or fstab must be obeyed.
+
+.PP
+\fIdir\fP is the mountpoint where the WebDAV resource is mounted on.
+It may be an absolute or relative path.
+
+.PP
+\fIfstab\fP may be used to define mounts and mount options as usual. In
+place of the device the url of the WebDAV server must be given. There must not
+be more than one entry in \fIfstab\fP for every mountpoint.
+
+
+.SH OPTIONS
+
+.TP
+.B \-V \-\-version
+Output version.
+
+.TP
+.B \-h \-\-help
+Print a help message.
+
+.TP
+.B \-o
+A comma\-separated list defines mount options to be used. Available options
+are:
+
+.RS
+.TP
+.B [no]auto
+Can (not) be mounted with \fBmount \-a\fR.
+.br
+Default: \fBauto\fR.
+
+.TP
+.B comment=\fIsome comment\fP
+This option is ignored by \fB@PROGRAM_NAME@\fR but other programs may
+require it to be present in fstab.
+
+.TP
+.B conf=\fIabsolute path\fP
+An alternative user configuration file. This option is intended for cases
+where the default user configuration file in the users home directory can not
+be used.
+.br
+Default: \fI~/.@PACKAGE@/@CONFIGFILE@\fP
+
+.TP
+.B [no]dev
+(Do not) interpret character or block  special  devices  on the file system.
+This option is only included for compatibility with the \fBmount\fR(8)
+program. It will allways be set to \fBnodev\fR
+
+.TP
+.B dir_mode=\fImode\fP
+The default mode bits for directories in the mounted file system. Value given
+in octal. s\-bits for user and group are allways silently ignored.
+.br
+Default: calculated from the umask of the mounting user; an x\-bit is
+associated to every r\-bit in u\-g\-o.
+
+.TP
+.B [no]exec
+(Do  not) allow  execution  of any binaries on the mounted file system.
+.br
+Default: \fBexec\fR. (When mounting as an ordinary user, the \fBmount\fR(8)
+program will set the default to \fBnoexec\fR.)
+
+.TP
+.B file_mode=\fImode\fP
+The default mode bits for files in the mounted file system. Value given
+in octal. s\-bits for user and group are allways silently ignored.
+.br
+Default: calculated from the umask of the mounting user; no x\-bits
+are set for files.
+
+.TP
+.B gid=\fIgroup\fP
+The group the mounted file system belongs to. It may be a numeric ID or a
+group name. The mounting user, if not root, must be member of this group.
+.br
+Default: the primary group of the mounting user.
+
+.TP
+.B [no]grpid
+When this option is set a newly created file will take the group id
+of the directory in which it is created. This will also apply to all files
+that are on the server and not in the local cache. (That is because the
+group id is not stored on the server.)
+.br
+If the group id of the directory is \fIroot\fP this option is ignored.
+.br
+Default: \fBnogrpid\fR.
+
+.TP
+.B [no]_netdev
+The file system needs a (no) network connection for operation. This information
+allows the operating system to handle the file system properly at system start
+and when the network is shut down.
+.br
+Default: \fB_netdev\fR
+
+.TP
+.B ro
+Mount the file system read\-only.
+.br
+Default: \fBrw\fR.
+
+.TP
+.B rw
+Mount the file system read\-write.
+.br
+Default: \fBrw\fR.
+
+.TP
+.B [no]suid
+Do not allow set\-user\-identifier or set\-group\-identifier bits to take effect.
+This option is only included for compatibility with the mount program. It will
+allways be set to \fBnosuid\fR.
+
+.TP
+.B [no]user
+(Do not) allow  an  ordinary  user  to mount the file system. The name of the
+mounting user is written to \fImtab\fP so that he can unmount the file system
+again. Option \fBuser\fR implies the options \fBnoexec\fR, \fBnosuid\fR and
+\fBnodev\fR (unless  overridden by subsequent options). This option makes only
+sense when set in \fIfstab\fP.
+.br
+Default: ordinary users are not allowed to mount.
+
+.TP
+.B users
+Like \fBuser\fR, but \fBany\fR user is allowed to unmount the file system,
+not only the mounting user. This is generally not recomended.
+If the \fBuser\fR option allows an unprivileged user to mount, but unmounting by
+the mounting user fails the \fBusers\fR may be a work around.
+.br
+Default: only the mounting user is allowed to unmount the file system.
+
+.TP
+.B uid=\fIuser\fP
+The owner of the mounted file system. It may be a numeric ID or a user name.
+Only when mounted by root, this may be different from the mounting user.
+.br
+Default: ID of the mounting user.
+.RE
+
+.TP
+.B username=\fIWebDAV_user\fP
+Use this name to authenticate with the WebDAV server. This option
+is intended for use with pam_mount only. When this option is set the
+credentials in the secrets files will be ignored. The password will
+always be read from stdin, even when option \fIaskauth\fP is set to 0.
+Do not use it in \fIfstab\fP. The username will be visible for everyone
+in the output of \fIps\fP.
+.br
+Default: no username.
+.br
+\fBExperimental:\fR This option is experimental and might be removed. If you
+think it useful and successfully use it please send a short report.
+
+
+.SH SECURITY POLICY
+
+\fB@PROGRAM_NAME@\fR needs root privileges for mounting. But running a daemon,
+that is connected to the internet, with root privileges is a security risk. So
+\fB@PROGRAM_NAME@\fR will change its uid and gid when entering daemon mode.
+
+.RS
+.PP
+When invoked by root \fB@PROGRAM_NAME@\fR will run as user \fB@USER@\fR and
+group \fB@GROUP@\fR. This may be changed in \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP.
+
+.PP
+When invoked by an ordinary user it will run with the id of this user and
+with group \fB@GROUP@\fR.
+.RE
+
+As the file system may be mounted over an insecure internet connection,
+this increases the risk that malicious content may be included in the file
+system. So \fB@PROGRAM_NAME@\fR is slightly more restrictive than
+\fBmount\fR(8).
+
+.RS
+.PP
+Options \fBnosuid\fR and \fBnodev\fR will always be set; even root can not
+change this.
+
+.PP
+For ordinary users to be able to mount, they must be member of group
+\fB@GROUP@\fR and there must be an entry in \fIfstab\fP.
+
+.PP
+When the mount point given in \fIfstab\fP is a relative file name and the
+file system is mounted by an unprivileged user, the mount point must lie within
+the home directory of the mounting user.
+
+.PP
+If in \fIfstab\fP option \fBuid\fR and/or \fBgid\fR are given, an ordinary
+user can only mount, if her uid is the one given in option \fBuid\fR and
+he belongs to the group given in option \fBgid\fR.
+.RE
+
+\fBWARNING:\fR If root allows an ordinary user to mount a file system
+(using \fIfstab\fP) this includes the permission to read the
+associated \fBcredentials\fR from \fI@SYS_CONF_DIR@/@SECRETSFILE@\fP
+as well as the \fBprivate key\fR of the associated \fBclient certificate\fR
+and the mounting user may get access to this information. You should only
+do this, if you might as well give this information to the user directly.
+
+.SH URLS AND MOUNT POINTS WITH SPACES
+
+Special characters like spaces in pathnames are a mess. They are interpreted
+differently by different programs and protocols, and there are different rules
+for escaping.
+
+.PP
+In \fIfstab\fP spaces must be replaced by a three digit octal escape
+sequence. Write \fIhttp://foo.bar/path\(rs040with\(rs040spaces\fP instead of
+\fIhttp://foo.bar/path with spaces\fP.
+
+.PP
+For the \fI@CONFIGFILE@\fP and the \fI@SECRETSFILE@\fP files please see
+the escape and quotation rules described in the \fB@CONFIGFILE@\fR(5) man page.
+
+.PP
+On \fIcommand line\fP you must obey the escaping rules of the shell.
+
+
+.SH CACHING
+
+\fB@PROGRAM_NAME@\fR tries to reduce HTTP\-trafic by caching and reusing data.
+Information about directories and files are held in memory, while downloaded
+files are cached on disk.
+
+.PP
+\fB@PROGRAM_NAME@\fR needs to hold a local copy of all open files in the
+cache directory. Please make sure that enough local disk space is available.
+
+.PP
+\fB@PROGRAM_NAME@\fR will consider cached information about directories and file
+attributes valid for a configurable time and look up this information on
+the server only after this time has expired (or there is other evidence
+that this information is stale). So if somebody else creates or deletes
+files on the server it may take some time before the local file system
+reflects this.
+
+.PP
+This will not affect the content of files and directory listings. Whenever
+a file is opened, the server is looked up for a newer version of the file.
+Please consult the manual \fB@CONFIGFILE@\fR(5) to see how can you configure
+this according your needs.
+
+
+.SH LOCKS, LOST UPDATE PROBLEM AND BACKUP FILES
+
+WebDAV introduced locks and \fB@PROGRAM_NAME@\fR uses them by default. This will in
+most cases prevent two people from changing the same file in parallel. But not
+allways:
+
+.RS
+.PP
+You might have disabled locks in \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP or
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP.
+
+.PP
+The server might not support locks (they are not mandatory).
+
+.PP
+A bad connection might prevent \fB@PROGRAM_NAME@\fR from refreshing the lock
+in time.
+
+.PP
+Another WebDAV\-client might use your lock (that is not too difficult and might
+even happen without intention).
+.RE
+
+.PP
+\fB@PROGRAM_NAME@\fR will therefore check if the file has been changed on the
+the server before it uploads a new version. If it
+finds it impossible to upload the locally changed file, it will store it in
+the local backup direcotry \fIlost+found\fP. You should check this directory from
+time to time and decide what to do with this files.
+
+.PP
+Sometimes locks held by some client on the server will not be released. Maybe
+the client crashes or the network connection fails. When \fB@PROGRAM_NAME@\fR
+finds a file locked on the server, it will check whether the lock is
+held by \fB@PROGRAM_NAME@\fR and the current user, and if so tries to reuse and
+release it. But this will not allways succeed. So servers should automatically
+release locks after some time, when they are not refreshed by the client.
+
+.PP
+WebDAV allows to lock files that don't exist (to protect the name when a client
+intends to create a new file). This locks will be displayed as files with
+size 0 and last modified date of 1970\-01\-01. If this locks are not released
+properly \fB@PROGRAM_NAME@\fR may not be able to access this files. You can use
+\fBcadaver\fR(1) <\fIhttp://www.webdav.org/cadaver/\fP> to remove this locks.
+
+
+.SH FILE OWNER AND PERMISSIONS
+
+\fB@PACKAGE@\fR implements Unix permissions for access control. But
+changing owner and permissions of a file is only \fBlocal\fR. It is 
+intended as a means for the owner of the file system, to controll whether
+other local users may acces this file system.
+
+.PP
+The server does not know about this. From the servers point of view there is
+just one user (identified by the credentials) connected. Another WebDAV\-client,
+connected to the same server, is not affected by this local changes.
+
+.PP
+There is one exeption: The \fBexecute bit\fR on files is stored as a
+property on the sever. You may think of this property as an information about
+the type of file rather than a permission. Whether the file is executable
+on the local system is still controlled by mount options and local permissions.
+
+.PP
+When the file system is unmounted, attributes of cached files (including
+owner and permissions) are stored in cache, as well as the attributs of
+the direcotries they are in. But there is no information stored about
+directories that do not contain cached files.
+
+
+.SH FILES
+
+.TP
+.I @SYS_CONF_DIR@/@CONFIGFILE@
+System wide configuration file.
+
+.TP
+.I ~/.@PACKAGE@/@CONFIGFILE@
+Configuration file in the users home directory.The user configuration takes
+precedence over the system wide configuration. If it does not exist,
+\fB@PROGRAM_NAME@\fR will will create a template file.
+
+.TP
+.I @SYS_CONF_DIR@/@SECRETSFILE@
+Holds the credentials for WebDAV servers and the proxy, as well as
+decryption passwords for client certificates. The file must be
+read\-writable by root only.
+
+.TP
+.I ~/.@PACKAGE@/@SECRETSFILE@
+Holds credentials for WebDAV servers and proxy, as well as decryption
+passwords for client certificates. The file must be
+read\-writable by the owner only. Credentials are first
+looked up in the home directory of the mounting user. If not found
+there the system wide secrets file is consulted. If no creditentials and
+passwords are found they are asked from the user interactively (if not
+disabled). If the file does not exist, \fB@PROGRAM_NAME@\fR will will
+create a template file.
+
+.TP
+.I @SYS_CONF_DIR@/@CERTS_DIR@
+You may store trusted server certificates here, that can not be verified
+by use of the system wide CA\-Certificates. This is useful when your server
+uses a selfmade certificate. You must configure the \fBservercert\fR option in
+\fI@SYS_CONF_DIR@/@CONFIGFILE@\fP or \fI~/.@PACKAGE@/@CONFIGFILE@\fP to use
+it. Certificates must be in PEM format.
+.br
+Be sure to verify the certificate.
+
+.TP
+.I ~/.@PACKAGE@/@CERTS_DIR@
+You may store trusted server certificates here, that can not be verified
+by use of the system wide CA\-Certificates. This is useful when your server
+uses a selfmade certificate. You must configure the \fBservercert\fR option in
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP to use it. Certificates must be in PEM format.
+.br
+Be sure to verify the certificate.
+
+.TP
+.I @SYS_CONF_DIR@/@CERTS_DIR@/@CLICERTS_DIR@
+To store client certificates. Certificates must be in PKCS#12 format. You must
+configure the \fBclientcert\fR option in \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP or
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP to use it. This directory must be rwx by root
+only.
+
+.TP
+.I ~/.@PACKAGE@/@CERTS_DIR@/@CLICERTS_DIR@
+To store client certificates. Certificates must be in PKCS#12 format. You must
+configure the \fBclientcert\fR option in \fI~/.@PACKAGE@/@CONFIGFILE@\fP to
+use it. This directory must be rwx by the owner only.
+
+.TP
+.I @SYS_RUN@
+PID\-files of running mount.davfs processes are stored there. This directory
+must belong to group \fB@USER@\fR with write permissions for the group and
+the sticky\-bit set (mode 1775). The PID\-files are named after the mount point
+of the file system.
+
+.TP
+.I @SYS_CACHE_DIR@
+System wide directory for cached files. Used when the file system is
+mounted by root. It must belong do group \fB@USER@\fR and read, write and
+execute bits for group must be set. There is a subdirectory for every mounted
+file system. The names of this subdirectories are created from url, mount
+point and user name.
+
+.TP
+.I ~/.@PACKAGE@/cache
+Cache directory in the mounting users home directory. For every mounted
+WebDAV resource a subdirectory is created.
+.RE
+
+\fB@PROGRAM_NAME@\fR will try to create missing directories, but it will
+\fBnot\fR touch \fI@SYS_CONF_DIR@\fP.
+
+.SH ENVIRONMENT
+
+.TP
+.B https_proxy http_proxy all_proxy
+If no proxy is defined in the configuration file the value is taken from
+this environment variables. The proxy may be given with or without scheme
+and with or without port
+.br
+http_proxy=[http://]foo.bar[:3218]
+.br
+Only used when the mounting user is root.
+
+.TP
+.B no_proxy
+A comma separated list of domain names that shall be accessed directly.
+\fB*\fR matches any domain name. A domain name starting with \fB.\fR
+(period) matches all subdomains.
+.br
+Only used when the mounting user is root.
+.br
+Not applied when the proxy is defined in \fI@SYS_CONF_DIR@\fP.
+
+
+.SH EXAMPLES
+
+.B Non root user (e.g. filomena):
+
+.PP
+To allow an ordinary user to mount there must be an entry in \fIfstab\fP
+.RS
+http://webdav.org/dav   /media/dav   davfs   noauto,user   0   0
+.RE
+
+.PP
+If a proxy must be used this should be configured in
+\fI@SYS_CONF_DIR@/@CONFIGFILE@\fP
+.RS
+proxy   proxy.mycompany.com:8080
+.RE
+
+.PP
+Credentials are stored in \fI/home/filomena/.@PACKAGE@/@SECRETSFILE@\fP
+.RS
+proxy.mycompany.com     filomena  "my secret"
+.br
+/media/dav   webdav\-username   password
+.RE
+
+.PP
+Now the WebDAV resource may be mounted by user filomena invoking
+.RS
+.B mount /media/dav
+.RE
+
+.PP
+and unmounted by user filomena invoking
+.RS
+.B umount /media/dav
+.RE
+
+.PP
+.B Root user only:
+
+.PP
+Mounts the resource \fIhttps://asciigirl.com/webdav\fP at mount point
+\fI/mount/site\fP, encrypting all traffic with SSL. Credentials for
+\fIhttp://webdav.org/dav\fP will be looked up in \fI@SYS_CONF_DIR@/@SECRETSFILE@\fP,
+if not found there the user will be asked.
+.RS
+.B mount \-t davfs \-o uid=otto,gid=users,mode=775 https://asciigirl.com/webdav /mount/site
+.RE
+
+.PP
+Mounts the resource \fIhttp://linux.org.ar/repos\fP at \fI/dav\fP.
+.RS
+.B mount.davfs \-o uid=otto,gid=users,mode=775 http://linux.org.ar/repos/ /dav
+.RE
+
+
+.SH BUGS
+
+\fB@PACKAGE@\fR does not support links.
+.PP
+A \fB@PACKAGE@\fR file system cannot be moved with \fImount --move\fR.
+
+
+.SH AUTHORS
+
+This man page was written by Luciano Bello <luciano@linux.org.ar>
+for Debian, for version 0.2.3 of davfs2.
+
+.PP
+It has been updated for this version by Werner Baumann
+<werner.baumann@onlinhome.de>.
+
+.PP
+@PACKAGE@ is developed by Sung Kim <hunkim@gmail.com>.
+
+.PP
+Version 1.0.0 (and later) of @PACKAGE@ is a complete rewrite
+by Werner Baumann.
+
+
+.SH DAVFS2 HOME
+
+@PACKAGE_BUGREPORT@
+
+
+.SH SEE ALSO
+
+.BR u@PROGRAM_NAME@ (8),
+.BR @CONFIGFILE@ (5),
+.BR mount (8),
+.BR umount (8),
+.BR fstab (5)

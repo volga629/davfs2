@@ -1,0 +1,8 @@
+# List of source files which contain translatable strings.
+src/cache.c
+src/dav_coda.c
+src/dav_fuse.c
+src/kernel_interface.c
+src/mount_davfs.c
+src/umount_davfs.c
+src/webdav.c

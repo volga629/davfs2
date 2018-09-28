@@ -1,0 +1,85 @@
+2008-07-12
+----------
+
+#Copyright (C) 2006, 2007, 2008 Werner Baumann
+
+#Copying and distribution of this file, with or without modification, are
+#permitted in any medium without royalty.
+
+
+davfs2 uses the GNU gettext utilities to support localized messages.
+Information about GNU gettext may be found at
+http://www.gnu.org/software/gettext/manual/
+
+For the man pages (and probably other documentation in future), it makes use
+of the po4a tools in order to keep translations of documentation maintainable.
+po4a (http://po4a.alioth.debian.org/) applies the gettext tools to arbitrary
+documentation.
+
+
+Messages
+--------
+All messages that need translation are in the file po/davfs2.pot. The
+translated messages will be in po/ll.po, where ll is the two-letter country
+code.
+If you start a translation into a language not yet supported, you may just
+take a copy of po/davfs2.pot for your ll.po file.
+
+
+Man Pages
+---------
+The .pot files of the man pages are in the man/ subdirectory together with
+a configuration file for po4a to automatically build all the translated man
+pages from the .po files.
+There is a subdirectory for each language, named after the country code, that
+holds the .po files and the addendum files. As usual the initial .po file can
+be a copy of the .pot file.
+
+
+Replacement Text in Man Pages
+-----------------------------
+davfs2 uses all uppercase strings enclosed in @-characters for strings that may
+change with every version or at compile time (like @PACKAGE_STRING@ or
+@SYS_CACHE_DIR@). They will be replaced at compile time by the correct value.
+Please use them in your translation unaltered. To allow correct integration
+into the translated text, here are the most probable values:
+
+  @PACKAGE@           davfs2
+  @PACKAGE_STRING@    davfs2 1.2.0
+  @PROGRAM_NAME@      mount.davfs
+  @CONFIGFILE@        davfs2.conf
+  @SECRETSFILE@       secrets
+  @CERTS_DIR@         certs
+  @CLICERTS_DIR@      certs/private
+  @SYS_CONF_DIR@      /usr/local/etc/davfs2 or
+                      /etc/davfs2
+  @SYS_RUN@           /var/run/mount.davfs
+  @SYS_CACHE_DIR@     /var/cache/davfs2
+  @USER@              davfs2
+  @GROUP@             davfs2
+
+
+Additional Text
+---------------
+At least you want to add a paragraph about the translators into the localized
+man page. But maybe you feel the need for some more additions that are
+not present in the English man page.
+Unfortunately, these additions cannot be inserted directly into the .po file,
+as the document structure must not differ from the original. So these
+additions have to go into separate files, called addendum.
+You can use the template man/template.translator to add a paragraph about
+the translators. If you need more than this, you have to create additional
+addendum files. Please see the po4a documentation for the syntax of the
+PO4A-HEADER to mark the position where to add the text.
+Please use the same character encoding as in the .po file.
+
+
+Character Encoding
+------------------
+** This issue seems to be fixed today and man pages are allowed to be
+   utf-8. But I am not really sure. **
+At the moment, the "man" tool, or at least one of its helper programs, do not
+seem capable of handling UTF-8 encoding. Luckily, gettext can convert the
+encoding when the translated man page is created. So you may use UTF-8 in the
+.po file or any other encoding. But please tell me which character encoding
+should be used when the man page is built.

@@ -1,0 +1,101 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH u@PROGRAM_NAME@ 8 2014\-08\-23 @PACKAGE_STRING@ 
+
+.SH BEZEICHNUNG
+
+u@PROGRAM_NAME@ \- Umount\-Hilfsprogramm für @PACKAGE@ Dateisysteme
+
+
+.SH ÜBERSICHT
+
+\fBu@PROGRAM_NAME@ [\-h | \-\-help] [\-V | \-\-version]\fP
+.br
+\fBumount \fP\fIdir\fP
+
+
+.SH "ÜBERSICHT (nur für root)"
+
+\fBu@PROGRAM_NAME@ \fP\fIdir\fP
+
+
+.SH BESCHREIBUNG
+
+\fBu@PROGRAM_NAME@\fP ist ein Hilfsprogramm, das von \fBumount\fP(8)  aufgerufen
+wird. Es soll verhindern, dass das umount\-Kommando zurück kehrt, bevor
+\fB@PROGRAM_NAME@\fP alle geänderten Dateien aus dem Cache auf den
+WebDAV\-Server zurück sichern konnte.
+
+.PP
+\fIdir\fP ist der Einhängepunkt. Es kann eine absolute oder relative Pfadangabe
+sein.
+
+.PP
+Bei lokalen Dateisystemen kehrt \fBumount\fP(8) erst zurück, wenn alle Daten
+aus dem Cache auf die Festplatte geschrieben sind. Dies funkioniert bei
+einem \fB@PACKAGE@\fP\-Dateisystem nicht automatisch. Mit diesem Hilfsprogramm
+kann sich der Benutzer auf das bekannte Verhalten von \fBumount\fP(8)
+verlassen. Es sollte auch immer mit der Option \fB_netdev\fP eingehängt werden,
+damit das Betriebssystem darüber informiert wird, dass das
+\fB@PACKAGE@\fP\-Dateisystem eine Netzwerkverbindung braucht.
+
+.PP
+Abhängig von der Datenmenge und der Qualität der Netzwerkverbindung kann das
+Aushängen ein paar Sekunden, aber auch einige Stunden dauern.
+
+.PP
+Wenn der \fB@PROGRAM_NAME@\fP\-Hintergrundprozess ernste Probleme hat, kann
+\fBu@PROGRAM_NAME@\fP möglicherweise das Dateisystem nicht aushängen, sondern
+meldet einen Fehler. Versuche es in diesem Fall mit \fBumount \-i\fP. Die Option
+\fB\-i\fP hindert \fBumount\fP(8) daran, \fBu@PROGRAM_NAME@\fP aufzurufen.
+
+
+.SH OPTIONEN
+
+.TP 
+\fB\-V \-\-version\fP
+Zeige die Version an.
+
+.TP 
+\fB\-h \-\-help\fP
+Zeige einen Hilfe\-Text an.
+
+.TP 
+\fB\-f \-l \-n \-r \-v \-t\fP
+Dies Optionen dienen nur der Kompatibilität mit \fBumount\fP(8) und werden
+ignoriert.
+
+
+.SH DATEIEN
+
+.TP 
+\fI@SYS_RUN@\fP
+Die PID\-Dateien der laufenden \fB@PROGRAM_NAME@\fP\-Hintergrundprozesse werden
+in diesem Verzeichnis gesucht.
+
+
+.SH FEHLER
+
+Derzeit keine bekannten.
+
+
+.SH AUTOREN
+
+Diese Handbuch hat Werner Baumann <werner.baumann@onlinehome.de>
+geschrieben.
+
+
+.SH ÜBERSETZER
+Das Handbuch wurde von Werner Baumann <werner.baumann@onlinehome.de>
+übersetzt. 2009-04-27
+.SH "DAVFS2 HOME"
+
+@PACKAGE_BUGREPORT@
+
+
+.SH "SIEHE AUCH"
+
+\fB@PROGRAM_NAME@\fP(8), \fBumount\fP(8), \fB@CONFIGFILE@\fP(5), \fBfstab\fP(5)

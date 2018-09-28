@@ -1,0 +1,4 @@
+PO4A-HEADER:mode=after;position=^\.SH AUTOREN;beginboundary=^\.SH
+.SH ÜBERSETZER
+Das Handbuch wurde von Werner Baumann <werner.baumann@onlinehome.de>
+übersetzt. 2009-04-27

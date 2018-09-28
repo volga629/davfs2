@@ -1,0 +1,152 @@
+2014-08-23
+----------
+
+# Copyright (C) 2006, 2007, 2008, 2009, 2010. 2012, 2013, 2014 Werner Baumann
+
+# Copying and distribution of this file, with or without modification, are
+# permitted in any medium without royalty.
+
+
+DAVFS2 1.5.2 INSTALLATION
+=========================
+
+    1 UPDATING FROM PREVIOUS VERSION
+    2 INSTALLATION
+        2.1 PREREQUISITE
+        2.2 INSTALLATION FROM CVS SOURCES
+        2.3 INSTALLATION FROM SOURCE PACKAGE
+    3 UNINSTALL
+    
+
+1 UPDATING FROM PREVIOUS VERSION
+================================
+
+'make install' copies new versions of davfs2.conf and secrets
+into /usr/local/etc/davfs2 or /etc/davfs2 and creates a backup of the
+existing files. You will have to merge your changes from the backup
+into the new files.
+
+When a user invokes the new version of mount.davfs the first time, it
+will only copy new versions of davfs2.conf and secrets into ~/.davfs2,
+if this files do not exist. The user should rename this files before
+invoking mount.davfs. After the new configuration files have been
+installed the user may merge the changes form the old files into
+the new versions.
+
+
+2 INSTALLATION
+==============
+
+2.1 PREREQUISITE
+----------------
+
+davfs2 uses the neon libraries for communication with the server.
+libneon (2.7, 2.8, 2.9 or 3.0) must be installed. Your distribution will most
+likely provide a package.
+You will also need the neon header files. Distributions usually provide
+development packages for this.
+If your distribution don't come with libneon or it does not support TLS and
+large files, you may build your own neon library. You can get it from
+http://www.webdav.org/neon/
+
+Your kernel must include either the coda file system or the fuse file system
+or both. They may be loadable modules. Almost all Linux kernels support at
+least one of them.
+
+
+2.2 INSTALLATION FROM CVS SOURCES
+---------------------------------
+
+To build davfs2 from the CVS sources you need recent versions of the some
+build tools:
+
+- GNU Autoconf 2.69 or newer
+- GNU Automake 1.11.6 or newer
+- GNU gettext-tools 0.18.1 or newer
+- po4a 0.42 or newer
+
+Change into the top level source directory and run
+    $ ./bootstrap
+    This will add some necessary files, create the configure script and the
+    Makefile.in's, and build the translated man pages from the po-files.
+
+Proceed with Installation from Source Package.
+
+
+2.3 INSTALLATION FROM SOURCE PACKAGE
+------------------------------------
+
+From within the top level source directory:
+
+- Run the configure script.
+    $ ./configure [options]
+    This will test your system and finally create the appropriate Makefiles.
+    You may add some options or set some variables, but hopefully will not
+    have to.
+
+    Options and variables:
+    ----------------------
+
+    --prefix=<prefix>
+        Defines the directory where davfs2 will be installed. It defaults to
+        '/usr/local'. If your sources came with your distribution it may
+        be '/usr'.
+
+    --with-neon=<directory>
+        Directory where to find the neon library and the neon headers.
+        Default is to first try /usr/local and then /usr. If you just have
+        neon libraries in /usr/lib and headers in /usr/include, you don't
+        need this.
+
+    --disable-nls
+        Disable the support for national languages.
+
+    LINGUAS="ll ll ll"
+        A list of two-letter language codes. This will select which of the
+        available translations of messages and documentation will be installed.
+        ll must be in lower case.
+
+    dav_user=<davfs2>
+        A system user without shell. mount.davfs will run with this id when
+        invoked by root. Default dav_user is "davfs2".
+
+    dav_group=<davfs2>
+        A system group. mount.davfs will be member of this group. Normal users
+        must be member of this group in order to mount. Default dav_group is
+        "davfs2".
+    
+    ./configure --help will show all available options.
+        
+- Run make.
+    $ make
+    This will compile the program.
+
+- Gain root permissions and run make install.
+    # make install
+    This will copy all the files in the appropriate directory.
+    Note: 'mount.davfs' will be setuid root!
+
+- Create the system user 'davfs2' and group 'davfs2' if they not yet exist.
+  The system user should not have a shell. Proposed home directory is
+  '/var/cache/davfs2'.
+
+- Get rid of the root permissions.
+
+
+3 UNINSTALL
+===========
+
+To uninstall davfs2 the sources have to be configured just the same way
+they were configured for installation.
+
+From within the top level source directory run with root permissions
+    # make uninstall
+    This will remove all the installed files.
+
+Note: The directories will not be removed.
+      Files and directories created by mount.davfs at run-time will *not* be
+      removed too.
+      This are: pid-files (in /var/run/mount.davfs), cache files and
+      directories (in /var/cache/davfs2) and all the files in the users
+      home directories in .davfs2.
+      This files have to be removed manually.

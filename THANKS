@@ -1,0 +1,22 @@
+davfs2 THANKS 2014-04-21
+------------------------
+
+This file used to contain a list of contributers. But this list never was
+complete and I am not able to keep track of contributions.
+
+So I wand to thank all the people who helped in one or another way:
+
+ - By sending reports about problems.
+
+ - By running debug sessions.
+
+ - By sending patches for bug fixes or new teatures.
+
+ - By providing all the libraries that davfs2 uses directly or indirectly.
+
+ - By providing all the tools used to create this program.
+
+ - By providing the free GNU/Linux operating system.
+ 
+ Werner Baumann
+ 

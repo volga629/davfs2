@@ -1,0 +1,88 @@
+davfs2 1.2.2 2008-01-24
+-----------------------
+
+# Copyright (C) 2006, 2007, 2008 Werner Baumann
+
+# Copying and distribution of this file, with or without modification, are
+# permitted in any medium without royalty.
+
+
+FREQUENTLY ASKED QUESTIONS
+
+Q: What are these files with size 0 and date of 1970-01-01?
+A: WebDAV allows to lock files that do not exist, to protect the name
+   while you are preparing a file for upload. These "locked-null-resources"
+   will show as files with size 0. This is OK as long as the locks are
+   released some day.
+
+Q: But the size-0-files don't disappear. How can I get rid of them?
+Q: Some files cannot be accessed because they are locked. But I know for
+   sure that nobody uses them.
+A: It can happen that locks are not released:
+   - An WebDAV client may crash.
+   - The network connection may get down before the locks are released.
+   - ...
+   How davfs2 tries to handle this:
+   - It sets a timeout for locks, when they should be released automatically.
+   - It sends a lock-owner property, so it can identify its own locks.
+   - Whenever it discovers that a file is locked, it tries to discover whether
+     it owns the lock. In this case it will reuse the lock and then release it.
+   But not all servers will support this.
+   Sometimes, only the administrator of the server may be able to free stale
+   locks. It would be a good idea if the server implements an administrative
+   timeout for locks, because it is impossible to make sure that all clients
+   will always release locks properly.
+
+Q: When I try to save may backups to the WebDAV Server, davfs2 creates another
+   copy on disk, so I run out of disk space. Why does davfs2 do this?
+A: davfs2 will always create a local copy of all files moved between the local
+   computer and the server. There are several reasons for this:
+   - The coda kernel file system needs this. It will only read and write to
+     local copies.
+   - davfs2 is not able to do incremental uploads. So davfs2 needs to get the
+     whole file from the application before it can send it to the server.
+   davfs2 really is not a replacement for network file systems like nfs.
+
+Q: When I unmount a davfs2 file system, umount blocks and it sometimes takes
+   hours before it returns.
+A: This is intentionally. umount should not return before all cached data is
+   saved to the media. The time needed depends on the amount of data and the
+   transfer rate. It is almost unnoticeable for a hard disk, some minutes for
+   a floppy, and for davfs2 it varies with the quality of the connection.
+   Note: You should always unmount davfs2 file systems before you shut down
+         your system. On shut down mount.davfs will usually be killed
+         regardless of the time needed to save data. 
+
+Q: Displaying large directories with nautilus or konqueror is very, very slow.
+   Is there a way to speed this up?
+A: Reason is that this programs open every file in a directory to evaluate the
+   file type. mount.davfs has to download them all. Even if the files are
+   cached, it will have to ask the server whether there is a new version.
+   You may try the configuration option 'gui_optimize'. This will not help when
+   you visit the directory for the first time, but when the files are already
+   in the cache it will reduce response time.
+
+O: When I mount a resource form Microsoft IIS, I can create new files, but when
+   I try to open them I get an error saying 'File does not exist'. This does not
+   happen when the file is named something.txt or something.doc, but it happens
+   for instance with files named something.odt.
+A: Microsoft IIS only serves files with extensions and MIME-types that are
+   registered with IIS (or Windows). But when files are created it does not apply
+   this restriction. So you can create a new file with e.g. OpenOffice.org and
+   when you try to open it again, IIS will tell it can't find it. But it really
+   exists in the servers file system.
+   By default, only extensions used by Microsoft are registered (because you do
+   not want to use file formats that are not owned by Microsoft.). To change
+   this you have to register all file extensions you want to use. You may also
+   register a wildcard extension.
+   - Open the microsoft management console for IIS.
+   - Select the WebDAV folder within IIS you want to use.
+   - Right click and choose: Properties->HTTP-headers->MIME-types->new
+   - Edit '*' as extension and 'application/octet-stream' as MIME-type.
+   - Apply the changes.
+   - Select your IIS (the server as a whole, not just the WebDAV folder).
+   - From the menu choose actions->all tasks->save configuration on disk
+   - Restart IIS.
+   Please Note:
+   I had to retranslate the names of menu items from Microsoft's German. So the
+   exact naming in English might be different.

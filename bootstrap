@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Copyright (C) 2006, 2007, 2008, 2009 Werner Baumann
+
+# Copying and distribution of this file, with or without modification, are
+# permitted in any medium without royalty provided the copyright notice
+# and this notice are preserved.
+
+set -ex
+autopoint --force
+cd man; po4a po4a.conf; cd ..
+aclocal -I config
+autoheader
+automake --add-missing --force-missing --copy
+autoconf
+cp -p config/COPYING.davfs2 COPYING
+cp -p config/INSTALL.davfs2 INSTALL
+

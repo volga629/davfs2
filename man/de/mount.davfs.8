@@ -1,0 +1,615 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH @PROGRAM_NAME@ 8 2016\-04\-15 @PACKAGE_STRING@ 
+
+.SH BEZEICHNUNG
+
+@PROGRAM_NAME@ \- Hängt eine WebDAV\-Resource als @PACKAGE@\-Dateisystem ein
+
+
+.SH ÜBERSICHT
+
+\fB@PROGRAM_NAME@ [\-h | \-\-help] [\-V | \-\-version]\fP
+.br
+\fBmount {\fP\fIdir\fP\fB | \fP\fIwebdavserver\fP\fB}\fP
+
+
+.SH "ÜBERSICHT (nur für root)"
+
+\fBmount \-t davfs [\-o \fP\fIoption\fP\fB[,...]]\fP\fI webdavserver dir\fP
+.br
+\fB@PROGRAM_NAME@ [\-o \fP\fIoption\fP\fB[,...]]\fP\fI webdavserver dir\fP
+
+
+.SH BESCHREIBUNG
+
+\fB@PROGRAM_NAME@\fP hängt die WebDAV\-Resource \fIwebdavserver\fP in das
+Verzeichnis \fIdir\fP des lokalen Dateisystems ein.  WebDAV (RFC 4918) ist eine
+HTTP\-Erweiterung, die die gemeinsame Bearbeitung von Web\-Resourcen aus der
+Ferne erlaubt.  \fB@PROGRAM_NAME@\fP ist Teil des \fB@PACKAGE@\fP\-Packets.
+
+.PP
+\fB@PACKAGE@\fP erlaubt es, Dokumente auf einem Webserver mit
+Standardanwendungen zu bearbeiten, die dafür keine WebDAV\-Erweiterungen
+benötigen. Z.B. könnte eine Web\-Site auf einem entfernten Webserver mit den
+gleichen Werkzeugen bearbeitet werden, mit denen sie erstellt wurde.  Oder
+man kann auf einem WebDAV\-Server Dokumente speichern, die man von
+verschiedenen Orten aus bearbeiten will.
+
+.PP
+\fB@PACKAGE@\fP unterstützt \fBTLS/SSL\fP (falls die Neon\-Bibliothek es
+unterstützt) und Verbindungen über einen Proxy. Es wird über das coda oder
+das fuse Kernel\-Dateisystem in das virtuelle Dateisystem eingebunden.
+Derzeit werden CODA_KERNEL_VERSION 3 und FUSE_KERNEL_VERSION 7 unterstützt.
+
+.PP
+\fB@PROGRAM_NAME@\fP wird normalerweise durch das \fBmount\fP(8)\-Programm
+aufgerufen, wenn der Parameter \fI\-t davfs\fP angegeben ist. Nach dem Einhängen
+läuft es als Hintergrundprozess. Zum Aushängen wird das
+\fBumount\fP(8)\-Programm benutzt.
+
+.PP
+\fIwebdavserver\fP ist die URL des Servers. Sie muss mindestens den Host\-Namen
+enthalten. Zusätzlich können das Schema, die Portnummer und der Pfad
+enthalten sein. Für fehlende Komponenten werden sinnvolle Standardwerte
+eingesetzt. Die Pfad\-Komponente darf \fBnicht\fP in %\-kodierter Form sein. Wird
+die URL jedoch an der Kommandozeile oder in die fstab eingegeben, müssen die
+Escape\-Regeln der Shell bzw. der fstab beachtet werden.
+
+.PP
+\fIdir\fP ist der Einhängepunkt. Es kann eine absolute oder relative Pfadangabe
+sein.
+
+.PP
+\fIfstab\fP kann wie gewohnt benutzt werden, um Dateisysteme anzugeben. Im
+ersten Feld muss anstelle des Gerätes die URL des WebDAV\-Servers angegeben
+werden. Für jeden Einhängepunkt darf es nur einen Eintrag in \fIfstab\fP geben.
+
+
+.SH OPTIONEN
+
+.TP 
+\fB\-V \-\-version\fP
+Zeige die Version an.
+
+.TP 
+\fB\-h \-\-help\fP
+Zeige einen Hilfe\-Text an.
+
+.TP 
+\fB\-o\fP
+Eine durch Kommas unterteilte Liste von Optionen. Mögliche Optionen sind:
+
+.RS
+.TP 
+\fB[no]auto\fP
+Kann (nicht) mit \fBmount \-a\fP eingehängt werden.
+.br
+Voreinstellung: \fBauto\fP.
+
+.TP 
+\fBcomment=\fP\fIKommentar\fP
+Diese Option wird von \fB@PROGRAM_NAME@\fP ignoriert. Andere Programme
+verlangen möglicherweise diese Option in der fstab.
+
+.TP 
+\fBconf=\fP\fIabsoluter Pfad\fP
+Eine alternative Benutzer\-Konfigurationsdatei für den Fall, dass die
+Standard\-Konfigurationsdatei im Home\-Verzeichnis des Benutzers nicht
+verwendet werden kann.
+.br
+Voreinstellung: \fI~/.@PACKAGE@/@CONFIGFILE@\fP
+
+.TP 
+\fB[no]dev\fP
+In einem davfs2\-Dateisystem sind grundsätzlich keine Gerätedateien (device
+special files) möglich. Diese Option ist nur wegen der Kompatibilität mit
+\fBmount\fP(8) vorhanden und wird immer auf \fBnodev\fP gesetzt.
+
+.TP 
+\fBdir_mode=\fP\fImode\fP
+Standardwert für die Dateirechte von Verzeichnissen in oktaler
+Schreibweise. s\-Bits für den Eigentümer und die Gruppen werden
+stillschweigend ignoriert.
+.br
+Voreinstellung: wird aus der umask des Benutzers abgeleitet.  Wenn ein r\-Bit
+gesetzt ist, wird auch das entsprechende x\-Bit gesetzt.
+
+.TP 
+\fB[no]exec\fP
+Die Ausführung von Programm\-Dateien ist (nicht) erlaubt
+.br
+Voreinstellung: \fBexec\fP. (Bei einem normalen Benutzer gibt \fBmount\fP(8) als
+Voreinstellung \fBnoexec\fP vor.)
+
+.TP 
+\fBfile_mode=\fP\fImode\fP
+Standardwert für die Dateirechte von normalen Dateien in oktaler
+Schreibweise. s\-Bits für den Eigentümer und die Gruppen werden
+stillschweigend ignoriert.
+.br
+Voreinstellung: wird aus der umask des Benutzers abgeleitet; es werden keine
+x\-Bits gesetzt.
+
+.TP 
+\fBgid=\fP\fIgroup\fP
+Das Dateisystem gehört zu dieser Gruppe. Es kann die Nummer der Gruppe oder
+der Name angegeben werden. Der Benutzer, der das Dateisystem einhängt, muss
+Mitglied dieser Gruppe sein, es sei denn er ist root.
+.br
+Voreinstellung: die primäre Gruppe des Benutzers.
+
+.TP 
+\fB[no]grpid\fP
+Wenn diese Option gesetzt ist, erhalten neue Dateien die gleiche Gruppe wie
+das Verzeichnis, in dem sie erzeugt werden. Dies gilt auch für Dateien, die
+auf dem Server vorhanden sind, aber nicht im lokalen Cache. (Dies wird
+gemacht, weil die Gruppe nicht auf dem Server gespeichert ist.)
+.br
+Wenn das Verzeichnis die Gruppe \fIroot\fP hat, wird diese Option ignoriert.
+.br
+Voreinstellung: \fBnogrpid\fP.
+
+.TP 
+\fB[no]_netdev\fP
+Das Dateisystem benötigt (k)eine Netzwerkverbindung. Diese Information
+erlaubt es dem Betriebssystem, das Dateisystem beim Systemstart und beim
+Herunterfahren des Netzwerks angemessen zu behandeln.
+.br
+Voreinstellung: \fB_netdev\fP
+
+.TP 
+\fBro\fP
+Das Dateisystem erlaubt nur Lese\-Zugriffe.
+.br
+Voreinstellung: \fBrw\fP.
+
+.TP 
+\fBrw\fP
+Auf das Dateisystem kann lesend und schreibend zugegriffen werden.
+.br
+Voreinstellung: \fBrw\fP.
+
+.TP 
+\fB[no]suid\fP
+In @PACKAGE@\-Dateisystemen sind grundsätzlich keine s\-Bits für den Besitzer
+und die Gruppe erlaubt. Die Option ist nur zwecks Kompatibilität mit
+\fBmount\fP(8) vorhanden und wird immer auf \fBnosuid\fP gesetzt.
+
+.TP 
+\fB[no]user\fP
+Erlaube einem normalen Benutzer (nicht) das Dateisystem einzuhängen. Der
+Name des Benutzers wird in die \fImtab\fP geschrieben, damit er das Dateisystem
+wieder aushängen kann. Die Option \fBuser\fP zieht die Optionen \fBnoexec\fP,
+\fBnosuid\fP und \fBnodev\fP nach sich, falls diese nicht explizit anders gesetzt
+werden. Diese Option hat nur in der \fIfstab\fP einen Sinn.
+.br
+Voreinstellung: normale Benutzer dürfen nicht mounten.
+
+.TP 
+\fBusers\fP
+Wie \fBuser\fP, aber \fBjeder\fP Benutzer darf das Dateisystem wieder
+aushängen. Dies wird im Allgemeinen nicht empfohlen. Wenn ein
+unprivilegierter Benutzer bei Verwendung der \fBuser\fP\-Option das Dateisystem
+einhängen kann, derselbe Benutzer es aber nicht mehr aushängen kann, dann
+kann die \fBusers\fP\-Option sinnvoll sein.
+.br
+Voreinstellung: nur der Benutzer, der das Dateisystem einghängt hat, darf es
+wieder aushängen.
+
+.TP 
+\fBuid=\fP\fIuser\fP
+Der Beseitzer des Dateisystems. Kann als numerische Benutzerkennung oder als
+Name angegeben werden. Nur wenn root das Dateisystem einhängt, darf sie von
+der Benutzerkennung des Benutzers abweichen, der das Dateisystem einhängt.
+.br
+Voreinstellung: Kennung des Benutzers.
+.RE
+
+.TP 
+\fBusername=\fP\fIWebDAV_user\fP
+Dieser Name wird zur Anmeldung beim WebDAV\-Server benutzt. Die Option ist
+nur für den Gebrauch mit pam_mount gedacht. Wenn sie gesetzt ist, werden die
+Anmaldedaten in der secrets\-Datei ignoriert. Das Passwort wird immer von
+stdin eingelesen, auch wenn die Option \fIaskauth\fP auf 0 gesetzt ist. Benutze
+die Option nicht in der \fIfstab\fP. Der Benutzername ist in der Ausgabe von
+\fIps\fP für jedermann sichtbar.
+.br
+Voreingestellt: kein username
+.br
+\fBExperimentell:\fP Diese Option ist experimentell und wird möglicherweise
+wieder entfernt. Falls du sie erfolgreich verwendest und behalten möchtest,
+sende bitte einen kurzen Bericht.
+
+
+.SH SICHERHEITSREGELN
+
+Um ein Dateisystem einzuhängen, braucht \fB@PROGRAM_NAME@\fP root\-Rechte. Aber
+es ist ein Sicherheitsrisiko, einen Hintergrundprozess, der mit dem Internet
+verbunden ist, mit root\-Rechten laufen zu lassen. Deshalb ändert
+\fB@PROGRAM_NAME@\fP seine Benutzer\- und Gruppenkennung, wenn es in den
+Hinterdrund wechselt.
+
+.RS
+.PP
+Wenn \fB@PROGRAM_NAME@\fP von root gestartet wird, läuft es als Benutzer
+\fB@USER@\fP und Gruppe \fB@GROUP@\fP. Dies kann in \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP
+geändert werden.
+
+.PP
+Wenn es von einem normalen Benutzer gestartet wird, läuft es mit dessen
+Benutzerkennung und Gruppe \fB@GROUP@\fP.
+.RE
+
+Da das Dateisystem über eine unsichere Internet\-Verbindung angebunden sein
+kann, ist das Risiko erhöht, dass darin Dateien mit schädlichem Inhalt
+sind.  Deshalb hat \fB@PROGRAM_NAME@\fP etwas stärkere Einschränkungen als
+\fBmount\fP(8).
+
+.RS
+.PP
+Die Optionen \fBnosuid\fP und \fBnodev\fP werden immer gesetzt; das kann auch root
+nicht ändern.
+
+.PP
+Damit normale Benutzer ein Dateisystem einhängen können, müssen sie der
+Gruppe \fB@GROUP@\fP angehören und es muss durch einen Eintrag in der \fIfstab\fP
+erlaubt werden.
+
+.PP
+Wenn in \fIfstab\fP ein relativer Dateiname als Einhängepunkt angegeben ist und
+ein normaler Benutzer ein Dateisystem einhängt, muss der Einhängepunkt
+innerhalb des Home\-Verzeichnisses dieses Benutzers liegen.
+
+.PP
+Wenn in der \fIfstab\fP die Optionen \fBuid\fP und/oder \fBgid\fP angegeben sind,
+kann ein normaler Benutzer das Dateisystem nur einhängen, wenn es seine
+Benutzerkennung ist und wenn er zur angegebenen Gruppe gehört.
+.RE
+
+\fBWARNHINWEIS:\fP Wenn root durch einen Eintrag in der \fIfstab\fP einem normalen
+Benutzer erlaubt, ein Dateisystem einzuhängen, dann erlaubt er ihm damit
+auch, die dazu gehörigen \fBvertraulichen Zugangsdaten\fP aus der Datei
+\fI@SYS_CONF_DIR@/@SECRETSFILE@\fP zu lesen, sowie den nötigen \fBprivaten
+Schlüssel\fP des dazu gehörigen \fBClient\-Zertifikats\fP.  Das sollte man nur
+tun, wenn man diese Informationen dem Benutzer auch direkt geben würde.
+
+.SH "URLS UND EINHÄNGEPUNKTE MIT LEERZEICHEN"
+
+Zeichen mit Sonderfunktion, wie z.B. das Leerzeichen, in Pfadangaben sind
+Mist. Unterschiedliche Programme und Protokolle interpretieren sie
+unterschiedlich und haben unterschiedliche Escape\-Regeln.
+
+.PP
+In der \fIfstab\fP müssen Leerzeichen durch den dreistelligen oktalen
+Zeichencode mit vorangestelltem Escape\-Zeichen ersetzt werden. Also z.B.
+\fIhttp://foo.bar/path\(rs040with\(rs040spaces\fP anstelle von
+\fIhttp://foo.bar/path with spaces\fP.
+
+.PP
+Für die Dateien \fI@CONFIGFILE@\fP und \fI@SECRETSFILE@\fP sind die Regeln im
+\fB@CONFIGFILE@\fP(5)\-Handbuch beschrieben.
+
+.PP
+Auf der Kommandozeile müssen die Regeln der Shell beachtet werden.
+
+
+.SH CACHE
+
+\fB@PROGRAM_NAME@\fP versucht den Netzwerkverkehr durch Verwendung eines Cache
+zu verringern. Informationen über Verzeichnisse werden im Hauptspeicher
+gehalten und heruntergeladene Dateien werden auf der Festplatte gespeichert.
+
+.PP
+\fB@PROGRAM_NAME@\fP benötigt von allen offenen Dateien eine Lokale Kopie im
+Cache\-Verzeichnis. Stelle bitte sicher, dass dafür ausreichend Platz auf der
+Festplatte zur Verfügung steht.
+
+.PP
+\fB@PROGRAM_NAME@\fP betrachtet Informationen über Verzeichnisse und
+Dateiattribute für eine (konfigurierbare) Zeit als gültig. Es holt diese
+Informationen nur dann erneut vom Server, wenn diese Zeit abgelaufen ist
+oder es andere Hinweise hat, dass die Informationen sich geändert
+haben. Wenn jemand anderes auf dem Server eine Datei neu anlegt oder löscht,
+kann es deshalb etwas dauern, bis dies im lokalen Dateisystem sichtbar wird.
+
+.PP
+Dies betrifft nicht den Inhalt von Dateien und die Auflistung von
+Verzeichnisinhalten. Wenn eine Datei geöffnet wird, wird immer der Server
+nach einer evtl. neuen Version gefragt. Im \fB@CONFIGFILE@\fP(5)\-Handbuch
+finden sich Hinweise, wie dies angepasst werden kann.
+
+
+.SH "SPERREN, VERLORENGEGANGENE ÄNDERUNGEN UND BACKUP\-DATEIEN"
+
+Mit WebDAV wurden Sperren eingefürht und \fB@PROGRAM_NAME@\fP benutzt diese
+standardmäßig. Normalerweise verhindern diese, dass zwei Leute gleichzeitig
+die selbe Datei ändern. Aber nicht immer:
+
+.RS
+.PP
+In \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP oder \fI~/.@PACKAGE@/@CONFIGFILE@\fP könnten
+die Sperren deaktiviert sein.
+
+.PP
+Möglicherweise unterstützt der Server keine Sperren (sie sind in WevDAV
+nicht zwingend vorgeschrieben).
+
+.PP
+Durch eine schlechte Netzwerkverbindung könnte das rechtzeitige Erneuern
+einer Sperre verhindert werden.
+
+.PP
+Ein anderer WebDAV\-Client könnte deine Sperre benutzen (das ist nicht
+schwierig und könnte auch aus Versehen geschehen).
+.RE
+
+.PP
+\fB@PROGRAM_NAME@\fP prüft deshalb, ob sich eine Datei auf dem Server geändert
+hat, bevor es eine neue Version hochlädt. Wenn es nicht möglich ist, eine
+lokal geänderte Datei auf den Server hochzuladen, wird sie im
+Backup\-Verzeichnis \fIlost+found\fP gespeichert. Du solltest dieses Verzeichnis
+ab und zu überprüfen und entscheiden, was mit diesen Dateien zu tun ist.
+
+.PP
+Manchmal gibt ein Client eine Sperre nicht wieder frei. Möglicherweise ist
+er abgestürzt oder die Netzwerkverbindung ist zusammengebrochen. Wenn
+\fB@PROGRAM_NAME@\fP feststellt, dass eine Datei auf dem Server gesperrt ist,
+prüft es, ob die Sperre vom Benutzer mit Hilfe von \fB@PROGRAM_NAME@\fP
+angelegt wurde. In diesem Fall versucht es, die vorhandene Sperre zu
+verwenden. Dies gelingt aber nicht immer. Deshalb sollten Server Sperren
+automatisch entfernen, wenn sie vom Client nicht innerhalb einer
+vorgegebenen Zeit erneuert werden.
+
+.PP
+WebDAV erlaubt es auch, Dateien zu sperren, die gar nicht existieren (damit
+niemand anderes den Namen benutzt, wenn ein Client eine neue Datei anlegen
+will). Solche gesperrten, nicht existierenden Dateien erscheinen im
+Dateisystem mit der Größe 0 und dem Änderungsdatum 1970\-01\-01. Wenn Sperren
+nicht ordnungsgemäß wieder frei gegeben werden, kann u.U. nicht mehr auf die
+Datei zugegriffen werden. Mit Hilfe von \fBcadaver\fP(1)
+<\fIhttp://www.webdav.org/cadaver/\fP> können solche Sperren entfernt
+werden.
+
+
+.SH "EIGENTÜMER UND DATEIRECHTE"
+
+\fB@PACKAGE@\fP regelt die Zugriffskontrolle durch Unix\-Dateirechte.  Aber das
+Änderen des Eigentümers und der Dateirechte ist nur \fBlokal\fP wirksam. Damit
+kann der Besitzer eines Dateisystems festlegen, welche anderen lokalen
+Benutzer auf sein Dateisystem zugreifen dürfen.
+
+.PP
+Der Server weiß davon nichts. Für ihn gibt es nur den einen Benutzer
+(ausgewiesen durch die vertraulichen Zugangsdaten). Ein anderer
+WebDAV\-Client, der mit dem gleichen Server verbunden ist, bekommt von diesen
+lokalen Änderungen an Eigentümer und Dateirechten nichts mit.
+
+.PP
+Es gibt eine Ausnahme: Das \fBExecute\-Bit\fP für Dateien wird auf dem Server
+als WebDAV\-Eigenschaft gespeichert. Mann sollte dies eher als eine
+Information über den Dateityp betrachten, denn als ein Dateirecht. Ob die
+Datei lokal ausführbar ist, wird weiterhin durch die Mount\-Optionen und die
+lokalen Rechte festgelegt.
+
+.PP
+Wenn das Dateisystem ausgehängt wird, werden die Attribute der Dateien im
+Cache gespeichert, ebenso die der übergeordneten Verzeichnisse. Es werden
+aber keine Attribute von Verzeichnissen gespeichert, die keine Dateien
+enthalten, die im Cache sind.
+
+
+.SH DATEIEN
+
+.TP 
+\fI@SYS_CONF_DIR@/@CONFIGFILE@\fP
+Systemweite Konfigurationsdatei.
+
+.TP 
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP
+Konfigurationsdatei im Home\-Verzeichnis des Benutzers. Sie hat Vorrang vor
+der systemweiten Konfigurationsdatei. Wenn sie nicht existiert, legt
+\fB@PROGRAM_NAME@\fP eine Vorlage an.
+
+.TP 
+\fI@SYS_CONF_DIR@/@SECRETSFILE@\fP
+Enthält vertrauliche Zugangsdaten für den WebDAV\-Server und den Proxy, sowie
+Passwörter zur Entschlüsselung von Client\-Zertifikaten. Die Datei darf nur
+Schreib\- und Leserechte für root haben.
+
+.TP 
+\fI~/.@PACKAGE@/@SECRETSFILE@\fP
+Enthält vertrauliche Zugangsdaten für den WebDAV\-Server und den Proxy, sowie
+Passwörter zu Entschlüsselung von Client\-Zertifikaten. Die Datei darf nur
+Schreib\- und Leserechte für den Besitzer haben.  Zugangsdaten und Passwörter
+werden vorrangig dieser Datei entnommen.  Wenn keine gefunden werden, wird
+die systemweite Datei durchsucht.  Wenn die Zugangsdaten und Passörter nicht
+gefunden werden, wird der Benutzer danach gefragt (falls nicht anders
+konfiguriert). Wenn die Datei nicht existiert, legt \fB@PROGRAM_NAME@\fP eine
+Vorlage an.
+
+.TP 
+\fI@SYS_CONF_DIR@/@CERTS_DIR@\fP
+Hier können vertrauenswürdige Server\-Zertifikate gespeichert werden, die
+nicht auf normale Weise mit Hilfe der CA\-Zertifikate des Systems überprüft
+werden können. Das ist dann sinnvoll, wenn der Server ein selbst gemachtes
+Zertifikat benutzt. Um ein solches Zertifikat zu benutzen, muss dies in
+\fI@SYS_CONF_DIR@/@CONFIGFILE@\fP oder \fI~/.@PACKAGE@/@CONFIGFILE@\fP
+konfiguriert werden. Die Zertifikate müssen im PEM\-Format vorliegen.
+.br
+Vergiss nicht, das Zertifikat selbst zu prüfen.
+
+.TP 
+\fI~/.@PACKAGE@/@CERTS_DIR@\fP
+Hier können vertrauenswürdige Server\-Zertifikate gespeichert werden, die
+nicht auf normale Weise mit Hilfe der CA\-Zertifikate des Systems überprüft
+werden können. Das ist dann sinnvoll, wenn der Server ein selbst gemachtes
+Zertifikat benutzt. Um ein solches Zertifikat zu benutzen, muss dies in
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP konfiguriert werden. Die Zertifikate müssen im
+PEM\-Format vorliegen.
+.br
+Vergiss nicht, das Zertifikat selbst zu prüfen.
+
+.TP 
+\fI@SYS_CONF_DIR@/@CERTS_DIR@/@CLICERTS_DIR@\fP
+Hier können Client\-Zertifikate im PKCS#12\-Format gespeichert werden. Die
+Benutzung muss in \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP oder
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP konfiguriert werden. Das Verzeichnis darf nur
+Schreib\-, Lese\- und Ausführungsrecht für root haben.
+
+.TP 
+\fI~/.@PACKAGE@/@CERTS_DIR@/@CLICERTS_DIR@\fP
+Hier können Client\-Zertifikate im PKCS#12\-Format gespeichert werden. Die
+Benutzung muss in \fI~/.@PACKAGE@/@CONFIGFILE@\fP konfiguriert werden.  Das
+Verzeichnis darf nur Schreib\-, Lese\- und Ausführungsrecht für den Besitzer
+haben.
+
+.TP 
+\fI@SYS_RUN@\fP
+Hier speichert der Hintergrundprozess eine PID\-Datei. Das Verzeichnis muss
+zur Gruppe \fB@USER@\fP gehören; die Gruppe muss Schreibrecht haben und das
+Sticky\-Bit muss gesetzt sein (Dateimodus 1775). Der Name der PID\-Datei wird
+vom Einhängepunkt abgeleitet.
+
+.TP 
+\fI@SYS_CACHE_DIR@\fP
+Dieses systemweite Cache\-Verzeichnis wird benutzt, wenn root das Dateisystem
+einhängt. Es muss zur Gruppe \fB@USER@\fP gehören und die Gruppe muss Lese\-,
+Schreib\- und Ausfürungsrecht haben. Für jedes Dateisystem wird ein
+Unterverzeichnis angelegt. Der Name des Unterverzeichnisses wird aus der
+URL, dem Einhängepunkt und dem Benutzernamen gebildet.
+
+.TP 
+\fI~/.@PACKAGE@/cache\fP
+Cache\-Verzeichnis im Home\-Verzeichnis des Benutzers. Für jedes Dateisystem
+wird ein Unterverzeichnis angelegt.
+.RE
+
+\fB@PROGRAM_NAME@\fP versucht fehlende Verzeichnisse zu erstellen. Aber es
+lässt die Pfoten von \fI@SYS_CONF_DIR@\fP.
+
+.SH UMGEBUNGSVARIABLEN
+
+.TP 
+\fBhttps_proxy http_proxy all_proxy\fP
+Wenn kein Proxy konfiguriert ist, wird der Wert dieser Umgebungsvariablen
+benutzt. Der Proxy kann mit und ohne Schema, sowie mit und ohne Port
+angegeben werden.
+.br
+http_proxy=[http://]foo.bar[:3218]
+.br
+Wird nur benutzt, wenn der Benutzer root das Dateisystem einhängt.
+
+.TP 
+\fBno_proxy\fP
+Eine durch Kommas getrennte Liste von Domainnamen, auf die direkt
+zugegriffen werden soll. \fB*\fP passt auf alle Domainnamen. Ein Domainname,
+der mit einem Punkt \fB.\fP beginnt, umfasst auch alle Subdomains.
+.br
+Wird nur benutzt, wenn der Benutzer root das Dateisystem einhängt.
+.br
+Wird nicht benutzt, wenn der Proxy in \fI@SYS_CONF_DIR@\fP festgelegt wird.
+
+
+.SH BEISPIELE
+
+\fBNormaler Benutzer (z.B filomena):\fP
+
+.PP
+Damit ein normaler Benutzer ein Dateisystem einhängen kann, ist ein Eintrag
+in \fIfstab\fP nötig.
+.RS
+http://webdav.org/dav /media/dav davfs noauto,user 0 0
+.RE
+
+.PP
+Falls ein Proxy benutzt werden soll, sollte dies in
+\fI@SYS_CONF_DIR@/@CONFIGFILE@\fP konfiguriert werden.
+.RS
+proxy proxy.mycompany.com:8080
+.RE
+
+.PP
+Die vertraulichen Zugangsdaten für den Server werden in
+\fI/home/filomena/.@PACKAGE@/@SECRETSFILE@\fP gespeichert.
+.RS
+proxy.mycompany.com filomena "my secret"
+.br
+/media/dav webdav\-username password
+.RE
+
+.PP
+Jetzt kann Benutzerin filomena das Dateisystem einhängen durch
+.RS
+\fBmount /media/dav\fP
+.RE
+
+.PP
+und dieselbe Benutzerin filomena kann es aushängen durch
+.RS
+\fBumount /media/dav\fP
+.RE
+
+.PP
+\fBNur Benutzer root:\fP
+
+.PP
+Die WebDAV\-Resource \fIhttps://asciigirl.com/webdav\fP wird im Verzeichnis
+\fI/mount/site\fP eingehängt. Der Netzwerkverkehr wird verschlüsselt. Die
+vertraulichen Zugangsdatenen für \fIhttp://webdav.org/dav\fP werden
+\fI@SYS_CONF_DIR@/@SECRETSFILE@\fP entnommen. Falls sie da nicht gefunden
+werden, wird der Benutzer gefragt.
+.RS
+\fBmount \-t davfs \-o uid=otto,gid=users,mode=775 https://asciigirl.com/webdav
+/mount/site\fP
+.RE
+
+.PP
+Die WebDAV\-Resource \fIhttp://linux.org.ar/repos\fP wird auf \fI/dav\fP
+eingehängt.
+.RS
+\fBmount.davfs \-o uid=otto,gid=users,mode=775 http://linux.org.ar/repos/
+/dav\fP
+.RE
+
+
+.SH FEHLER
+
+\fB@PACKAGE@\fP unterstützt keine Links.
+.PP
+Ein \fB@PACKAGE@\fP\-Dateisystem kann nicht mit \fImount \-\-move\fP verschoben
+werden.
+
+
+.SH AUTOREN
+
+Dieses Handbuch wurde von Luciano Bello <luciano@linux.org.ar> für
+die Version 0.2.3 von @PACKAGE@ in Debian geschrieben.
+
+.PP
+Für spätere Versionen wurde es von Werner Baumann
+<werner.baumann@onlinehome.de> angepasst.
+
+.PP
+@PACKAGE@ wurde von Sung Kim <hunkim@gmail.com> entwickelt.
+
+.PP
+Version 1.0.0 (und spätere) von @PACKAGE@ sind eine vollständige Neufassung
+von Werner Baumann.
+
+
+.SH ÜBERSETZER
+Das Handbuch wurde von Werner Baumann <werner.baumann@onlinehome.de>
+übersetzt. 2009-04-27
+.SH "DAVFS2 HOME"
+
+@PACKAGE_BUGREPORT@
+
+
+.SH "SIEHE AUCH"
+
+\fBu@PROGRAM_NAME@\fP(8), \fB@CONFIGFILE@\fP(5), \fBmount\fP(8), \fBumount\fP(8),
+\fBfstab\fP(5)

@@ -1,0 +1,424 @@
+# Copyright (C) 2006, 2007, 2008, 2009, 2010, 2012, 2013, 2014 Werner Baumann
+
+# Copying and distribution of this file, with or without modification, are
+# permitted in any medium without royalty.
+
+
+
+What is new in davfs2 1.5.2
+===========================
+
+Fixes a problem when unmounting, caused by an backward incompatible
+change of util-linux.
+
+
+What is new in davfs2 1.5.1
+===========================
+
+Some bug fixes and minor improvements (please seee ChangeLog).
+
+
+What is new in davfs2 1.5.0
+===========================
+
+Bug fixes and Improvements:
+
+- Fixed security risk caused by insecure use of function system.
+  (bug #40034)
+
+- umount will now properly work with system where mtab is a symbolic link
+  to /proc/mounts. for this davfs2 uses the new /var/mount/utab file.
+  Fixes sr #108528.
+
+- Symbolic links in fstab will no longer break davfs2 (sr #108377).
+
+- Fixed bugs with setting access bits and evaluating access permissions
+  (bug #33644 and bug #33644).
+
+- Support Neon version 0.30 (sr #108392).
+
+- Improved configuration for certificate validation with new options
+  trust_ca_cert and trust_server_cert.
+
+- New option minimize_mem to reduce memory consumption by davfs2 (sr #108158).
+
+- Allow mount option comment= (bug #41354).
+
+- New mount option grpid (sr #108432).
+
+- Improved cookie support allows for more than one cookie
+  (sr #107907, bug #41438).
+
+- Honor configure parameter --manfile (sr #108173).
+
+- Fixed DESTDIR bug (sr #108104).
+
+Experimental new features:
+
+- Support temporary redirects for downloading of files (bug #35428).
+
+- Support compression for downloading (bug #41355) (not necessarily RFC-
+  compliant, but what is used by browsers).
+
+Removed features:
+
+- Support for extended attributes was more then rudimentary and is now
+  removed for the sake of performance and clarity.
+
+
+
+What is new in davfs2 1.4.7
+===========================
+
+Mostly bug-fixes (see ChangeLog).
+The check for somebody elses home directory is gone. So you should
+be able tomount in /media/foo even if / is the home of some daemon.
+
+
+What is new in davfs2 1.4.6
+===========================
+
+Nothing. Just two bug fixes.
+
+
+What is new in davfs2 1.4.5
+===========================
+
+If option 'ask_auth 0' is set, davfs2 will no langer prompt the user
+for suspicious server certificates but terminate silently.
+
+
+What is new in davfs2 1.4.2
+===========================
+
+Mainly bug fixes (see ChangeLog).
+
+Support for Neon 0.29.
+
+Support for NTLM authentication (with Neon 0.29 only).
+
+Experimental support for commandline option "username" for use
+with pam_mount. I am not sure wether this is really usefull because
+I think that for typical use cases of pam_mount davfs2 is not
+well suited. Please report your experience with this option.
+
+If option askauth ist set to 0 davfs2 will no longer ask the user
+if a servercert is not trusted but silently not accept the certificate.
+
+
+What is new in davfs2 1.4.1
+===========================
+
+For this version I got many bug fixes, informations and
+suggestions for improvement from Dirk Arend of the German
+company AVM. Thanks a lot.
+
+davfs2 experimentally uses the non-standard method USERINFO
+to get information about available and used web space from the
+server. Some of the big German providers use it. davfs2 will
+now recognize when the server does not provide this information
+and avoid useless further attempts.
+
+When attempts to upload changed files fail because of problems
+with the network connection, new upload attempts will be done with
+increasing time intervals to not waist bandwith with to many
+useless attempts. When the davfs2 file system is unmounted while
+the connection is down changed files will stay in the cache and
+will be uploaded when the file system is mounted the next time.
+
+For minor changes and bug fixes please see ChangeLog.
+
+
+What is new in davfs2 1.4.0
+===========================
+
+With this release of davfs2 the default configuration has changed
+significantly to better match user experience and the behaviour of
+current WebDAV servers. This might cause your current configuration
+to no longer work with your server. Please carefully check for
+changes that might affect your davfs2 configuration.
+
+if_match_bug
+------------
+The default is now 0 (was 1) assuming your server does not have this
+bug. To the best of my knowledge this bug was only found in
+Apache with mod_dav and was fixed with release 2.2.8. But there are
+many older versions of Apache/mod_dav out there and you might have
+to manually insert this option in your davfs2.conf.
+
+use_expect100
+-------------
+The default is now 0 (was 1). This option rarely is of any use but
+frequently causes trouble with servers that don't support it (it is
+an optional protocol element). You only should set this option if
+you really need it and know it is working with your server.
+
+use_displayname
+---------------
+This option has been removed. davfs2 no longer supports "displayname".
+This WebDAV property has been undefined nonsense from the beginning
+and the update of the WebDAV protocol only made it worse. The protocol
+explicitly states that this "name"(?) needs *not* to be unique. It is
+therefore impossible to use it as a file name in davfs2. 
+
+delay_upload
+------------
+When this option is set to 0 seconds on closing a changed file it will be
+*synchronously* saved to the server and the upcall from the kernel will
+block until the upload is finished. But in case the upload fails temporarily
+the upcall from the kernel will return and davfs2 will try uploading later.
+This may make davfs2 very slow due too many unsuccessful attempts to upload.
+Only use "delay_upload 0" when your really need it and you have a reliable
+connection to the server.
+
+Command line (and fstab) options askauth, locks and useproxy
+------------------------------------------------------------
+These have been deprecated for many years and now have been removed. There
+are corresponding options in davfs2.conf.
+
+Command line (and fstab) option users
+-------------------------------------
+davfs2 now supports the option users which allows any user to unmount a
+davfs2 file system. This is intended as a work around for systems without
+the mtab file.
+
+Known bugs (except those listed in BUGS) have been fixed.
+
+Last but not least the davfs2 project moved to Savannah:
+http://savannah.nongnu.org/projects/davfs2
+
+
+
+What is new in davfs2 1.3.X
+===========================
+
+- The format of entries in the secrets file is changed.
+  It now uses the mount point as key, instead of the URL.
+  The old format is still recognized by davfs2.
+
+- When mount.davfs gets signal SIGTERM, it will not try to
+  upload dirty files to the server, but mark the cached files
+  as dirty to avoid too slow reaction (and get SIGKILL). The
+  files will be uploaded when mount.davfs runs the next time.
+
+- Added support for Neon 0.27 and 0.28, removed support for
+  Neon 0.24.
+
+- Scanning the cache for changed files and locks improved
+  to require less CPU-time.
+
+- Support for dav-quota. davfs2 will get available and used
+  storage space from the server if the server supports
+  RFC 4331.
+
+- Use conditional PUT and LOCK requests if possible. This is
+  still turned off by default, as the most widely used server
+  does not support it. But you should set "if_match_bug 0" for
+  Apache 2.2.8 and newer, as well as for many other servers.
+  This will save many unnecessary requests.
+  Conditional LOCKs will not work with neon 0.25. You should
+  update to neon 0.26, 0.27 or 0.28.
+
+- Reads environment variables https_proxy, http_proxy and
+  all_proxy, if no proxy is configured in the config files.
+  Reads environment variable no_proxy for hosts to access
+  directly, not via proxy.
+  
+- MIME-type is accessible as extended attribute (read-only).
+
+- Option to add custom headers.
+
+- Added very simple Cookie-support.
+  Will not work with neon 0.25. You should update to neon 0.26,
+  0.27 or 0.28.
+
+- New options: precheck, ignore_dav_header, if_match_bug,
+  delay_upload, drop_weak_etags and connect_timeout (1.3.3 only).
+  See 'man davfs2.conf' for details.
+
+- Removed option idle_time.
+
+- WebDAV-property displayname is no longer used by default
+  (it is defined to be *not* a name and mostly useless).
+
+- Fixed all known bugs (except one; see BUGS).
+
+
+What is new in davfs2 1.2.2
+===========================
+
+Debugging is not longer a compile time option but a run time
+option. The amount of debugging output is controlled by the
+davfs2.conf file.
+
+
+What is new in davfs2 1.2.1
+===========================
+
+This is a bug fix release. No new features.
+
+
+What is new in davfs2 1.2.0
+===========================
+
+- davfs2 now supports localized versions of messages and man pages
+  using GNU gettext and the po4a tools. Currently there is a German
+  translation, but other languages will follow. You are invited to
+  contribute.
+
+- davfs2 needs a system user 'davfs2' and a system group 'davfs2'.
+  Normal users must be member of group 'davfs2' in order to mount
+  (no longer group 'users'). You may change the system user and
+  group at configuration time. You will have to create the system
+  user and group manually. The  system user should not have a shell.
+  Proposed home directory is '/var/cache/davfs2', but this does not
+  matter.
+
+- davfs2 supports client certificates.
+
+- davfs2 can use server certificates, stored on disk, that can not
+  be verified the normal way, like self-made certificates.
+
+- davfs can translate the encoding of file names.
+
+- There are two new man pages: umount.davfs and davfs2.conf.
+
+- File system is mounted, even when the first request times out.
+  When access to the file system is tried, an error is returned
+  until the connection comes up. (This feature had been removed
+  in the last release by mistake.)
+
+
+What is new in davfs2 1.1.4
+===========================
+
+Please be sure to read section "0 UPDATING FROM PREVIOUS VERSION" of
+the README file to avoid loss of data.
+
+This version fixes bugs that have become known since the last release.
+
+- The kernel interface module for fuse kernel version 7 crashed. Now
+  the fuse interface will work with kernel 2.6.14 and higher.
+
+- The handling of file times has been adjusted. The modification time
+  will no longer change unexpectedly, thus confusing some applications
+  (bug 1596104).
+
+- davfs2 will check server capabilities at start up to decide whether
+  locks may be used. As a side effect this also fixes interoperation
+  problems with the gmx-server (bug 1594808).
+
+- The default time to refresh directory information is reduced to
+  60 s. Every time a directory is opened, the directory content is
+  newly retrieved from the server. Remote changes will get visible
+  earlier this way, but performance may decrease. Please send a bug
+  report if the performance decrease is unacceptable.
+
+
+What is new in davfs2 1.1.3
+===========================
+
+Please be sure to read section "0 UPDATING FROM PREVIOUS VERSION" of
+the README file to avoid loss of data.
+
+- There is a umount helper umount.davfs. It will be called by umount
+  and make sure that umount will not return before mount.davfs has
+  saved back all data that changed in cache. So umount with davfs2
+  now shows the same behaviour as with local file systems.
+
+- The new configuration option 'gui_optimize' will speed up the
+  display of large directories on graphical user interfaces (once
+  the files are cached).
+
+- The configuration options 'expire' and 'get_wait' have been
+  renamed into 'dir_refresh' and 'file_refresh'.
+
+- The use of the HTTP-Header 'Expect: 100-Continue' is now a
+  configuration option, as some servers don't understand it.
+
+- Known bugs are fixed and some changes are done to improve
+  performance (see ChangeLog).
+
+
+What is new in davfs2 1.1.0
+===========================
+
+Please be sure to read section "0 UPDATING FROM PREVIOUS VERSION" of
+the README file to avoid loss of data.
+
+- davfs2 can now use the fuse kernel file system besides coda.
+
+- Neon library version 0.24, 0.25 and 0.26 are now supported. Version
+  0.26 allows to use gnutls instead of openssl.
+
+- Support for large files (> 2 GiByte) added.
+
+- davfs2 now uses time-outs on locks to reduce problems with stale
+  locks. But not all servers will honour this.
+
+- No more URL-encoding of server URLs with spaces (see man-page).
+
+- davfs2 allows to set configuration options differently for different
+  mount points.
+
+- The name of the backup directory is changed to the well known
+  "lost+found". But you may configure something else.
+
+The following bugs should have gone:
+
+- [ 1519718 ] davfs2 fails to properly decode complex escape sequences
+- [ 1522903 ] chokes on directory names containing ' _ % characters
+- [ 1539444 ] mounting of webdav drive fails
+- [ 1539445 ] unable to access files in mounted webdav drive
+- [ 1558525 ] davfs2-1.0.2_p20060820 mount fails
+
+  These bugs were related to incorrect alignment of data structures on
+  64 bit systems, incorrect treatment of the WebDAV property "displayname"
+  and incorrect double URL-decoding of URLs.
+
+  Problems with notifying the kernel of changes on the server are solved too.
+
+
+What is new in davfs2 1.0.0
+===========================
+
+davfs2 1.0.0 is an almost complete rewrite of davfs2. it introduces the
+following features into davfs2:
+
+- The same binary now supports different versions of the coda kernel
+  module (CODA_KERNEL_VERSION 2 and 3). The version is evaluated at
+  run time.
+
+- Extended caching: davfs2 now caches information about all visited
+  files and directories at runtime in memory. This will speed up
+  operation and it is necessary to enable operations like chmod or
+  chown, as the WebDAV-servers usually do not know about this.
+  
+- Persistent cache: davfs2 will save all downloaded files in a cache
+  directory. This cache will persist when the file system is unmounted
+  and will be reused, when mounted again. This should save a lot of
+  network traffic, as files that did not change on the server will not
+  be downloaded again. Especially when working with graphical user
+  interfaces this will make a big difference, since some of them will
+  open almost every file in a directory, though they just need a 
+  directory listing.
+
+- Unix Permissions: davfs2 now implements standard Unix permissions.
+  Options uid, gid, file_mode and dir_mode are enabled again. This
+  allows the mounting user to share the file system with other local
+  users.
+  Note: The WebDAV server still does not know about this. On the server
+  side there is still only one user (the user who's credentials are
+  used). Except the execute bit, mode, uid and gid are maintained
+  locally only. But they are saved in the persistent cache.
+
+- Configuration: There are a lot of new configuration options in
+  /etc/davfs2/davfs2.conf and ~/.davfs2/davfs2.conf. But usually
+  the defaults will do.
+
+As the code of davfs2 1.0.0 is quite different from davfs 0.2.x, bug
+fixes that were done between davfs 0.2.4 and 0.2.8 could not be
+ported automatically to davfs2 1.0.0. So some of the old bugs may
+reappear together with the new ones I introduced.
+
+

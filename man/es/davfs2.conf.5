@@ -1,0 +1,601 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH @CONFIGFILE@ 5 2014\-06\-09 @PACKAGE_STRING@ 
+
+
+.SH NOMBRE
+
+\fB@CONFIGFILE@\fP \- Archivo de Configuración para \fB@PROGRAM_NAME@\fP
+
+
+.SH DESCRIPCIÓN
+
+Hay un archivo de configuración general \fI@SYS_CONF_DIR@/@CONFIGFILE@\fP y
+archivos de configuración propios del usuario
+\fI~/.@PACKAGE@/@CONFIGFILE@\fP. Cuando \fB@PROGRAM_NAME@\fP es invocado como
+root, sólo el archivo de configuración general es leído. Cuando es invocado
+por un usuario normal, el archivo de configuración del usuario es leído
+adicionalmente. Las configuraciones del archivo de configuración del usuario
+tienen precedencia sobre el archivo de configuración general.
+
+.PP
+El archivo de configuración consiste en líneas donde cada una contiene pares
+de palabrasclave/valor. Las palabras claves y los valores están separados
+por espacios y/o tabs.
+
+.PP
+El archivo puede tener secciones que son aplicables solamente para un punto
+de montaje específico. Esta sección empieza con una línea, que contiene la
+ruta completa del punto de montaje entre corchetes. La sección termina
+cuando empieza la siguiente sección o cuando termina el archivo. Las
+opciones que deban aplicarse a todas los sistemas de archivos montados deben
+ir antes de la primer sección. Las opciones dadas en la sección específica
+tendrán precedencia.
+
+
+.SH EJEMPLO
+
+kernel_fs coda
+.br
+proxy	foo.bar:8080
+.br
+use_locks 0
+.br
+.br
+[/media/dav]
+.br
+use_locks 1
+.br
+.br
+[/home/otto/mywebspace]
+.br
+gui_optimize 1
+
+.PP
+All mounted @PACKAGE@ file systems will use the coda kernel file system and
+the proxy foo.bar. All @PACKAGE@ file systems expect /media/dav will disable
+the use of the locks. /home/otto/mywebspace will use the gui_optimize
+option.
+
+.SH "REGLAS SINTÁCTICAS GENERALES"
+
+Líneas que sólo contienen espacios y tabs (líneas vacías) son ignoradas.
+
+.PP
+# indica un comentario. El resto de la línea es ignorada.
+
+.PP
+\(rs es el caracter de escape.
+
+.PP
+"" es usado para citar.
+
+.PP
+Si el parámetro contiene algún caracter especial como espacio, tab, #, \(rs,
+o ", éste debe ser escapado por el prefijo \(rs. Use \(cq\(rs\ \(cq en vez
+de \(cq\ \(cq, \(cq\(rs#\(cq en vez de \(cq#\(cq, \(cq\(rs\(rs\(cq en vez de
+\(cq\(rs\(cq y \(cq\(rs"\(cq
+
+.PP
+Valores que contengan espacios, tabs o # deben referirse entre comillas
+dobles. Pero " y \(cq deben escaparse incluso cuando están entre comillas
+dobles. Si la línea inicial de la sección está entre comillas, los corchetes
+deben ir con las comillas (por ejemplo, "[/home/otto/con espacios]").
+
+.PP
+Opciones con valores booleanos deben ser dados como valores numéricos. 0
+para no, 1 para sí.
+
+
+.SH "OPCIONES DE CONFIGURACIÓN DISPONIBLES"
+
+.SH "Opciones Generales"
+
+.TP 
+\fBdav_user\fP
+Cuando el demonio \fB@PROGRAM_NAME@\fP sea invocado como root correrá con éste
+usuario. El valor deber ser dado como un \fInombre_de_usuario\fP, \fBno\fP como un
+id numérico.
+.br
+Predeterminado: @USER@
+.br
+\fBSólo permitido en el archivo general de configuración del sistema.\fP
+
+.TP 
+\fBdav_group\fP
+El grupo con el que corre el demonio \fB@PROGRAM_NAME@\fP. Los usuarios
+normales deben ser miembros de este grupo para poder montar un sistemas de
+archivos @PACKAGES@. El valor debeser dado como un \fInombre_de_grupo\fP, \fBno\fP
+como un id numérico.
+.br
+Predeterminado: @GROUP@
+.br
+\fBSólo permitido en el archivo general de configuración del sistema.\fP
+
+.TP 
+\fBkernel_fs\fP
+Qué sistema de archivos del kernel utilizar para integrar con el sistema de
+archivos virtual.  Los posibles valores son \fIfuse\fP y \fIcoda\fP.
+.br
+Predeterminado: fuse
+
+.TP 
+\fBbuf_size\fP
+Tamaño en KiByte del buffer usado para comunicarse con el sistema de
+archivos del kernel. Solamente útil con \fIfuse\fP, donde las operaciones de
+lectura y escritura pueden  beneficiarse con un buffer grande.
+.br
+Predeterminado: 16
+
+
+.SH "Opciones Relacionadas con WebDAV"
+
+.TP 
+\fBuse_proxy\fP
+Whether to use a proxy to connect to the WebDAV server. 0 = no, 1 = yes.  If
+no proxy is defined in the configration file or the environment variables
+\fBhttps_proxy\fP, \fBhttp_proxy\fP and \fBall_proxy\fP, this option has no effect.
+.br
+Predeterminado: 1
+.br
+\fBSólo permitido en el archivo general de configuración del sistema.\fP
+
+.TP 
+\fBproxy\fP
+Nombre del proxy. El nombre debe ser un FQDN (el nombre de la computadora y
+el nombre de dominio). Si el puerto del proxy es distinto de 8080,
+debeexplicitarse, separado por dos puntos. Por ejemplo: \fIfoo.bar:1704\fP o
+\fIfoo.bar\fP
+.br
+\fBSólo permitido en el archivo general de configuración del sistema.\fP
+
+.TP 
+\fBtrust_ca_cert\fP
+Name of a certificate file in PEM format. The name of the file may be given
+as absolute path or as file name only. In the latter case the directories
+\fI~/.@PACKAGE@/@CERTS_DIR@\fP and \fI@SYS_CONF_DIR@/@CERTS_DIR@\fP will be
+searched.
+.br
+This option is useful when the certificate presented by the server cannot be
+verified using the system's data base of trusted certificate authorities
+(CA). The certificate file must contain the self\-signed certificate of the
+top level CA in the chain of trust. It may be a self\-signed server
+certificate (but see also \fBtrust_server_cert\fP).  With this option the
+system's CA data base is ignored.
+.br
+\fBNote:\fP Even if the server's certificate is trusted that does not mean it
+is accepted. Additionally the certificate's date must be valid and either
+the CommonName or the SubjectAltName must match the host name of the server.
+
+.TP 
+\fBservercert\fP
+Same as \fBtrust_ca_cert\fP but badly named.
+.br
+\fBDeprecated\fP
+
+.TP 
+\fBtrust_server_cert\fP
+Name of a certificate file in PEM format. The name of the file may be given
+as absolute path or as file name only. In the latter case the directories
+\fI~/.@PACKAGE@/@CERTS_DIR@\fP and \fI@SYS_CONF_DIR@/@CERTS_DIR@\fP will be
+searched.
+.br
+Usefull when the server's certificate can't be verified or is even invalid,
+but \fByou know\fP that you can trust this certificate.  When the server
+presents a certificate that is exactly equal to this one and when the server
+is able to authenticate against the public key contained in this certificate
+the connection will be established.
+.br
+This is the preferred option for self signed server certificates.
+.br
+No other ways to verify the certificate will be tried and the certificate
+will not be checked for validity.
+
+.TP 
+\fBclientcert\fP
+El nombre de un certificado en formato PKCS#12 que será utilizado para
+autenticarse con el servidor. El nombre del archivo puede ser dado como un
+camino absoluto o, simplemente, como el nombre de archivo. En el caso
+anterior, los directorios \fI~/.@PACKAGE@/@CERTS_DIR@/@CLICERTS_DIR@\fP y
+\fI@SYS_CONF_DIR@/@CERTS_DIR@/@CLICERTS_DIR@\fP serán buscados.
+
+.TP 
+\fBsecrets\fP
+Nombre de archivo que contiene las credenciales de los servidores y del
+proxy, y contraseñas para descifrar el certificado cliente. El nombre debe
+ser un camino absoluto. El archivo debe ser legible y escribible únicamente
+por el dueño (modo 600).
+.br
+Predeterminado: ~/.@PACKAGE@/@SECRETSFILE@
+.br
+\fBSólo permitido en el archivo general de configuración del sistema.\fP El
+archivo "secrets" general del sistema es siempre
+\fI@SYS_CONF_DIR@/@SECRETSFILE@\fP.
+
+.TP 
+\fBask_auth\fP
+Ask the user interactively for credentials and passwords if not found in the
+secretsfile. Ask the user if a servercert cannot be verified. 0 = no, 1 =
+yes.
+.br
+Predeterminado: 1
+
+.TP 
+\fBuse_locks\fP
+Si deben ser bloqueados los archivos en el servidor cuando son abiertos para
+escritura. 0 = no, 1 = sí.
+.br
+Predeterminado: 1
+
+.TP 
+\fBlock_owner\fP
+Una cadena enviada al servidor para identificar al dueño del bloqueo. Si el
+recurso WebDav es usado al mismo tiempo por diferentes clientes que utilizan
+las mismas credenciales, se deberán elegir diferentes valores de lock_owner.
+.br
+Predeterminado: el nombre de usuario utilizado en las credenciales
+
+.TP 
+\fBlock_timeout\fP
+Durante cuanto tiempo, en segundos, se considerará válido, antes de que el
+servidor los remueva. El servidor puede ignorar este valor y tomar su propio
+valor de timeout.
+.br
+Predeterminado: 1800
+
+.TP 
+\fBlock_refresh\fP
+Cuantos segundos antes del tiempo de bloqueo, \fB@PROGRAM_NAME@\fP
+intentarárefrescar el bloqueo. El valor deberá ser sustancialmente más
+grande que \fBdelay_upload\fP.
+.br
+Predeterminado: 60
+
+.TP 
+\fBuse_expect100\fP
+Para evitar subir archivos grandes que puede ser rechazados por el servidor,
+\fB@PROGRAM_NAME@\fP usa el encabezado \fIexpect: 100\-continue\fP para obtener la
+confirmación del servidor antes de la subida. No todos los servidores
+entienden esto. 0 = no, 1 = sí.
+.br
+Predeterminado: 0
+
+.TP 
+\fBif_match_bug\fP
+Some servers do not handle If\-Match and If\-None\-Match\-headers correctly.
+This otion tells \fB@PROGRAM_NAME@\fP to use HEAD instead of thes headers.  0 =
+no, 1 = yes.
+.br
+Predeterminado: 0
+
+.TP 
+\fBdrop_weak_etags\fP
+Popular servers send a weak etag whenever they are not able to calculate a
+strong one. This weak etag will never be valid, but after one second it is
+silently turned into a strong, valid etag. With this flag set to 1,
+\fB@PROGRAM_NAME@\fP will never use this weak etags. If the flag is 0, the
+weakness indicator will be removed and the etag is assumed to be
+strong. There is some danger of the Lost\-Update\-Problem with this. But it is
+minimized when using locks.
+.br
+You should turn this on, when you can't use locks and there is the danger of
+concurrent access to the same resource. In this case the etag is not used at
+all and the resource cannot be cached.
+.br
+0 = no, 1 = sí.
+.br
+Predeterminado: 0
+
+.TP 
+\fBn_cookies\fP
+Some servers will only work when they are allowed to set a cookie and this
+cookie is returned in subsequent requests. This option sets the number of
+cookies you are willing to accept and include in subsequent requests. davfs2
+will only care for the name and the value of the cookie and ignore all of
+the possible attributes.
+.br
+Predeterminado: 0
+
+.TP 
+\fBprecheck\fP
+If option \fBif_match_bug\fP is set: use HEAD\-requests to check for existence
+or modification of a file to avoid unintended overwriting what somebody else
+changed. Has no effect if option \fBif_match_bug\fP is 0. You should only set
+it 0, if there is no concurrent access to the server.  0 = no, 1 = yes.
+.br
+Predeterminado: 1
+
+.TP 
+\fBignore_dav_header\fP
+Some servers send wrong information about their capabilities in the
+DAV\-header.  In this case the header should be ignored.
+.br
+Predeterminado: 0
+
+.TP 
+\fBuse_compression\fP
+Use gzip\-compression for downloading files, if supported by the server.
+Uploads will still be uncompressed.
+.br
+Predeterminado: 0
+
+.TP 
+\fBmin_propset\fP
+Some servers are reported to significantly slow down when the Etag and
+Last\-Modified properties are requested. This option will reduce the set of
+WebDAV\-properties requested from the server to the minimal set. Don't use it
+if your file system is used for reading and writing. Without Etag or
+Last\-Modified davfs2 will not be able to check for changes on the server
+which may result in unnecessary downloads and lost updates. This option will
+also effectively disable caching of files because files in the cache can't
+be reused.
+.br
+Predeterminado: 0
+
+.TP 
+\fBfollow_redirect\fP
+If the server redirects a GET\-request to a different resource (maybe on a
+different server) then follow this redirection.
+.br
+Currently there are some restrictions: all redirects are treated as
+temporary redirects; if the new server requires authentication then the same
+credentials are use as for the original server; if the connection is over
+TLS the server certificate will be checked against the trusted CAs known by
+the system; user configured server certificates and client certificates are
+not used for the new server.
+.br
+Predeterminado: 0
+
+.TP 
+\fBserver_charset\fP
+Cuando se extraen los nombre de archivos desde la ruta del componente en la
+URL, \fB@PROGRAM_NAME@\fP asumirá que están codificados usando este conjunto de
+caracteres y traducirá los nombre de archivo al mapa de caracteres
+local. Esto \fBno\fP está relacionado conla codificación del contenido del
+archivo ni \fBtampoco\fP tiene relación con las reglas de escapado de HTTP.
+.br
+No hay manera en HTTP de saber las codificaciones de caracteres de los
+componentes de la ruta.Puede que existan muchas codificaciones en una misma
+ruta, como así también nombres de archivos codificados que suelen ser
+creados por ciertos clientes.Hoy en día, lo mejor es usar la codificación
+UTF\-8 y no hacer ninguna conversión.Si no está seguro de que todos los
+clientes entienden UTF\-8, limite el nombre de archivo a us\-ascii puro. Nunca
+use caracteres en los nombres de archivo que puedan tener una función
+especial en algún sistema operativo (como /, : y \(rs).)
+.br
+Predeterminado: no convertir el mapa de caracteres
+
+.TP 
+\fBconnect_timeout\fP
+When creating a TCP connection to the server \fB@PROGRAM_NAME@\fP will wait
+that many seconds for an answer before assuming an error. If a value of '0'
+is used then no explicit timeout handling is set and the connect call will
+only timeout as dictated by the TCP stack.
+.br
+This parameter only takes effect if the version of neon in use (neon version
+> 0.26) and the OS support non\-blocking I/O.
+.br
+Predeterminado: 10
+
+.TP 
+\fBread_timeout\fP
+Cuánto tiempo, en segundos, esperará \fB@PROGRAM_NAME@\fP por una respuesta del
+servidor antes de  asumir un error.
+.br
+Predeterminado: 30
+
+.TP 
+\fBretry\fP
+Cuando \fB@PROGRAM_NAME@\fP no pueda localizar el servidor lo intentará
+nuevamente después de \fBretry\fP segundos. Para subsiguientes intentos el
+intervalo irá en aumento hasta los \fBmax_retry\fP segundos.
+.br
+Predeterminado: 30
+
+.TP 
+\fBmax_retry\fP
+Máximo valor para el intervalo de reintento.
+.br
+Predeterminado: 300
+
+.TP 
+\fBmax_upload_attempts\fP
+When uploading a changed file fails temporarily \fB@PROGRAM_NAME@\fP will retry
+with increasing intervals, but not more often than this.
+.br
+With a bad connection this will cause additional traffic. To reduce traffic
+caused by unsuccessful attempts option \fBuse_expect100\fP can be set. But
+please test it. Most proxies and some servers don't support this header.
+.br
+Default: 15
+
+.TP 
+\fBadd_header\fP
+Your server might expect special headers to do what you want. Different from
+other options, this one takes two values: the name of the header and its
+value.  Some ASP\-backends to IIS seem to require the Microsoft specific
+header "Translate: F". You can add it like this:
+.br
+add_header Translate F
+.br
+\fB@PROGRAM_NAME@\fP will add header "Translate: F" on all requests.
+.br
+This option is cumulative. You can enter more than one add_header option and
+all of them will be added. Also add_header options from
+@SYS_CONF_DIR@/@CONFIGFILE@ and ~/.@PACKAGE@/@CONFIGFILE@ are merged.
+
+
+.SH "Opciones Relacionadas al Caché "
+
+.TP 
+\fBbackup_dir\fP
+Cada sistema de archivos @PACKAGE@ montado tiene un directorio donde
+almacenar archivos de respaldo que no han podido ser almacenados en el
+servidor. Aquí se configura el nombre de ese directorio. Este directorio
+debe ser examinado periodicamente.
+.br
+Predeterminado: lost+found
+
+.TP 
+\fBcache_dir\fP
+El directorio donde \fB@PROGRAM_NAME@\fP almacenará los archivos caché. Para
+cadapunto de montaje un subdirectorio será creado.
+.br
+En el archivo de configuración general esto configurará el cachéusado por
+root. En el archivo de configuración del usuario configurará el caché usado
+por ese usuario.
+.br
+Predeterminado: @SYS_CACHE_DIR@ y ~/.@PACKAGE@/cache
+
+.TP 
+\fBcache_size\fP
+La cantidad espacio en disco, medido en MiByte, que será
+usado. \fB@PROGRAM_NAME@\fP tomará siempre el espacio necesario de caché para
+abrir archivos, ignorando este valor si es necesario.
+.br
+Predeterminado: 50
+
+.TP 
+\fBtable_size\fP
+\fB@PROGRAM_NAME@\fP mantiene una tabla de hash con una entrada por cada
+archivo  o directorio conocido. Este valor es la cantidad de entradas en
+esta tabla. Para sistemas de archivos muy grandes (más de cientos de
+archivos) incrementar este número puede darle velocidad a las operaciones de
+archivos. El parámetro debe ser potencia de 2.
+.br
+Predeterminado: 1024
+
+.TP 
+\fBdir_refresh\fP
+After \fB@PROGRAM_NAME@\fP has got information about files in a directory it
+considers it valid for this time in seconds. Note: This does not affect
+opening of files and reading a directory by an application.
+.br
+Predeterminado: 60
+
+.TP 
+\fBfile_refresh\fP
+Cuando un archivo o un directorio es abierto por una aplicación,
+\fB@PROGRAM_NAME@\fPchequeará primero en el servidor si hay una nueva
+versión. Pero algunas aplicaciones hacen estos chequeos del mismo archivo en
+períodos de tiempo muy corto. Para evitar el tráfico innecesario
+\fB@PROGRAM_NAME@\fP esperará varios segundos antes de enviar un nuevo chequeo
+que pida la misma información.
+.br
+Predeterminado: 1
+
+.TP 
+\fBdelay_upload\fP
+When a file that has been changed is closed, \fB@PROGRAM_NAME@\fP will wait
+that many seconds before it will upload it to the server. This will avoid
+uploading of temporary files that will be removed immediately after
+closing.  If you need the files to appear on the server immediately after
+closing, set this option to 0.
+.br
+Predeterminado: 10
+
+.TP 
+\fBgui_optimize\fP
+Cuando un archivo es abierto, \fB@PROGRAM_NAME@\fP tendrá que chequear el
+servidor por si hay una nueva versión. Las Interfaces Gráficas de Usuario
+(GUI) intentan abrir cualquier archivo, haciendo las cosas terriblemente
+lentas para directorios grandes.  Con esta opción \fB@PROGRAM_NAME@\fP
+intentará obtener esta información de todos los archivos en un directorio
+con un único pedido PROPFIND. 0 = no, 1 = sí.
+.br
+Predeterminado: 0
+
+.TP 
+\fBminimize_mem\fP
+davfs2 holds information about files and directories in the working
+memory. It will stay there as long as the file system is mounted and the
+file is not deleted. By this memory usage by davfs2 will grow over time and
+may slow down davfs2. With this option set to 1 davfs2 will regularly clean
+the memory from information that has not be used for some time.  0 = no, 1 =
+yes.
+.br
+\fBWarning:\fP Most file attributes are only maintained locally because there
+is no corresponding WebDAV property. So if users change attributes (owner,
+group, access bits) locally this changes will be lost and attribute values
+will be reset to the default values.
+.br
+Predeterminado: 0
+
+
+.SH "Debugging Options"
+
+.TP 
+\fBdebug\fP
+Send debug messages to the syslog daemon. The value tells what kind of
+information shall be logged. The messages are send with facility LOG_DAEMON
+and priority LOG_DEBUG. It depends from the configuration of the syslog
+daemon where the messages will go (propably /var/log/messages,
+/var/log/syslog or /var/log/daemon.log). Whether HTTP related debug messages
+are available depends on your neon library.
+.br
+Unlike other options, this option is cumulative. If there are several debug
+entries with different values, all of them will be applied. Also debug
+options from @SYS_CONF_DIR@/@CONFIGFILE@ and ~/.@PACKAGE@/@CONFIGFILE@ are
+merged.
+.br
+\fBNote:\fP Debug messages let the log\-files grow quickly. Never use this
+option in normal operation of mount.davfs.
+.br
+Default: no debugging messages
+.RS
+.TP 
+\fBRecognized values:\fP
+.TP 
+\fBconfig\fP
+Command line and configuration options.
+.TP 
+\fBkernel\fP
+Upcalls from the kernel file system.
+.TP 
+\fBcache\fP
+Cache operations like adding and removing nodes.
+.TP 
+\fBhttp\fP
+HTTP headers.
+.TP 
+\fBxml\fP
+Parsing of the XML\-body of WebDAV\-requests.
+.TP 
+\fBhttpauth\fP
+Negotiation of authentication.
+.TP 
+\fBlocks\fP
+Information about locks.
+.TP 
+\fBssl\fP
+TLS/SSL related stuff like certificates.
+.TP 
+\fBhttpbody\fP
+Complete body of HTTP\-responses.
+.TP 
+\fBsecrets\fP
+Also print confidential information, which is usually omitted or obscured.
+.TP 
+\fBmost\fP
+Includes config, kernel, cache and http.
+.RE
+
+
+.SH AUTORES
+
+Este manual ha sido escrito por Werner Baumann
+<werner.baumann@onlinehome.de>.
+
+
+.SH "DAVFS2 HOME"
+
+@PACKAGE_BUGREPORT@
+
+
+.SH "VER TAMBIÉN"
+
+\fB@PROGRAM_NAME@\fP(8), \fBu@PROGRAM_NAME@\fP(8), \fBmount\fP(8), \fBumount\fP(8),
+\fBfstab\fP(5)

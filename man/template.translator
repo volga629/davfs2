@@ -1,0 +1,11 @@
+PO4A-HEADER:mode=after;position=^\.SH AUTHORS;beginboundary=^\.SH
+.SH TRANSLATOR(S)
+YOUR TEXT
+
+# Please replace AUTHORS by its translation, exactly as in the .po-file.
+# Translate the string TRANSLATOR(S).
+# Replace YOUR TEXT with information about the translators.
+# Please use the same character encoding as in the .po-file.
+# Rename the file. The name should be like the name of the man
+# page, with .translator appended (e.g. mount.davfs.8.translator).
+# Finally remove all this comment lines (lines beginning with #).

@@ -1,0 +1,1655 @@
+# #-#-#-#-#  davfs2.conf.5.po (davfs2)  #-#-#-#-#
+# German translation of davfs2.conf(5) man page.
+# Copyright (C) 2007, 2008, 2014 Werner Baumann
+# Werner Baumann <werner.baumann@onlinehome.de>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: davfs2 1.5.0\n"
+"POT-Creation-Date: 2014-06-09 20:32+0300\n"
+"PO-Revision-Date: 2014-06-09 20:35+0200\n"
+"Last-Translator: Werner Baumann <werner.baumann@onlinehome.de>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# type: TH
+#. type: TH
+#: davfs2.conf.5:1
+#, no-wrap
+msgid "@CONFIGFILE@"
+msgstr "@CONFIGFILE@"
+
+# type: TH
+#. type: TH
+#: davfs2.conf.5:1
+#, no-wrap
+msgid "2014-06-09"
+msgstr "2014-06-09"
+
+# type: TH
+#. type: TH
+#: davfs2.conf.5:1 mount.davfs.8:1 umount.davfs.8:1
+#, no-wrap
+msgid "@PACKAGE_STRING@"
+msgstr "@PACKAGE_STRING@"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:4 mount.davfs.8:3 umount.davfs.8:3
+#, no-wrap
+msgid "NAME"
+msgstr "BEZEICHNUNG"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:7
+msgid "B<@CONFIGFILE@> - Configuration file for B<@PROGRAM_NAME@>"
+msgstr "B<@CONFIGFILE@> - Konfigurationsdatei für B<@PROGRAM_NAME@>"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:9 mount.davfs.8:22 umount.davfs.8:20
+#, no-wrap
+msgid "DESCRIPTION"
+msgstr "BESCHREIBUNG"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:17
+msgid ""
+"There is a system wide configuration file I<@SYS_CONF_DIR@/@CONFIGFILE@> and "
+"user configuration files I<~/.@PACKAGE@/@CONFIGFILE@>. When "
+"B<@PROGRAM_NAME@> is invoked by root, only the system wide configuration "
+"file is read. When invoked by an ordinary user, the user configuration file "
+"is read in addition. Settings from the user configuration file will take "
+"precedence over the system wide configuration."
+msgstr ""
+"Es gibt die systemweite Konfigurationsdatei I<@SYS_CONF_DIR@/@CONFIGFILE@> "
+"und die Benutzer-Konfigurationsdateien I<~/.@PACKAGE@/@CONFIGFILE@>. Wenn "
+"root B<@PROGRAM_NAME@> startet, wird nur die systemweite Konfigurationsdatei "
+"gelesen. Bei einem normalen Benutzer wird zusätzlich seine Benutzer-"
+"Konfigurationsdatei gelesen. Einstellungen in der Benutzer-"
+"Konfigurationsdatei haben Vorrang vor denen in der systemweiten "
+"Konfigurationsdatei."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:21
+msgid ""
+"The configuration file consists of lines where each line contains a keyword "
+"value pair. Keyword and value are seperated by spaces and/or tabs."
+msgstr ""
+"Jede Zeile der Konfigurationsdatei enthält ein Schlüsselwort und einen Wert, "
+"die durch Leerzeichen und/oder Tabulatoren von einander getrennt sind."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:29
+msgid ""
+"The file may contain sections that are for one specific mount point only.  "
+"Such a section starts with a line, that contains the full path of the mount "
+"point enclosed in square brackets. The section ends at the start of the next "
+"section or the end of file. Options that shall apply to all mounted file "
+"system must come before the first sections. Options given in a mount "
+"specific section will have precedence."
+msgstr ""
+"Die Konfigurationsdatei kann Abschnitte enthalten, die nur für ein "
+"bestimmtes Dateisystem gelten. Diese Abschnitte beginnen mit einer Zeile, "
+"die nur den vollständigen Pfad des Einhängepunktes, eingeschlossen in eckige "
+"Klammern, enthält. Ein solcher Abschnitt endet mit dem Beginn eines neuen "
+"Abschnittes oder dem Ende der Datei. Optionen, die für alle Dateisysteme "
+"gelten sollen, müssen vor dem ersten solchen Abschnitt stehen.  Optionen in "
+"einem Abschnitt für ein bestimmtes Dateisystem haben Vorrang."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:31
+#, no-wrap
+msgid "EXAMPLE"
+msgstr "BEISPIEL"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:34
+msgid "kernel_fs coda"
+msgstr "kernel_fs coda"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:36
+msgid "proxy\tfoo.bar:8080"
+msgstr "proxy foo.bar:8080"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:38
+msgid "use_locks 0"
+msgstr "use_locks 0"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:41
+msgid "[/media/dav]"
+msgstr "[/media/dav]"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:43
+msgid "use_locks 1"
+msgstr "use_locks 1"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:46
+msgid "[/home/otto/mywebspace]"
+msgstr "[/home/otto/mywebspace]"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:48
+msgid "gui_optimize 1"
+msgstr "gui_optimize 1"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:53
+msgid ""
+"All mounted @PACKAGE@ file systems will use the coda kernel file system and "
+"the proxy foo.bar. All @PACKAGE@ file systems expect /media/dav will disable "
+"the use of the locks. /home/otto/mywebspace will use the gui_optimize option."
+msgstr ""
+"Alle @PACKAGE@-Dateisysteme benutzen das Kerneldateisystem fuse und den "
+"Proxy foo.bar. Nur in /media/dav werden Sperren benutzt. Für das "
+"Dateisystem /home/otto/mywebspace wird die Option gui_optimize eingeschaltet."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:54
+#, no-wrap
+msgid "GENERAL SYNTAX RULES"
+msgstr "ALLGEMEINE SYNTAX-REGELN"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:57
+msgid "Lines that only contain spaces and tabs (empty lines) are ignored."
+msgstr "Leerzeilen werden ignoriert."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:60
+msgid "# indicates a comment. The rest of the line is ignored."
+msgstr "# kennzeichnet einen Kommentar. Der Rest der Zeile wird ignoriert."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:63
+msgid "\\(rs is the escape character."
+msgstr ""
+"\\(rs ist das Escape-Zeichen und hebt die Sonderfunktion des folgenden "
+"Zeichens auf."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:66
+msgid "\"\" is used for quotation."
+msgstr "\" wird als Anführungszeichen benutzt."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:72
+msgid ""
+"If a value contains one of the special characters space, tab, #, \\(rs, or "
+"\", this character must be escaped by a preceding \\(rs. Use \\(cq\\(rs\\ "
+"\\(cq instead of \\(cq\\ \\(cq, \\(cq\\(rs#\\(cq instead of \\(cq#\\(cq, "
+"\\(cq\\(rs\\(rs\\(cq instead of \\(cq\\(rs\\(cq and \\(cq\\(rs\"\\(cq "
+"instead of \\(cq\"\\(cq."
+msgstr ""
+"Wenn ein Wert eines der Sonderzeichen Leerzeichen, Tabulator, #, \\(rs oder "
+"\" enthält, muss diesem Zeichen ein Escape-Zeichen \\(rs vorangestellt "
+"werden. Also \\(cq\\(rs\\ \\(cq statt \\(cq\\ \\(cq, \\(cq\\(rs#\\(cq statt "
+"\\(cq#\\(cq, \\(cq\\(rs\\(rs\\(cq statt \\(cq\\(rs\\(cq und \\(cq\\(rs"
+"\"\\(cq statt \\(cq\"\\(cq."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:78
+msgid ""
+"Values containing spaces, tabs or # may instead be enclosed in double "
+"quotes.  But \" and \\(cq must be escaped even within double quotes. If the "
+"starting line of a section is enclosed in double quotes, the square brakets "
+"must be within the quotes (like \"[/home/otto/with space]\")."
+msgstr ""
+"Werte, die Lerrzeichen, Tabulatoren oder # enthalten, können stattdessen "
+"auch in doppelte Anführungszeichen gesetzt werden. \\(rs und \" brauchen "
+"auch innerhalb eines Ausdrucks in Anführungszeichen ein vorangestelltes "
+"Escape-Zeichen. Wenn die Kopfzeile eines Abschnittes in Anführungszeichen "
+"gesetzt wird, dann müssen die eckigen Klammern innerhalb der "
+"Anführungszeichen stehen (z.B.  \"[/home/otto/with space]\")."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:82
+msgid ""
+"Boolean option values (yes/no) must be given as numerical value.  0 for no, "
+"1 for yes."
+msgstr ""
+"Bei ja/nein-Optionen muss der Wert numerisch angegeben werden. 0 für nein, 1 "
+"für ja."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:84
+#, no-wrap
+msgid "AVAILABLE CONFIGURATION OPTIONS"
+msgstr "KONFIGURATIONS-OPTIONEN"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:86
+#, no-wrap
+msgid "General Options"
+msgstr "Allgemeine Optionen"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:88
+#, no-wrap
+msgid "B<dav_user>"
+msgstr "B<dav_user>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:92
+msgid ""
+"When invoked by root the B<@PROGRAM_NAME@> daemon will run as this user.  "
+"Value must be given as I<name>, B<not> as numerical id."
+msgstr ""
+"Wird B<@PROGRAM_NAME@> von root gestartet, läuft der Hintergrundprozess als "
+"dieser Benutzer. Es muss der Benutzer-I<Name> angeben werden, nicht die "
+"Benutzernummer."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:94
+msgid "Default: @USER@"
+msgstr "Voreingestellt: @USER@"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:96 davfs2.conf.5:106 davfs2.conf.5:135 davfs2.conf.5:144
+msgid "B<Only allowed in the system wide configuration file.>"
+msgstr ""
+"B<Diese Option ist nur in der systemweiten Konfigurationsdatei erlaubt.>"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:97
+#, no-wrap
+msgid "B<dav_group>"
+msgstr "B<dav_group>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:102
+msgid ""
+"The group of the running B<@PROGRAM_NAME@> daemon. Ordinary users must be "
+"member of this group in order to mount a @PACKAGE@ file system.  Value must "
+"be given as I<name>, B<not> as numerical id."
+msgstr ""
+"Die Gruppe des B<@PROGRAM_NAME@>-Hintergrundprozesses. Normale Benutzer "
+"müssen Mitglieder dieser Gruppe sein, damit sie ein @PACKAGE@-Dateisystem "
+"einhängen dürfen. Es muss der Gruppen-I<Name> angeben werden, nicht die "
+"Gruppennummer."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:104
+msgid "Default: @GROUP@"
+msgstr "Voreingestellt: @GROUP@"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:107
+#, no-wrap
+msgid "B<kernel_fs>"
+msgstr "B<kernel_fs>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:111
+msgid ""
+"Which kernel file system to use, to integrate into the virtual file system.  "
+"Possible values are I<fuse> and I<coda>."
+msgstr ""
+"Welches Kernel-Dateisystem zur Integration in das virtuelle Dateisystem "
+"benutzt wird. Möglich sind I<fuse> und I<coda>."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:113
+msgid "Default: fuse"
+msgstr "Voreingestellt: fuse"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:114
+#, no-wrap
+msgid "B<buf_size>"
+msgstr "B<buf_size>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:119
+msgid ""
+"Size in KiByte of the buffer used to communicate with the kernel file "
+"system.  Only usefull with I<fuse>, where read and write operations may "
+"profit from a larger buffer."
+msgstr ""
+"Größe des Puffers zur Kommunikation mit dem Kernel-Dateisystem in KiByte.  "
+"Hat nur einen Effekt, wenn I<fuse> benutzt wird; Schreib- und "
+"Leseoperationen können durch einen großen Puffer beschleunigt werden."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:121
+msgid "Default: 16"
+msgstr "Voreingestellt: 16"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:123
+#, no-wrap
+msgid "WebDAV Related Options"
+msgstr "WebDAV-Optionen"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:125
+#, no-wrap
+msgid "B<use_proxy>"
+msgstr "B<use_proxy>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:131
+msgid ""
+"Whether to use a proxy to connect to the WebDAV server. 0 = no, 1 = yes.  If "
+"no proxy is defined in the configration file or the environment variables "
+"B<https_proxy>, B<http_proxy> and B<all_proxy>, this option has no effect."
+msgstr ""
+"Ob ein Proxy benutzt werden soll. 0 = nein, 1 = ja. Wenn weder in der "
+"Konfigurationsdatei noch in den Umgebungsvariablen B<https_proxy>, "
+"B<http_proxy> und B<all_proxy> ein Proxy angegeben ist, hat diese Option "
+"keinen Effekt."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:133 davfs2.conf.5:213 davfs2.conf.5:220 davfs2.conf.5:298
+#: davfs2.conf.5:472
+msgid "Default: 1"
+msgstr "Voreingestellt: 1"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:136
+#, no-wrap
+msgid "B<proxy>"
+msgstr "B<proxy>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:142
+msgid ""
+"Name of the proxy. The name must be the fully qualified domain name (no "
+"scheme). If the proxy port differs from the default of 8080, it must be "
+"appended, seperated by a colon. Examples: I<foo.bar:1704> or I<foo.bar>"
+msgstr ""
+"Der vollständige Domain-Name des Proxy (aber ohne Schema). Wenn der Proxy "
+"eine andere Port-Nummer als 8080 benutzt, muss diese, durch einen "
+"Doppelpunkt getrennt, angehängt werden. Beispiele: I<foo.bar:1704> oder "
+"I<foo.bar>"
+
+#. type: TP
+#: davfs2.conf.5:145
+#, no-wrap
+msgid "B<trust_ca_cert>"
+msgstr "B<trust_ca_cert>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:151 davfs2.conf.5:176
+msgid ""
+"Name of a certificate file in PEM format. The name of the file may be given "
+"as absolute path or as file name only. In the latter case the directories "
+"I<~/.@PACKAGE@/@CERTS_DIR@> and I<@SYS_CONF_DIR@/@CERTS_DIR@> will be "
+"searched."
+msgstr ""
+"Name einer Datei mit einem Zertifikat im PEM-Format. Der Dateiname kann als "
+"absoluter Pfad angegeben werden oder als reiner Dateiname. Im letzteren Fall "
+"wird die Datei in den Verzeichnissen I<~/.@PACKAGE@/@CERTS_DIR@> und "
+"I<@SYS_CONF_DIR@/@CERTS_DIR@> gesucht."
+
+#. type: Plain text
+#: davfs2.conf.5:158
+msgid ""
+"This option is useful when the certificate presented by the server cannot be "
+"verified using the system's data base of trusted certificate authorities "
+"(CA). The certificate file must contain the self-signed certificate of the "
+"top level CA in the chain of trust. It may be a self-signed server "
+"certificate (but see also B<trust_server_cert>).  With this option the "
+"system's CA data base is ignored."
+msgstr ""
+"Diese Option ist nützlich, wenn das vom Server vorgelegte Zertifikat nicht "
+"mit Hilfe der systemeigenen Datenbank vertrauenswürdiger "
+"Zertifizierungsstellen (CA) verifiziert werden kann. Die Datei muss das "
+"selbst signierte Zertifikat der obersten CA in der Vertrauenskette "
+"enthalten. Es kann auch das selbst signierte Zertifikat des Servers sein "
+"(siehe auch B<trust_server_cert>). Wenn diese Option benutzt wird, wird die "
+"systemeigene CA-Datenbank ignoriert."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:163
+msgid ""
+"B<Note:> Even if the server's certificate is trusted that does not mean it "
+"is accepted. Additionally the certificate's date must be valid and either "
+"the CommonName or the SubjectAltName must match the host name of the server."
+msgstr ""
+"B<Hinweis:> Auch wenn dem Zertifikat vertraut wird, wird es nicht unbedingt "
+"auch akzeptiert. Das Gültigkeitsdatum muss stimmen und entweder der "
+"CommonName oder der SubjectAltName muss gleich dem Servernamen sein."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:164
+#, no-wrap
+msgid "B<servercert>"
+msgstr "B<servercert>"
+
+#. type: Plain text
+#: davfs2.conf.5:167
+msgid "Same as B<trust_ca_cert> but badly named."
+msgstr "Wie B<trust_ca_cert> aber mit falscher Bezeichnung."
+
+# type: TP
+#. type: Plain text
+#: davfs2.conf.5:169
+msgid "B<Deprecated>"
+msgstr "B<Deprecated>"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:170
+#, no-wrap
+msgid "B<trust_server_cert>"
+msgstr "B<trust_server_cert>"
+
+#. type: Plain text
+#: davfs2.conf.5:182
+msgid ""
+"Usefull when the server's certificate can't be verified or is even invalid, "
+"but B<you know> that you can trust this certificate.  When the server "
+"presents a certificate that is exactly equal to this one and when the server "
+"is able to authenticate against the public key contained in this certificate "
+"the connection will be established."
+msgstr ""
+"Nützlich wenn das Zertifikat des Servers nicht überprüft werden kann oder "
+"gar ungültig ist, aber B<du weißt>, dass du ihm vertrauen kannst. Wenn der "
+"ein identisches Zertifikat vorlegt und sich gegen den öffentlichen Schlüssel "
+"des Zertifikats ausweisen kann, wird die Verbindung aufgebaut. "
+
+#. type: Plain text
+#: davfs2.conf.5:184
+msgid "This is the preferred option for self signed server certificates."
+msgstr ""
+"Dies ist die bevorzugte Option für selbst signierte Server Zertifikate."
+
+#. type: Plain text
+#: davfs2.conf.5:187
+msgid ""
+"No other ways to verify the certificate will be tried and the certificate "
+"will not be checked for validity."
+msgstr ""
+"Es wird nicht versucht, das Zertifikat auf anderem Weg zu verifizieren, und "
+"es wird nicht auf Gültigkeit überprüft."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:188
+#, no-wrap
+msgid "B<clientcert>"
+msgstr "B<clientcert>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:195
+msgid ""
+"Name of a certificate in PKCS#12 format that will be used to authenticate "
+"with the server. The name of the file may be given as absolute path or as "
+"file name only. In the latter case the directories I<~/.@PACKAGE@/"
+"@CERTS_DIR@/@CLICERTS_DIR@> and I<@SYS_CONF_DIR@/@CERTS_DIR@/@CLICERTS_DIR@> "
+"will be searched."
+msgstr ""
+"Name einer Datei mit einem Zertifikat im PKCS#12-Format, mit dem sich der "
+"Benutzer beim Server ausweisen kann. Der Name muss entweder als absoluter "
+"Pfad oder als reiner Dateiname angegeben werden. Im letzteren Fall wird in "
+"den Verzeichnissen I<~/.@PACKAGE@/@CERTS_DIR@/@CLICERTS_DIR@> und "
+"I<@SYS_CONF_DIR@/@CERTS_DIR@/@CLICERTS_DIR@> nach ihr gesucht."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:196 davfs2.conf.5:559
+#, no-wrap
+msgid "B<secrets>"
+msgstr "B<secrets>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:201
+msgid ""
+"Name of a file that holds the credentials for servers and the proxy, and "
+"passwords to decrypt the client certificate. The name must be an absolute "
+"path. The file must be read and writable by the owner only (mode 600)."
+msgstr ""
+"Name der Datei, die die vertraulichen Zugangsdaten für Server und Proxy "
+"enthält, sowie Passwörter zur Entschlüsselung von Client-Zertifikaten.  Der "
+"Name muss ein absoluter Pfad sein. Die Datei darf nur für den Eigentümer "
+"schreib- und lesbar sein (Dateimodus 600)."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:203
+msgid "Default: ~/.@PACKAGE@/@SECRETSFILE@"
+msgstr "Voreingestellt: ~/.@PACKAGE@/@SECRETSFILE@"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:206
+msgid ""
+"B<Only allowed in the user configuration file.> The system wide secrets file "
+"is allways I<@SYS_CONF_DIR@/@SECRETSFILE@>."
+msgstr ""
+"B<Diese Option ist nur in den Benutzer-Konfigurationsdateien erlaubt.> Die "
+"systemweite Datei für diese Daten ist immer I<@SYS_CONF_DIR@/@SECRETSFILE@>."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:207
+#, no-wrap
+msgid "B<ask_auth>"
+msgstr "B<ask_auth>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:211
+msgid ""
+"Ask the user interactively for credentials and passwords if not found in the "
+"secretsfile. Ask the user if a servercert cannot be verified. 0 = no, 1 = "
+"yes."
+msgstr ""
+"Frage den Benutzer nach den vertraulichen Zugangsdaten, wenn diese nicht in "
+"der secrets-Datei gefunden werden. Frage den Benutzer wenn ein Zertifikat "
+"des Servers nicht verifiziert werden kann. 0 = nein, 1 = ja."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:214
+#, no-wrap
+msgid "B<use_locks>"
+msgstr "B<use_locks>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:218
+msgid ""
+"Whether to lock files on the server when they are opened for writing.  0 = "
+"no, 1 = yes."
+msgstr ""
+"Sperre Dateien auf dem Server, wenn sie zum Schreiben geöffnet werden.  0 = "
+"nein, 1 = ja."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:221
+#, no-wrap
+msgid "B<lock_owner>"
+msgstr "B<lock_owner>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:226
+msgid ""
+"A string send to the server to identify the owner of a lock. If a WebDAV "
+"resource is used at the same time by different clients using the same "
+"credentials, different values for lock_owner should be choosen."
+msgstr ""
+"Dieser Text wird an den Server gesandt, um den Eigentümer einer Sperre zu "
+"kennzeichnen. Wenn eine WebDAV-Resource gleichzeitig von mehreren Benutzern "
+"mit den gleichen Zugangsdaten benutzt wird, sollten unterschiedliche Werte "
+"für lock_owner gewählt werden."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:228
+msgid "Default: the username from the credentials"
+msgstr "Voreingestellt: der Benutzername aus den Zugangsdaten"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:229
+#, no-wrap
+msgid "B<lock_timeout>"
+msgstr "B<lock_timeout>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:233
+msgid ""
+"How long in seconds locks should be valid, before the server removes them.  "
+"The server may ignore this and set its own timeout value."
+msgstr ""
+"Nach dieser Zeit in Sekunden sollte der Server Sperren wieder entfernen.  "
+"Der Server hält sich nicht unbedingt daran."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:235
+msgid "Default: 1800"
+msgstr "Voreingestellt: 1800"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:236
+#, no-wrap
+msgid "B<lock_refresh>"
+msgstr "B<lock_refresh>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:241
+msgid ""
+"That many seconds before the lock times out, B<@PROGRAM_NAME@> will try to "
+"refresh the lock. The value should be substantially greater than "
+"B<delay_upload>."
+msgstr ""
+"Soviele Sekunden bevor eine Sperre abläuft versucht B<@PROGRAM_NAME@> sie zu "
+"erneuern. Der Wert sollte deutlich größer sein als die B<delay_upload>."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:243 davfs2.conf.5:462
+msgid "Default: 60"
+msgstr "Voreingestellt: 60"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:244
+#, no-wrap
+msgid "B<use_expect100>"
+msgstr "B<use_expect100>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:250
+msgid ""
+"To avoid uploading big files that will be refused by the server, "
+"B<@PROGRAM_NAME@> uses the header I<expect: 100-continue> to get the o.k.  "
+"from the server before uploading. Not all servers understand this.  0 = no, "
+"1 = yes."
+msgstr ""
+"Um nicht große Dateien hochzuladen, die vom Server sowieso abgelehnt werden, "
+"benutzt B<@PROGRAM_NAME@> den Header I<expect: 100-continue> um vom Server "
+"das o.k. im voraus zu erhalten. Aber nicht alle Server verstehen das. 0 = "
+"nein, 1 = ja."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:252 davfs2.conf.5:260 davfs2.conf.5:278 davfs2.conf.5:288
+#: davfs2.conf.5:305 davfs2.conf.5:312 davfs2.conf.5:324 davfs2.conf.5:338
+#: davfs2.conf.5:492 davfs2.conf.5:508
+msgid "Default: 0"
+msgstr "Voreingestellt: 0"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:253
+#, no-wrap
+msgid "B<if_match_bug>"
+msgstr "B<if_match_bug>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:258
+msgid ""
+"Some servers do not handle If-Match and If-None-Match-headers correctly.  "
+"This otion tells B<@PROGRAM_NAME@> to use HEAD instead of thes headers.  0 = "
+"no, 1 = yes."
+msgstr ""
+"Manche Server verarbeiten If-Match- und If-None-Match-Header nicht richtig. "
+"Dies Option veranlasst B<@PROGRAM_NAME@>, stattdessen HEAD zu benutzen. 0 = "
+"nein, 1 = ja."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:261
+#, no-wrap
+msgid "B<drop_weak_etags>"
+msgstr "B<drop_weak_etags>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:270
+msgid ""
+"Popular servers send a weak etag whenever they are not able to calculate a "
+"strong one. This weak etag will never be valid, but after one second it is "
+"silently turned into a strong, valid etag. With this flag set to 1, "
+"B<@PROGRAM_NAME@> will never use this weak etags. If the flag is 0, the "
+"weakness indicator will be removed and the etag is assumed to be strong. "
+"There is some danger of the Lost-Update-Problem with this. But it is "
+"minimized when using locks."
+msgstr ""
+"Weit verbreitete Server senden ein schwaches Etag, wenn sie kein starkes "
+"erzeugen können. Dieses schwache Etag ist immer ungültig, wird aber nach "
+"einer Sekunde stillschweigend in ein starkes, gültiges Etag verwandelt. Wenn "
+"diese Option auf 1 gesetzt ist, wird B<@PROGRAM_NAME@> diese Etags nicht "
+"verwenden. Ist diese Option 0, dann wird die Kennzeichnung als schwach "
+"entfernt und das Etag wie ein starkes Etag benutzt. Dies beinhaltet  die "
+"Gefahr, versehentlich die Änderungen anderer Leute zu überschreiben. Doch "
+"diese Gefahr kann durchdie Verwendung von Sperren minimiert werden."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:274
+msgid ""
+"You should turn this on, when you can't use locks and there is the danger of "
+"concurrent access to the same resource. In this case the etag is not used at "
+"all and the resource cannot be cached."
+msgstr ""
+"Wenn keine Sperren verwendet werden können, und die Gefahr besteht, dass "
+"zwei Clients gleichzeitig auf die selbe Resource zugreifen, solltest du "
+"diese Option aktivieren. In diesem Fall wird das Etag nicht benutzt und die "
+"Resource kann nicht im Cache gespeichert werden."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:276
+msgid "0 = no, 1 = yes."
+msgstr "0 = nein, 1 = ja."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:279
+#, no-wrap
+msgid "B<n_cookies>"
+msgstr "B<n_cookies>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:286
+msgid ""
+"Some servers will only work when they are allowed to set a cookie and this "
+"cookie is returned in subsequent requests. This option sets the number of "
+"cookies you are willing to accept and include in subsequent requests. davfs2 "
+"will only care for the name and the value of the cookie and ignore all of "
+"the possible attributes."
+msgstr ""
+"Manche Server verweigern den Dienst, wenn ihnen nicht erlaubt is ein Cookie "
+"zu setzen. Diese Option legt fest, wie vile Cookies akzeptiert und in den "
+"folgenden Requests gesendet werden. davfs2 kümmert sich nur um den Namen und "
+"den Wert von Cookies und ignoriert alle eventuellen zusätzlichen "
+"Eigenschaften der Cookies."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:289
+#, no-wrap
+msgid "B<precheck>"
+msgstr "B<precheck>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:296
+msgid ""
+"If option B<if_match_bug> is set: use HEAD-requests to check for existence "
+"or modification of a file to avoid unintended overwriting what somebody else "
+"changed. Has no effect if option B<if_match_bug> is 0. You should only set "
+"it 0, if there is no concurrent access to the server.  0 = no, 1 = yes."
+msgstr ""
+"Falls die Option B<if_match_bug> gesetzt ist: teste mit Hilfe von HEAD-"
+"Anfragen, ob eine Datei existiert oder geändert wurde, um versehentliches "
+"Überschreiben der Änderungen anderer Leute zu vermeiden. Hat keie Wirkung "
+"wenn B<if_match_bug> 0 ist. Du solltest die Option nur auf 0 setzen, wenn "
+"kein konkurrierender Zugriff auf den Server erfolgt. 0 = nein, 1 = ja."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:299
+#, no-wrap
+msgid "B<ignore_dav_header>"
+msgstr "B<ignore_dav_header>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:303
+msgid ""
+"Some servers send wrong information about their capabilities in the DAV-"
+"header.  In this case the header should be ignored."
+msgstr ""
+"Manche Server senden im DAV-Header Fehlinformationen über ihre Fähigkeiten. "
+"In diesem Fall sollte man den Header ignorieren."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:306
+#, no-wrap
+msgid "B<use_compression>"
+msgstr "B<use_compression>"
+
+#. type: Plain text
+#: davfs2.conf.5:310
+msgid ""
+"Use gzip-compression for downloading files, if supported by the server.  "
+"Uploads will still be uncompressed."
+msgstr ""
+"Benütze für den Download von Dateien die gzip-Komprimierung, falls der "
+"Server das unterstützt. Der Upload erfolgt weiter unkomprimiert."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:313
+#, no-wrap
+msgid "B<min_propset>"
+msgstr "B<min_propset>"
+
+#. type: Plain text
+#: davfs2.conf.5:322
+msgid ""
+"Some servers are reported to significantly slow down when the Etag and Last-"
+"Modified properties are requested. This option will reduce the set of WebDAV-"
+"properties requested from the server to the minimal set. Don't use it if "
+"your file system is used for reading and writing. Without Etag or Last-"
+"Modified davfs2 will not be able to check for changes on the server which "
+"may result in unnecessary downloads and lost updates. This option will also "
+"effectively disable caching of files because files in the cache can't be "
+"reused."
+msgstr ""
+"Von manchen Servern wird berichtet, dass sie erheblich langsamer werden, "
+"wenn Etag und Last-Modified abgefragt werden. Diese Option reduziert die vom "
+"Server abgefragten WebDAV-Properties auf das Minimum. Wenn das Dateisystem "
+"für Schreib- und Lesezugriffe verwendet wird, darf dies Option nicht gesetzt "
+"werden. Ohne Etag oder Last-Modified kann davfs2 Änderungen auf dem Server "
+"nicht erkennen, was zu überflüssigen Downloads und zum Verlust von "
+"Änderungen führen kann. Der Datei-Cache wird dadurch auch nutzlos, da "
+"Dateien im Cache nicht wieder verwendet werden können."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:325
+#, no-wrap
+msgid "B<follow_redirect>"
+msgstr "B<follow_redirect>"
+
+#. type: Plain text
+#: davfs2.conf.5:329
+msgid ""
+"If the server redirects a GET-request to a different resource (maybe on a "
+"different server) then follow this redirection."
+msgstr ""
+"Wenn ein GET-Request vom Server auf eine andere Resource verwiesen wird "
+"(Redirect), dann folge diesem Verweis."
+
+#. type: Plain text
+#: davfs2.conf.5:336
+msgid ""
+"Currently there are some restrictions: all redirects are treated as "
+"temporary redirects; if the new server requires authentication then the same "
+"credentials are use as for the original server; if the connection is over "
+"TLS the server certificate will be checked against the trusted CAs known by "
+"the system; user configured server certificates and client certificates are "
+"not used for the new server."
+msgstr ""
+"Zur Zeit gibt es einige Einschränkungen: alle Redirects werden als temporär "
+"behandelt; falls der neue Server eine Authentifizierung verlangt, dann "
+"werden die selben Zugangsdaten benutzt, wie für den ursprünglichen Server; "
+"wenn die Verbindung über TLS läuft, dann wird das Server-Zertifikat mit "
+"Hilfe der CAs geprüft, die vom System als vertrauenswürdig gespeichert sind; "
+"vom Benutzer konfigurierte Server- und Client-Zertifikate werden nicht "
+"benutzt."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:339
+#, no-wrap
+msgid "B<server_charset>"
+msgstr "B<server_charset>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:345
+msgid ""
+"When extracting file names from the path component of the URL, "
+"B<@PROGRAM_NAME@> will assume they are encoded using this character set and "
+"translate file names to the local character set. This is B<not> about "
+"encoding of file contents and B<not> about HTTP escaping rules."
+msgstr ""
+"Wenn B<@PROGRAM_NAME@> aus der Pfad-Komponente der URL die Dateinamen "
+"erzeugt, geht es davon aus, das diese entsprechend diesem Zeichensatz "
+"kodiert sind und übersetzt sie in die lokal benutzte Kodierung.  Dies hat "
+"B<nichts> zu tun mit der Kodierung des Dateiinhalts und auch B<nichts> mit "
+"den HTTP-Escape-Regeln."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:353
+msgid ""
+"There is no means in HTTP to know the character encoding of the path "
+"component. There may be even different encodings within the same path, as "
+"the encoding of file names is often defined by the clients that created "
+"them.  Nowadays it is best to use only UTF-8 encoding and to do no "
+"conversion. If you are not sure that all clients understand UTF-8, restrict "
+"file names to pure us-ascii. Never use characters in file names, that may "
+"have a special function on some operating systems (like /, : and \\(rs)."
+msgstr ""
+"Es gibt in HTTP keine Möglichekit die Kodierung der Pfad-Komponente zu "
+"erfahren. Da die Kodierung von Namen im Pfad meistens von den Clients "
+"festgelegt wird, die diese Dateien und Verzeichnisse erzeugen, kann es "
+"durchaus vorkommen, dass auch innerhalb eines Pfades unterschiedliche "
+"Kodierungen verwendet werden. Heutzutage ist es am besten, ausschließlich "
+"die UTF-8-Kodierung zu benutzen und keine Konvertierung vorzunehmen. Wenn du "
+"nicht sicher bist, dass alle Clients das verstehen, solltest du Dateinamen "
+"auf reines US-ASCII beschränken. Benutze niemals Zeichen, die im Dateisystem "
+"eines anderen Betriebssystems eine spezielle Funktion haben (wie z.B. /, : "
+"und \\(rs)."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:355
+msgid "Default: no character set conversion"
+msgstr "Voreingestellt: die Kodierung wird nicht umgewandelt"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:356
+#, no-wrap
+msgid "B<connect_timeout>"
+msgstr "B<connect_timeout>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:362
+msgid ""
+"When creating a TCP connection to the server B<@PROGRAM_NAME@> will wait "
+"that many seconds for an answer before assuming an error. If a value of '0' "
+"is used then no explicit timeout handling is set and the connect call will "
+"only timeout as dictated by the TCP stack."
+msgstr ""
+"Beim Öffnen einer TCP-Verbindung zum Server wartet B<@PROGRAM_NAME@> so "
+"viele Sekunden bevor es einen Fehler annimmt. Bei einem Wert von \"0\" wird "
+"die Feststellung einer Zeitüberschreitung dem TCP-Stack überlassen."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:365
+msgid ""
+"This parameter only takes effect if the version of neon in use (neon version "
+"E<gt> 0.26) and the OS support non-blocking I/O."
+msgstr ""
+"Dieser Parameter zeigt nur Wirkung, wenn die verwendete Neon-Version "
+"(Version E<gt> 0.26) und das Betriebssystem nicht-blockierende Ein-Ausgabe-"
+"Operationen unterstützen."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:367 davfs2.conf.5:482
+msgid "Default: 10"
+msgstr "Voreingestellt: 10"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:368
+#, no-wrap
+msgid "B<read_timeout>"
+msgstr "B<read_timeout>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:372
+msgid ""
+"How long in seconds B<@PROGRAM_NAME@> will wait for an answer from the "
+"server before assuming an error."
+msgstr ""
+"B<@PROGRAM_NAME@> wird so viele Sekunden auf die Antwort des Servers warten, "
+"bevor es einen Fehler annimmt."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:374 davfs2.conf.5:382
+msgid "Default: 30"
+msgstr "Voreingestellt: 30"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:375
+#, no-wrap
+msgid "B<retry>"
+msgstr "B<retry>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:380
+msgid ""
+"When B<@PROGRAM_NAME@> can not reach the server it will try again after "
+"B<retry> seconds. For subsequent retries the interval will be increased up "
+"to B<max_retry> seconds."
+msgstr ""
+"Wenn B<@PROGRAM_NAME@> den Server nicht erreichen kann, wird es es nach "
+"B<retry> Sekunden nochmal versuchen. Bei weiteren Versuchen wird es diese "
+"Zeit schrittweise bis auf B<max_retry> Sekunden erhöhen."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:383
+#, no-wrap
+msgid "B<max_retry>"
+msgstr "B<max_retry>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:386
+msgid "Maximum value of the retry interval."
+msgstr "Maximales retry-Intervall."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:388
+msgid "Default: 300"
+msgstr "Voreingestellt: 300"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:389
+#, no-wrap
+msgid "B<max_upload_attempts>"
+msgstr "B<max_upload_attempts>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:393
+msgid ""
+"When uploading a changed file fails temporarily B<@PROGRAM_NAME@> will retry "
+"with increasing intervals, but not more often than this."
+msgstr ""
+"Schlägt das Speichern einer geänderten Datei wegen eines nicht dauerhaften "
+"Problems fehl, versucht es B<@PROGRAM_NAME@> mit größer werdenden "
+"Intervallen immer wieder, aber höchsten so oft."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:398
+msgid ""
+"With a bad connection this will cause additional traffic. To reduce traffic "
+"caused by unsuccessful attempts option B<use_expect100> can be set. But "
+"please test it. Most proxies and some servers don't support this header."
+msgstr ""
+"Bei einer schlechten Verbindung verursacht dies zusätzlichen Datenverkehr. "
+"Durch die Option B<use_expect100> kann das Datenaufkommen durch "
+"fehlgeschlagene Versuche reduziert werden. Aber bitte erst testen. Die "
+"meisten Proxies und manche Server unterstützen diesen Header nicht."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:400
+msgid "Default: 15"
+msgstr "Voreingestellt: 15"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:401
+#, no-wrap
+msgid "B<add_header>"
+msgstr "B<add_header>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:407
+msgid ""
+"Your server might expect special headers to do what you want. Different from "
+"other options, this one takes two values: the name of the header and its "
+"value.  Some ASP-backends to IIS seem to require the Microsoft specific "
+"header \"Translate: F\". You can add it like this:"
+msgstr ""
+"Unter Umständen benötigt dein Server spezielle Header um zu tun was er soll. "
+"Diese Option benötigt, anders als andere Optionen, zwei Werte: den Namen des "
+"Headers und seinen Wert. Einige ASP-Backends des IIS scheinen den Microsoft "
+"spezifischen Header \"Translate: F\" zu benötigen. Du kannst in "
+"folgendermaßen hinzu fügen:"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:409
+msgid "add_header Translate F"
+msgstr "add_header Translate F"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:411
+msgid "B<@PROGRAM_NAME@> will add header \"Translate: F\" on all requests."
+msgstr ""
+"B<@PROGRAM_NAME@> sendet nun den Header \"Translate: F\" bei allen Anfragen "
+"mit."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:415
+msgid ""
+"This option is cumulative. You can enter more than one add_header option and "
+"all of them will be added. Also add_header options from @SYS_CONF_DIR@/"
+"@CONFIGFILE@ and ~/.@PACKAGE@/@CONFIGFILE@ are merged."
+msgstr ""
+"Diese Option kann mehrmals angegeben werden. Alle angegebenen Header werden "
+"bei Anfragen mitgesandt. Sowohl die add_header Optionen aus @SYS_CONF_DIR@/"
+"@CONFIGFILE@, als auch die aus ~/.@PACKAGE@/@CONFIGFILE@ werden angewandt."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:417
+#, no-wrap
+msgid "Cache Related Options"
+msgstr "Cache-Optionen"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:419
+#, no-wrap
+msgid "B<backup_dir>"
+msgstr "B<backup_dir>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:424
+msgid ""
+"Each mounted @PACKAGE@ file system has a directory to store backups of files "
+"that could not be stored back to the server. This sets the name of this "
+"directory. You should regularly check this directory."
+msgstr ""
+"Jedes @PACKAGE@-Dateisystem hat ein Verzeichnis mit diesem Namen. In ihm "
+"werden Dateien gespeichert, die nicht auf den Server zurück gesichert werden "
+"konnten. Du solltest dieses Verzeichnis öfter mal überprüfen."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:426
+msgid "Default: lost+found"
+msgstr "Voreingestellt: lost+found"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:427
+#, no-wrap
+msgid "B<cache_dir>"
+msgstr "B<cache_dir>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:431
+msgid ""
+"The directory where B<@PROGRAM_NAME@> will store cached files. For every "
+"mount point a subdirectory will be created."
+msgstr ""
+"In diesem Verzeichnis speichert B<@PROGRAM_NAME@> die Dateien zwischen.  Für "
+"jedes Dateisystem wird darin ein Unterverzeichnis angelegt."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:435
+msgid ""
+"In the systemwide configuration file this will set the system wide cache, "
+"used by root. In a users configuration file it will set the cache used by "
+"this user."
+msgstr ""
+"In der systemweiten Konfigurationsdatei wird das Verzeichnis festgelegt, das "
+"von root benutzt wird. In einer Benutzer-Konfigurationsdatei das "
+"Verzeichnis, das von diesem Benutzer benutzt wird"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:437
+msgid "Defaults: @SYS_CACHE_DIR@ and ~/.@PACKAGE@/cache"
+msgstr "Voreingestellt: @SYS_CACHE_DIR@ und ~/.@PACKAGE@/cache"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:438
+#, no-wrap
+msgid "B<cache_size>"
+msgstr "B<cache_size>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:443
+msgid ""
+"The amount of disk space in MiByte that may be used. B<@PROGRAM_NAME@> will "
+"always take enough space to cache open files, ignoring this value if "
+"necessary."
+msgstr ""
+"Der Platz auf der Festplatte in MiByte, der für den Cache zur Verfügung "
+"steht. B<@PROGRAM_NAME@> nimmt sich immer genug Platz für alle offenen "
+"Dateien auch wenn dieser Wert überschritten wird."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:445
+msgid "Default: 50"
+msgstr "Voreingestellt: 50"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:446
+#, no-wrap
+msgid "B<table_size>"
+msgstr "B<table_size>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:452
+msgid ""
+"B<@PROGRAM_NAME@> maintains a hash table with an entry for each known file "
+"or directory. This gives the number of entries in this table. For large file "
+"systems (more than some hundreds of files) increasing this number may speed "
+"up file operations. The value should be a power of 2."
+msgstr ""
+"Die Anzahl der Plätze in einer Hash-Tabelle, die B<@PROGRAM_NAME@> für alle "
+"bekannten Dateien und Verzeichnisse führt.  Bei großen Dateisystemen (mehr "
+"als einige Hundert Dateien) kann ein größerer Wert die Dateioperationen "
+"beschleunigen. Der Wert sollte eine Zweierpotenz sein."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:454
+msgid "Default: 1024"
+msgstr "Voreingestellt: 1024"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:455
+#, no-wrap
+msgid "B<dir_refresh>"
+msgstr "B<dir_refresh>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:460
+msgid ""
+"After B<@PROGRAM_NAME@> has got information about files in a directory it "
+"considers it valid for this time in seconds. Note: This does not affect "
+"opening of files and reading a directory by an application."
+msgstr ""
+"B<@PROGRAM_NAME@> betrachtet Informationen über Dateien in einem Verzeichnis "
+"so viele Sekunden als gültig. Hinweis: Dies gilt nicht beim Öffnen einer "
+"Datei oder wenn eine Anwendung den Inhalt eines Verzeichnisses liest.  "
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:463
+#, no-wrap
+msgid "B<file_refresh>"
+msgstr "B<file_refresh>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:470
+msgid ""
+"When a file or directory is opened by an application, B<@PROGRAM_NAME@> will "
+"first check the server for a newer version. But some applications do open "
+"calls on the same file in short sequence. To avoid unecessary traffic "
+"B<@PROGRAM_NAME@> will wait that many seconds before it send a new request "
+"for the same information."
+msgstr ""
+"Wenn eine Anwendung eine Datei oder ein Verzeichnis öffnet, wird "
+"B<@PROGRAM_NAME@> zuerst auf dem Server nachfragen, ob eine neuere Version "
+"vorliegt. Manche Anwendungen öffnen dieselbe Dateien in schneller Folge.  Um "
+"unnötigen Netzwerkverkehr zu vermeiden, wird B<@PROGRAM_NAME@> erst nach "
+"dieser Zeit in Sekunden dieselbe Information erneut anfragen."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:473
+#, no-wrap
+msgid "B<delay_upload>"
+msgstr "B<delay_upload>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:480
+msgid ""
+"When a file that has been changed is closed, B<@PROGRAM_NAME@> will wait "
+"that many seconds before it will upload it to the server. This will avoid "
+"uploading of temporary files that will be removed immediately after "
+"closing.  If you need the files to appear on the server immediately after "
+"closing, set this option to 0."
+msgstr ""
+"Wenn eine geänderte Datei geschlossen wird, wartet B<@PROGRAM_NAME@> so "
+"viele Sekunden, bevor es die Datei auf den Server hochlädt. Dies verhindert, "
+"dass temporäre Dateien zum Server übertragen werden, nur um sofort danach "
+"gelöscht zu werden. Wenn es nötig ist, dass die Dateien sofort nach dem "
+"Schließen auf dem Server erscheinen, kann diese Option auf 0 gesetzt werden."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:483
+#, no-wrap
+msgid "B<gui_optimize>"
+msgstr "B<gui_optimize>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:490
+msgid ""
+"When a file is opened, B<@PROGRAM_NAME@> will have to check the server "
+"whether there is a newer version. Graphical User Interfaces tend to open "
+"just any file, slowing down things dramatically for large directories.  With "
+"this option B<@PROGRAM_NAME@> will try to get this information from all "
+"files in a directory with one PROPFIND request. 0 = no, 1 = yes."
+msgstr ""
+"Immer wenn eine Datei geöffnet wird, muss B<@PROGRAM_NAME@> beim Server "
+"nachfragen, ob eine neuere Version vorliegt. Grafische Benutzeroberflächen "
+"neigen dazu, alle Dateien zu öffnen, was bei großen Verzeichnissen die "
+"Reaktionszeit des Dateisystem gewaltig erhöht. Mit dieser Option versucht "
+"B<@PROGRAM_NAME@> diese Abfrage für alle Dateien eines Verzeichnisses mit "
+"einem PROPFIND-Request zu erledigen. 0 = nein, 1 = ja."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:493
+#, no-wrap
+msgid "B<minimize_mem>"
+msgstr "B<minimize_mem>"
+
+#. type: Plain text
+#: davfs2.conf.5:501
+msgid ""
+"davfs2 holds information about files and directories in the working memory. "
+"It will stay there as long as the file system is mounted and the file is not "
+"deleted. By this memory usage by davfs2 will grow over time and may slow "
+"down davfs2. With this option set to 1 davfs2 will regularly clean the "
+"memory from information that has not be used for some time.  0 = no, 1 = yes."
+msgstr ""
+"davfs2 speichert Attribute von Dateien und Verzeichnissen im Hauptspeicher. "
+"Sie bleiben im Hauptspeicher solange das Dateisystem eingehängt ist und die "
+"Datei nicht gelöscht wird. Dadurch steigt die Speicherbelegung durch davfs2 "
+"mit der Zeit an und kann Dateisystemoperationen verlangsamen. Wird diese "
+"Option auf 1 gesetzt, dann entfernt davfs2 regelmäßig Informationen, die für "
+"einige Zeit nicht benutzt wurden. 0 = nein, 1 = ja."
+
+#. type: Plain text
+#: davfs2.conf.5:506
+msgid ""
+"B<Warning:> Most file attributes are only maintained locally because there "
+"is no corresponding WebDAV property. So if users change attributes (owner, "
+"group, access bits) locally this changes will be lost and attribute values "
+"will be reset to the default values."
+msgstr ""
+"B<Warnung:> Die meisten Attribute werden nur lokal vorgehalten, da es keine "
+"entsprechende WebDAV-Property gibt. Wenn Benutzer Dateiattribute ändern "
+"(Eigentümer, Gruppe, Zugriffsrechte) dann gehen diese Änderungen verloren "
+"und die Attribute werden auf ihre Standardwerte zurückgesetzt."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:510
+#, no-wrap
+msgid "Debugging Options"
+msgstr "Debugging Optionen"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:512
+#, no-wrap
+msgid "B<debug>"
+msgstr "B<debug>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:520
+msgid ""
+"Send debug messages to the syslog daemon. The value tells what kind of "
+"information shall be logged. The messages are send with facility LOG_DAEMON "
+"and priority LOG_DEBUG. It depends from the configuration of the syslog "
+"daemon where the messages will go (propably /var/log/messages, /var/log/"
+"syslog or /var/log/daemon.log). Whether HTTP related debug messages are "
+"available depends on your neon library."
+msgstr ""
+"Schickt Debug-Meldungen and den Syslog-Dämon. Der Wert legt die Art der "
+"Informationen fest. Die Meldungen werden mit facility LOD_DAEMON und "
+"Priorität LOG_DEBUG gesandt. In welche Log-Datei sie gehen, hängt von der "
+"Konfiguration des Syslog-Dämons ab (vermutlich /var/log/messages, /var/log/"
+"syslog oder /var/log/daemon.log). Ob Debug-Meldungen zu HTTP möglich sind, "
+"hängt von der Neon-Bibliothek ab."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:524
+msgid ""
+"Unlike other options, this option is cumulative. If there are several debug "
+"entries with different values, all of them will be applied. Also debug "
+"options from @SYS_CONF_DIR@/@CONFIGFILE@ and ~/.@PACKAGE@/@CONFIGFILE@ are "
+"merged."
+msgstr ""
+"Diese Option kann mehrmals angegeben werden, und die angegebenen Werte "
+"ergänzen sich und sind alle wirksam. Es werden sowohl die debug-Optionen aus "
+"@SYS_CONF_DIR@/@CONFIGFILE@, als auch die aus ~/.@PACKAGE@/@CONFIGFILE@ "
+"angewandt."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:527
+msgid ""
+"B<Note:> Debug messages let the log-files grow quickly. Never use this "
+"option in normal operation of mount.davfs."
+msgstr ""
+"B<Hinweis:> Debug-Meldungen lassen die Log-Dateien sehr schnell anwachsen. "
+"Verwende die Option niemals im normalen Betrieb."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:529
+msgid "Default: no debugging messages"
+msgstr "Voreinstellung: keine Debug-Meldungen."
+
+# type: Plain text
+#. type: TP
+#: davfs2.conf.5:530
+#, no-wrap
+msgid "B<Recognized values:>"
+msgstr "B<Mögliche Werte>"
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:532
+#, no-wrap
+msgid "B<config>"
+msgstr "B<config>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:535
+msgid "Command line and configuration options."
+msgstr "Kommando-Zeile und Kofigurationsoptionen."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:535
+#, no-wrap
+msgid "B<kernel>"
+msgstr "B<kernel>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:538
+msgid "Upcalls from the kernel file system."
+msgstr "Anfragen vom Kernel-Dateisystem."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:538
+#, no-wrap
+msgid "B<cache>"
+msgstr "B<cache>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:541
+msgid "Cache operations like adding and removing nodes."
+msgstr ""
+"Cache-Operationen wie das Erzeugen und Löschen von Dateien und "
+"Verzeichnissen."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:541
+#, no-wrap
+msgid "B<http>"
+msgstr "B<http>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:544
+msgid "HTTP headers."
+msgstr "HTTP-Header."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:544
+#, no-wrap
+msgid "B<xml>"
+msgstr "B<xml>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:547
+msgid "Parsing of the XML-body of WebDAV-requests."
+msgstr "Analysieren von XML-Daten in WebDAV-Anfragen."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:547
+#, no-wrap
+msgid "B<httpauth>"
+msgstr "B<httpauth>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:550
+msgid "Negotiation of authentication."
+msgstr "Aushandeln der Authentifizierung."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:550
+#, no-wrap
+msgid "B<locks>"
+msgstr "B<locks>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:553
+msgid "Information about locks."
+msgstr "Informationen über Sperren."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:553
+#, no-wrap
+msgid "B<ssl>"
+msgstr "B<ssl>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:556
+msgid "TLS/SSL related stuff like certificates."
+msgstr "TLS/SSL-Informatinen, z.B. Zertifikate."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:556
+#, no-wrap
+msgid "B<httpbody>"
+msgstr "B<httpbody>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:559
+msgid "Complete body of HTTP-responses."
+msgstr "Der komplette Datenteil von HTTP-Antworten."
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:562
+msgid ""
+"Also print confidential information, which is usually omitted or obscured."
+msgstr ""
+"Gib auch vertrauliche Daten aus, die normalerweise weg gelassen werden."
+
+# type: TP
+#. type: TP
+#: davfs2.conf.5:562
+#, no-wrap
+msgid "B<most>"
+msgstr "B<most>"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:565
+msgid "Includes config, kernel, cache and http."
+msgstr "Beinhaltet config, kernel, cache und http."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:568 mount.davfs.8:547 umount.davfs.8:79
+#, no-wrap
+msgid "AUTHORS"
+msgstr "AUTOREN"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:572
+msgid ""
+"This man page was written by by Werner Baumann E<lt>werner."
+"baumann@onlinehome.deE<gt>."
+msgstr ""
+"Dieses Handbuch hat Werner Baumann E<lt>werner.baumann@onlinehome.deE<gt> "
+"geschrieben."
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:574 mount.davfs.8:564 umount.davfs.8:84
+#, no-wrap
+msgid "DAVFS2 HOME"
+msgstr "DAVFS2 HOME"
+
+# type: TH
+#. type: Plain text
+#: davfs2.conf.5:577 mount.davfs.8:567 umount.davfs.8:87
+msgid "@PACKAGE_BUGREPORT@"
+msgstr "@PACKAGE_BUGREPORT@"
+
+# type: SH
+#. type: SH
+#: davfs2.conf.5:579 mount.davfs.8:569 umount.davfs.8:89
+#, no-wrap
+msgid "SEE ALSO"
+msgstr "SIEHE AUCH"
+
+# type: Plain text
+#. type: Plain text
+#: davfs2.conf.5:585
+msgid ""
+"B<@PROGRAM_NAME@>(8), B<u@PROGRAM_NAME@>(8), B<mount>(8), B<umount>(8), "
+"B<fstab>(5)"
+msgstr ""
+"B<@PROGRAM_NAME@>(8), B<u@PROGRAM_NAME@>(8), B<mount>(8), B<umount>(8), "
+"B<fstab>(5)"

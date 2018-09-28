@@ -1,0 +1,1391 @@
+ChangeLog for davfs2
+--------------------
+
+2016-04-16 Werner Baumann (werner.baumann@onlinehome.de)
+      Release version 1.5.4
+
+2016-04-16 Werner Baumann (werner.baumann@onlinehome.de)
+    * src/Makefile.am:
+      Use --fstack-protector-strong.
+
+2016-04-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * README, mount.davfs.8:
+      Add information about required local cache space.
+
+2016-04-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse.c, dac_coda.c, kernel_interface.h, mount_davfs.c:
+      For kernel_fs fuse: when getting SIGTERM unmount
+      while dav_fuse_loop still is running.
+
+2016-04-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse.c, dav_fuse_loop:
+      Remove useless call of is_mounted (sr #109009).
+
+2016-04-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * Release version 1.5.3
+
+2016-04-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, parse_line:
+      Fix stack smashing error (Debian bug #812456).
+    * mount_davfs.c, kernel_interface.c, webdav.c:
+      Check result of seteuid.
+    * cache.c, dav_tidy_cache:
+      Fix format parameter.
+    * src/Makefile.am:
+      Use compiler flag -fstack-protector-all.
+
+2014-08-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * Release version 1.5.2
+
+2014-08-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * umount_davfs.c:
+      Add (and ignore) option t (sr #108638).
+
+2014-08-10 Werner Baumann (werner.baumann@onlinehome.de)
+    * Release version 1.5.1
+
+2014-08-10 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c:
+      Return error on close (sr #108597).
+
+2014-08-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, cache.c:
+      High priority for lock refresh (sr #108607).
+
+2014-08-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_init_cache:
+      Increase faked free space.
+
+2014-07-16 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, webdav.h, dav_fuse.c, dav_coda.c,
+      mount_davfs.c, cache.c, cache.h:
+      Remove USERINFO, fix stat, remove update_stat.
+
+2014-06-20 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, cache.h, mount_davfs.c:
+      Pass parameter got_sigterm by reference.
+
+2014-06-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * Mount_davfs.c, main:
+      Only log error if still is mounted.
+
+2014-06-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * defaults.h, mount_davfs.h, mount_davfs.c webdav.c:
+      Add option min_propset.
+
+2014-06-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, add_node, update_directory:
+      Fix file times if LastModified is missing.
+
+2014-05-24 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, prop_result:
+      Case insensitive test of path (sr #108566).
+
+2014-05-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, update_cache_file:
+      Fixing memory leak (sr #108158).
+
+2014-04-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * src/Makefile.am:
+      Add some hardening flags for compilation.
+
+2014-04-21 Werner Baumann (werner.baumann@onlinehome.de)
+    * Release version 1.5.0.
+
+2014-04-20 Werner Baumann (werner.baumann@onlinehome.de)
+    * defaults.h, mount_davfs.h, mount_davfs.c, cache.c:
+      Add option minimize_mem (sr #108158).
+
+2014-04-20 Werner Baumann (werner.baumann@onlinehome.de)
+    * kernel_interface.c:
+      Try loading kernel module fuse.
+    * mount_davfs.c, check_dirs:
+      Set mode of secrets file.
+    * webdav.c, quota_reader:
+      Replace strndup with ne_strndup.
+
+2014-04-18 Werner Baumann (werner.baumann@onlinehome.de)
+    * defaults.h, mount_davfs.h, mount_davfs.c, webdav.c:
+      Improve cookie support (sr #107907, bug #41438).
+
+2014-04-13 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, mount_davfs.c, mount_davfs.h:
+      Add mount option grpid (sr #108432, Thanks to
+      Miguel Coca)
+
+2014-04-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount_davfs.h:
+      Replace args->add_mopts.
+
+2014-04-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.h, mount_davfs.c, webdav.c:
+      Add options trust_ca_cert and trust_server_cert.
+
+2014-04-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * umount_davfs.c:
+      Allways try 'umount -i'.
+
+2014-04-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.ac, src/Makefile.am, defaults.h,
+      mount_davfs.h, mount_davfs.c:
+      Use utab if mtab is a symbolic link.
+
+2014-03-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * defaults.h, webdav.c:
+      Set default of follow_redirect to 0.
+
+2014-03-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * defaults.h, mount_davfs.h, mount_davfs.c, webdav.c:
+      Support temporary redirects.
+
+2014-03-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, webdav.c, webdav.h:
+      Remove property creationdate.
+
+2014-03-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, cache.h, dav_fuse.c, webdav.c, webdav.h:
+      Remove support for extended attributes.
+      Remove property creationdate.
+
+2014-03-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * Document option "use_compression".
+
+2014-03-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, new_node:
+      Fix missing mode.
+    * man/mount.davfs.8:
+      Fix escape rules for fstab.
+
+2014-03-11 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, configure.ac:
+      Remove support for Neon versions < 0.27.
+    * defaults.h, mount_davfs.h, mount_davfs.c, wedav.c:
+      Support compression for GET responses (bug #41355,
+      thanks Evili del Rio).
+
+2014-03-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, get_options:
+      Add option "comment=" (bug #41354)
+
+2014-03-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, mount_davfs.c;
+      Make default access modes 755 and 644.
+    * cache.c:
+      Fix has_permission (bug #33644).
+
+2014-03-07 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, check_dirs, parse_config:
+      Use stat instead of access.
+    * cache.c, mount_davfs.c, mount_davfs.h:
+      Remove file_umask and dir_umask (bug #34563).
+
+2014-03-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, check_fstab:
+      Remove unnecessary decode_octal.
+      Remove double check for ft->mnt_dir.
+    * cache.c:
+      Missing 'static'.
+
+2013-12-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, configure.ac:
+      Remove #include <argz.h>
+    * webdav.c:
+      Make calls to iconv functions depend on HAVE_ICONV.
+    * dav_fuse.c, fuse_stat:
+      dav_coda.c, coda_statfs:
+      Return ENOSYS if dav_statfs fails (this should never
+      happen).
+
+2013-12-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c:
+      Always canonicalize mount point (sr #108377).
+    * mount_davfs.h, mount_davfs.c:
+      Replace log_dbg_cmdline.
+
+2013-09-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, check_fstab:
+      Replace xxfsent functions by xxmntent functions.
+      Don't compare commandline and fstab for options
+      'user' and 'users', only check fstab for presence.
+
+2013-09-21 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.ac:
+      Add neon version 0.30 (sr #108392).
+
+2013-09-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * kernel_interface.c, mount_davfs.c:
+      Don't create /dev/coda and /dev/fuse.
+      Remove insecure calls of system().
+
+2012-11-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * man/Makefile.am, man/de/Makefile.am, man/es/Makefile.am:
+      Honour configrue parameter --manfile (sr #108173)
+
+2012-08-20 Werner Baumann (werner.baumann@onlinehome.de)
+    * src/Makefile.am:
+      Fix DESTDIR bug (sr #108104).
+
+2012-08-06 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, write_mtab_entry:
+      Remove unnecessary variable ret.
+
+2012-08-06 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse.c:
+      Fix integer format warnings.
+
+2012-08-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c:
+      Fix integer format warnings.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * Release version 1.4.7.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c:
+      Get auxiliary groups with getgroups.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * umount_davfs.c:
+      Quote mpoint in umount_command.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, init_webdav:
+      Error reading client certificate.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, has_permission:
+      Change strcmp() == 0 into strcmp() != 0 (bug #33644).
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, get_ne_error:
+      Translate HTTP 405 into ENOENT.
+      (http://savannah.nongnu.org/support/?107869)
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_init_cache:
+      Fix integer overflow.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c, dav_fuse.c:
+      Add missing #includes.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_quota:
+      Check for all but temporary errors on USERINFO.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, parse_line, read_config, read_secrets:
+      Remove fixed length buffer, parse config line in place
+      (bug #33412).
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, kernel_interface.c:
+      Check return values of system calls.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c:
+      Added missing '\r' in constant none_match_header
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount_davfs.h:
+      Remove check for someone elses home directory
+      (sr #107641).
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, kernel_interface.c:
+      Fix integer format warnings.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, mount_davfs.c, webdav.c:
+      Fix format-security errors.
+
+2012-07-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, check_fstab:
+      Search fstab additionally for mount point with
+      trailing slash (Debian Bug#580227).
+
+2010-04-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.4.6
+
+2010-02-16 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c, dav_fuse.c, kernel_interface.c, webdav.c:
+      Add missing "#include <sys/stat.h>" (bug #28916).
+
+2010-01-21 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, parse_secrets:
+      Wrong assignment of password from pam_mount.
+      (bug #28706);
+
+2009-11-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_create:
+      Fix another error in the log message.
+
+2009-11-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_create:
+      Fix log message.
+    * Released version 1.4.5
+
+2009-11-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.4.4
+
+2009-11-14 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_init_cache:
+      Initialize fs_stat->files.
+    * cache.c, dav_create:
+      Log entry if dav_lock returns EEXIST.
+
+2009-11-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, ssl_verify:
+      Don't accept suspicious certificates if !have_terminal.
+
+2009-10-18 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, webdav.c:
+      Don't ask the user for unverified certificates
+      if "askauth 0".
+    * Released version 1.4.3
+
+2009-10-18 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c:
+      Add experimental support for command line option
+      'username' for use with pam_mount.
+    * Released version 1.4.2
+
+2009-10-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, parse_secrets:
+      Check for tty before calling dav_user_input_hidden.
+
+2009-10-14 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.ac:
+      Add support for neon 0.29.
+    * webdav.c, dav_init_webdav:
+      Support NTLM authentication.
+
+2009-10-10 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_head:
+      Ignore Last-Modified header if the value is 0.
+
+2009-08-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, update_cache_file:
+      Don't change file times when Last-Modified-Header
+      is missing.
+
+2009-08-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_close:
+      In call to get_file_handle set parameter accmode
+      to O_RDWR for directories (to avoid EBADF with coda).
+
+2009-07-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, prop_result:
+      Remove double slashes from path.
+
+2009-06-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse.c, fuse_stat:
+      Correct block counts according to block size.
+
+2009-06-13 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.4.1.
+
+2009-06-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, set_next_upload_attempt:
+      Max. retry intervall for files must not exceed max_retry.
+    * Add configuration option max_upload_attempts.
+
+2009-06-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, write_node et al:
+      Save member lock_expire to index file.
+
+2009-06-07 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, prop_result:
+      If property not found try property without namespace.
+      (idea by Dirk Arend <d.arend@avm.de>)
+    * cache.c, add_to_changed:
+      Fixed: wrong size in malloc.
+    * cache.c:
+      When upload fails temporarily: retry with
+      increasing delays.
+    * webdav.c, dav_delete:
+      If file is not found, try to unlock.
+    * cache.c, update_node:
+      Only remove created nodes when remote size > 0.
+    * webdav.c, dav_put:
+      Fix double free after second PUT attempt.
+
+2009-06-06 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_statfs:
+      Use retry time instead of dir_refresh.
+    * mount_davfs, read_secrets:
+      Only call ne_uri_defaultport if scheme != NULL.
+
+2009-06-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * wedav.c, dav_put:
+      Do HEAD if no etag returned (regression in 1.4.0).
+    * mount_davfs.c, read_secrets:
+      For URLs only check port if present.
+    * redo the above: set port to default if not present
+      and check.
+
+2009-05-31 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, cache.h, dav_coda.c, dav_fuse.c:
+      Cache quota in global variable fs_stat.
+      Update with dir_refresh when closing or
+      deleting files.
+      Function dav_stafs now returns a pointer.
+
+2009-05-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, webdav.h, dav_quota:
+      Return total webspace instead of available.
+      Remember support for quota in static flag use_rfc.
+      Add support for method USERINFO.
+    * webdav.c:
+      Rename block_writer into file_reader for consistency
+      with neon naming conventions.
+    * cache.c, dav_open, dav_write:
+      Open directories O_RDWR again, but prevent writing
+      by applications.
+
+2009-05-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, check_double_mounts:
+      Free temporary string mp.
+    * cache.c, parse_index:
+      Free index.
+    * webdav.c, dav_init_webdav:
+      Make custom_header a global variable to not disturb
+      code test tools.
+    * webdav.c, dav_quota:
+      Initialize ctx to 0; add ctx.error, use strtoull.
+
+2009-05-25 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, mount_davfs.c:
+      Add missing includes.
+
+2009-05-21 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, move_dirty, move_reg:
+      Use converted file name for dst_path.
+    * cache.c:
+      Rename move_dirty to move_no_remote.
+    * cache.c, move_reg:
+      Set src->utime = time(NULL).
+
+2009-05-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_close:
+      Always delete directory cache files on close.
+    * cache.c, dav_open:
+      Open dirs with O_RDONLY.
+    * dav_coda.c, dav_fuse.c:
+      Replace ENOTSUP by ENOSYS for unsupported upcalls.
+
+2009-05-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.4.0.
+
+2009-05-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.ac;
+      Add AC_CHECK_FUNCS([ftruncate]).
+
+2009-05-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * bootstrap:
+      Use --copy option with automake, remove rm commands.
+
+2009-05-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c:
+      Fix Etag normalization.
+
+2009-05-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.h, dav_open:
+      Add parameter open_create to allow
+      for open(..., O_CREATE, 444).
+
+2009-04-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_close:
+      if delay_upload == 0 save to server immediately.
+
+2009-04-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount_davfs.h:
+      Add mount-option "users".
+
+2009-04-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c:
+      New function split_uri; allow arbitrary characters
+      in path component, including spaces.
+
+2009-04-14 Werner Baumann (werner.baumann@onlinehome.de)
+    * Reverted to fuse_kernel.h from 2.5.3 because of
+      different length of struct fuse_attr.
+
+2009-04-13 Werner Baumann (werner.baumann@onlinehome.de)
+    * Updated fuse_kernel.h
+    * Removed unused licence documents.
+
+2009-04-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * Removed support for coda kernel version 2 and
+      fuse kernel version 5.
+    * Simplify coda.h and select alternative license.
+
+2009-04-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * bootstrap:
+      Inserted force options again. Restore COPYING
+      from COPYING.davfs2.
+
+2009-04-06 Werner Baumann (werner.baumann@onlinehome.de)
+    * bootstrap:
+      Removed --force and --force-missing options.
+    * COPYING:
+      Added missing licenses.
+
+2009-04-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * cahe.c, dav_lookup:
+      If node not found update directory with file_refresh.
+
+2009-03-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount.davfs.8:
+      Remove deprecated mount options (askauth, locks,
+      useproxy).
+    * defaults.h, davfs2.conf, davfs2.conf.5:
+      Option if_match_bug now defaults to 0.
+
+2009-03-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount_davfs.h, webdav.c, defaults.h:
+      Remove support for WebDAV-property displayname.
+
+2009-03-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c:
+      Changed handling of directory cache files to fix
+      bug in handling "rm -r".
+
+2009-03-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * Undo FUSE_ATOMIC_O_TRUNC.
+
+2009-03-24 Werner Baumann (werner.baumann@onlinehome.de)
+    * fuse7_kernel.h:
+      New version from linux 2.6.26
+    * dav_fuse7.c, fuse_init:
+      Use flag FUSE_ATOMIC_O_TRUNC.
+
+2009-03-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_setattr:
+      Set upload-time if size is changed.
+    * cache.c:
+      Added function get_upload_time.
+    * cache.c, update_cache_file:
+      Only upload dirty files if upload-time is reached.
+      (Fix empty PUTs on setattr before open.)
+
+2009-03-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, split_proxy:
+      Only set port if given in args.
+    * mount_davfs.c, read_secrets:
+      Only compare proxy-port if given in secrets file.
+    * mount_davfs.c new_args:
+      Fix getuid() (not getuid).
+
+2009-01-27 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, delete_args:
+      Remove double free of args->p_passwd (fixes bug
+      2351083, Debian bug #512625).
+
+2009-01-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * Added copyright notices.
+    * Updated to GPL version 3.
+    * mount_davfs: replace petpass with user_input_hidden.
+
+2008-11-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * Default for use_expect100 is now 0
+
+2008-11-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c:
+      Add function lock_by_path.
+      Remove global variable suri.
+
+2008-10-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * unifying coding style
+    * webdav.c, dav_init_connection:
+      Use %-encoded path.
+
+2008-09-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, block_writer:
+      Add mode parameter in call of open(); remove
+      O_CREATE (thanks Marcin Zajączkowski)
+    * cache.c, open_file:
+      Add mode parameter in call of open().
+
+2008-08-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_head:
+      Fix bug 2042177 (*length, not *mtime).
+
+2008-07-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.3.3
+
+2008-06-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, get_options:
+      Missing break in first case.
+
+2008-06-24 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_setattr:
+      Set file times of the cache file too when they
+      are changed by setattr.
+
+2008-06-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_put:
+      Only use etag in conditional PUT, even in second try.
+
+2008-06-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_tidy_cache:
+      Better debug messages, including neon-error.
+
+2008-05-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, parse_index:
+      Finish parsing, before checking for parse error
+      (ne_xml_parse seems not allways to report
+       errors otherwise)
+    * cache.c, write_node:
+      Put path, name, cache_path, etag and mime_type
+      in CDATA-sections.
+
+2008-05-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount_davfs.h, webdav.c, webdav.h:
+      Add ne_set_connect_timeout. (Thanks Martin Higham)
+
+2008-05-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.3.2 (really)
+
+2008-05-16 Werner Baumann (werner.baumann@onlinehome.de)
+    * Not yet released 1.3.2
+    * cache.c, resize_cache:
+      Fixed another bug calculating cache_size.
+
+2008-05-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.3.2
+
+2008-05-13 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, xml_..:
+      Concatenate subsequent cdata_callbacks. Fixes
+      growing-cache-bug when using libexpat.
+    * cache.c, clean_cache:
+      Fixed error parsing table.
+    * cache.c, update_cache_file:
+      Fixed error calculating cache_size.
+
+2008-05-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * Version 1.3.1 released.
+
+2008-04-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_get_file:
+      Typo: If-Non-Match -> If-None-Match
+
+2008-04-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse7.c, fuse_init:
+      Reduce max_write according to bug in fuse.
+    * dav_fuse7.c, fuse_stat:
+      Increase bsize to as many pages as fit in max_write.
+
+2008-04-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * Improved debug output
+
+2008-04-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.ac:
+      Add neon 0.28 (no API-changes)
+
+2008-03-24 Werner Baumann (werner.baumann@onlinehome.de)
+    * man/davfs2.conf.5:
+      Clarified option servercert.
+
+2008-03-24 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, change_persona:
+      Fixed bug in message: dav_user not dav_group
+    * man/davfs2.conf.5:
+      Options dav_user, dav_group: substitute USER
+      and GROUP, not PACKAGE.
+
+2008-02-07 Werner Baumann (werner.baumann@onlinehome.de)
+    * Disable cookie support an conditional LOCK for Neon 0.25
+
+2008-02-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * Version 1.3.0 released.
+
+2008-02-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, clean_cache:
+      Create backup-files for orphaned files in cache.
+
+2008-02-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, cache.c:
+      Quick termination on SIGTERM; store flags dirty and
+      remote_exists of dirty files in index.
+
+2008-02-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, termination_handler:
+      Don't call umount in termination handler.
+
+2008-02-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse7.c, dav_fuse5.c, dav_coda2.c, dav_coda3.c:
+      Only call dav_tidy_cache once every DAV_DELAY_UPLOAD
+      seconds as long as there are upcalls from kernel.
+
+2008-02-02 Werner Baumann (werner.baumann@onlinehome.de)
+    *webdav.c, update_cookie:
+     Fixed bug: old cookie not removed.
+
+2008-02-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_put:
+      No HEAD if !has_if_match_bug and !*exists.
+
+2008-02-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * Removed option idle_time.
+      Renamed option delay_uploads -> delay_upload.
+      Set delayed upload-time for node on close.
+
+2008-01-31 Werner Baumann (werner.baumann@onlinehome.de)
+    *webdav.c, prop_result:
+     Add double quotes on Etag if missing.
+
+2008-01-11 Werner Baumann (werner.baumann@onlinehome.de)
+    * umount_davfs.c:
+      Remove option -C from ps-command (BSC-option).
+
+2008-01-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, prop_result:
+      ctime is in iso-8601 format (Bug 1863061).
+    * webdav.c, prop_result, dav_put:
+      Fixed bug in drop_weak_etags.
+    * webdav.c, dav_put:
+      Only use etag in conditional PUT.
+
+2007-12-31 Werner Baumann (werner.baumann@onlinehome.de)
+    * Renamed option: misused_weak_etag -> drop_weak_etags
+
+2007-12-27 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_get_file, dav_head, dav_put:
+      Honour misused_weak_etag
+
+2007-12-27 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, webdav.h, mount_davfs.c, mount_davfs.h,
+      defaults.h;
+      New option: misused_weak_etag
+
+2007-12-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_put:
+      Don't even use "if-match" with etag when has_if_match_bug.
+
+2007-12-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, read_secrets:
+      Allow keyword "proxy" instead of DN in proxy line.
+      Fix bugs in certificate path names.
+
+2007-12-25 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, read_secrets:
+      Allow mountpoint instead of url in secrets file.
+
+2007-12-25 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, parse_line:
+      Allow none-ascii characters in config files.
+    * mount_davfs.h, mount_davfs.c, webdav.h, webdav.c,
+      defaults.h:
+      New options: precheck and ignore_dav_header
+
+2007-12-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, mount_davfs.h, mount_davfs.c, defaults.h:
+      Added very simple cookie support.
+
+2007-12-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, webdav.h, cache.c, cache.h:
+      Support dav-quota.
+      Change members of dav_stat to off_t.
+
+2007-12-15 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, xml_cdata_date, write_node:
+      Use epoch and ISO-format for time. Human readable
+      string for information only.
+
+2007-12-13 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, webdav.h, cache.c:
+      New functions for converting character encoding.
+    * cache.c, update_node:
+      Check for changed name before other checks.
+    * webdav.c, dav_move:
+      Remove prop displayname if used.
+
+2007-12-11 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, prop_result, dav_init_webdav:
+      ne_propset_value always is in utf-8; don't decode
+      from utf-16.
+
+2007-12-10 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c:
+      Add list of changed nodes. New dav_tidy_cache function.
+      Write times in readable format to index file.
+
+2007-12-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c:
+      Change cache_size whenever a file changes (do not
+      calculate in dav_tidy_cache).
+
+2007-12-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_lock:
+      create suri->path after HEAD-request
+
+2007-11-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, cache.h, dav_fuse7.c:
+      Support getxattr for user.mime_type.
+
+2007-11-25 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, log_writer:
+      Use Loglevel LOG_DEBUG.
+
+2007-11-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.h, mount_davfs.c, webdab.h, webdav.c,
+      davfs2.conf.5:
+      Added option "add_header".
+
+2007-11-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, webdav.c:
+      Use conditional LOCK if possible.
+
+2007-11-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, move_dirty:
+      Don't try to delete none-existant file.
+
+2007-11-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * davfs2.conf.5, mount_davfs.h, mount_davfs.c, webdav.c:
+      Add option if_match_bug. Use conditional PUT if
+      possible.
+
+2007-11-11 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.ac, cache.c, webdav.c:
+      Remove support for neon 0.24
+
+2007-11-06 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, debug_opts_neon:
+      Remove NE_DBG_XML from debug most.
+
+2007-11-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, put_file:
+      Added support for Neon 0.27
+
+2007-11-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_tidy_cache:
+      Don't check more than 100 nodes in one run.
+
+2007-11-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * defaults.h, mount_davfs.h, mount_davfs.c:
+      Added option delay_uploads
+    * cache.h, cache.c, dav_init_cache, dav_close:
+      Delay uploads only if !delay_uploads
+
+2007-11-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, move_reg, dav_rename:
+      Send MOVE request for dirty files.
+    * webdav.c, dav_move:
+      Remove locks on source file.
+    * defaults.h:
+      use_displayname defaults to no
+
+2007-11-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, dav_head:
+      Check header Content-Length.
+    * webdav.c, dav_put:
+      If a file should not exist, allow for file with
+      length 0 (SVN-Bug 2896).
+
+2007-08-31 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, get_error:
+      Return EIO on NE_LOOKUP, so mounting will fail with
+      appropriate error message.
+
+2007-07-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, read_config:
+      Disabled 'porxy' option in user configuration file.
+    * mount_davfs.c, parse_config:
+      Read proxy environment variables only if the mounting
+      user is root.
+
+2007-07-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, read_no_proxy_list:
+      Allow for '*', portnumber and spaces in no_proxy.
+
+2007-07-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c:
+      Added function proxy_from_env to parse different kind
+      of xxx_proxy environment variables. (Bug 1762423)
+      Added function read_no_proxy_list.
+
+2007-07-21 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c, init_webdav, log_writer:
+      Splitt messages into chunks < 512 char.
+      Escape '%'-character in log-messages.
+
+2007-07-07 Werner Baumann (werner.baumann@onlinehome.de)
+  * Use GNU Autoconf 2.61, GNU Automake 1.10,
+        GNU gettext-tools 0.16.1
+  * mount_davfs.c, parse_secrets:
+    Accept lines without terminating newline for username
+    and p_user.
+  * Version 1.2.2 released
+
+2007-06-29 Werner Baumann (werner.baumann@onlinehome.de)
+  * cache.c: update_node
+    If a node changed remotely, only create a new node
+    when the existing node is dirty.
+  * kernel_interface.c, kernel_interface.h:
+    Make fuse the default kernel file system.
+
+2007-06-10 Werner Baumann (werner.baumann@onlinehome.de)
+  * davfs2.m4, src/Makefile.am:
+    add variable ssbindir; create symbolic link only when
+    sbindir not equal to ssbindir
+
+2007-06-08 Werner Baumann (werner.baumann@onlinehome.de)
+  * mount_davfs.c, main:
+    properly release tty (bug 1730992, patch by Tero Pelander)
+  * man/Makefile.am, man/de/Makefile.am, man/es/Makefile.am:
+    enable concurrent compilation (bug 1730979,
+    patch by Tero Pelander)
+
+2007-05-29 Werner Baumann (werner.baumann@onlinehome.de)
+  * webdav.c, dav_init_webdav, dav_init_connection:
+    register lock_store *after* checking server capabilities
+
+2007-05-28 Werner Baumann (werner.baumann@onlinehome.de)
+  * Makefile.am: correct $(docdir)
+
+2007-05-21 Werner Baumann (werner.baumann@onlinehome.de)
+  * rename INSTALL to INSTALL.davfs2 to avoid name clash
+    with generic INSTALL
+
+2007-05-21 Werner Baumann (werner.baumann@onlinehome.de)
+  * made debug a runtime option
+
+2007-05-17 Werner Baumann (werner.baumann@onlinehome.de)
+  * webdav.c:
+    add custom stream to redirect neon debug messages
+    to syslog
+    remove unnecessary code from dav_close_webdav
+
+2007-04-26 Werner Baumann (werner.baumann@onlinehome.de)
+  * released version 1.2.1
+
+2007-04-15 Werner Baumann (werner.baumann@onlinehome.de)
+  * corrected po4a.conf for partial translations
+  * added Spanish davfs2.conf.5 from Luciano
+  * webdav.c, prop_result:
+    replacement for / in file names depends from position
+    (slash-, -slash-, -slash)
+
+2007-04-07 Werner Baumann (werner.baumann@onlinehome.de)
+  * Released version 1.2.0
+
+2007-04-06 Werner Baumann (werner.baumann@onlinehome.de)
+  * etc/Makefile.am:
+    create backup of davfs2.conf and secrets on install
+  * src/Makefile.am: simplified
+
+2007-04-03 Werner Baumann (werner.baumann@onlinehome.de)
+  * cache.c: add_node
+    don't reset x-bit if is_exec == -1
+
+2007-04-01 Werner Baumann (werner.baumann@onlinehome.de)
+  * mount_davfs.c, webdav.c, cache.c:
+    mount even when OPTIONS request times out
+
+2007-03-25 Werner Baumann (werner.baumann@onlinehome.de)
+  * use autopoint to add gettextize-files
+  * use LINGUAS variable to decide which man pages
+    to install
+
+2007-03-10 Werner Baumann (werner.baumann@onlinehome.de)
+  * use po4a for translated man pages
+
+2007-03-05 Werner Baumann (werner.baumann@onlinehome.de)
+  * mount_davfs.c, parse_commandline:
+    added dummy options -v and -w
+
+2007-03-02 Werner Baumann (werner.baumann@onlinehome.de)
+  * webdav.c: make ssl error messages more clear
+  * mount_davfs.c, read_config: clicert_pw not cliecert
+
+2007-03-02 Werner Baumann (werner.baumann@onlinehome.de)
+  * cache.c: cache_dir is owned by mount.davfs process
+             backup_dir is owned by default_user
+
+2007-03-02 Werner Baumann (werner.baumann@onlinehome.de)
+  * added option ignore_home
+  * added davfs2.conf man page
+
+2007-02-28 Werner Baumann (werner.baumann@onlinehome.de)
+  * Added support for client certificates
+  * Added support for server certificates that are verified
+    by the user and can't be verified the normal way
+  * Added dav_user, when invoked by root change id to dav_user
+  * Changed default dav_group to 'davfs2'
+
+2007-02-25 Werner Baumann (werner.baumann@onlinehome.de)
+  * mount_davfs.c, write_mtab_entry:
+    List options; no username if user is root.
+
+2007-02-20 Werner Baumann (werner.baumann@onlinehome.de)
+  * mount_davfs.c, webdav.c: review charset conversion
+  * mount-davfs.c: added option _netdev
+
+2007-02-14 Werner Baumann (werner.baumann@onlinehome.de)
+  * Added NLS.
+
+2007-02-13  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* gettext.m4: New file, from gettext-0.14.4.
+	* iconv.m4: New file, from gettext-0.14.4.
+	* lib-ld.m4: New file, from gettext-0.14.4.
+	* lib-link.m4: New file, from gettext-0.14.4.
+	* lib-prefix.m4: New file, from gettext-0.14.4.
+	* progtest.m4: New file, from gettext-0.14.4.
+	* Makefile.am (EXTRA_DIST): Add the new files.
+	                            Add config/config.rpath.
+	                 (SUBDIRS): Add po.
+	* configure.ac (AC_CONFIG_FILES): Add po/Makefile.in.
+
+2007-02-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * Use automake.
+      Reorganize directory structure, trying to meet
+      GNU standards.
+
+2007-02-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: dav_setattr
+      Check return value of getpwuid and getgrgid.
+
+2006-12-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c, mount_davfs.h, webdav.c, webdav.h,
+      cache.c, davfs2.conf, davfs2.conf.template:
+      Experimental character conversion for file and
+      directory names.
+
+2006-12-26 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.1.4
+
+2006-12-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: dav_tidy_cache
+      Don't save backups.
+    * cache.c: dav_getattr, dav_lookup
+      Use dir_refresh (not file_refresh).
+    * defaults.h:
+      Reduce default dir_refresh to 60 seconds.
+
+2006-11-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * kernel_interface:
+      Try modprobe coda. Use full path of modprobe.
+      Send messages from modprobe to /dev/null.
+
+2006-11-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: update_directory
+      Make update interval depend from calling function.
+
+2006-11-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * kernel_interface.c: init_fuse
+      buf_size minimum is FUSE_MIN_READ_BUFFER + 4096
+    * dav_fuse5.c, dav_fuse7.c: dav_fuse7_loop, fuse_init,
+      fuse_read, fuse_stat, fuse_write
+      Adjust buffer size.
+    *cache.c: move_dirty
+      Unlock src if created, else delete.
+
+2006-11-27 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_fuse7.c: fuse_create
+      Removed O_EXCL and O_CREAT flags in call to dav_open.
+    * mount_davfs: main
+      Use options -il in call of umount program.
+
+2006-11-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: Flush coda on create and mkdir.
+    * cache.c: dav_init_cache
+      Fixed name clash of parameters and global variables.
+    * cache.c, cache.h, dav_coda2.c, dav_coda3.c, dav_fuse5.c,
+      dav_fuse7.c: dav_setattr
+      Ignore ctime.
+
+2006-11-19 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: dav_init_webdav
+      Changed default lock owner to <username>.
+    * webdav.c, cache.c: dav_init_webdav, dav_init_cache
+      Check server capabilities. If connection fails,
+      print neon error.
+    * cache.c: move_reg
+      Do not change etag and smtime of source node. Do
+      not lock or set execute.
+    * Time stamps revisited.
+
+2006-11-18 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: dav_put
+      Do not check mtime if etag is present.
+    * cache.c: update_node
+      For cached files (includes dirty and open_write)
+      do not check mtime if etag is present.
+    * cache.c: tidy_cache, update_cache_file
+      Do not change mtime after PUT.
+    * cache.c, webdav.c: update_cache_file, dav_get_file
+      Only change mtime if a new version is retrieved.
+    * cache.c: dav_getattr, dav_lookup
+      Call attr_from_cache_file only if the file is open.
+
+2006-11-12 Werner Baumann (werner.baumann@onlinehome.de)
+    * umount_davfs:
+      If canonicalize_file_name returns NULL, try
+      argv[optind].
+
+2006-11-07 Werner Baumann (werner.baumann@onlinehome.de)
+    * Makefile.in: Added missing entries for umount.
+    * Released version 1.1.3
+
+2006-11-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: move_reg, move_dirty
+      Do not backup destination.
+      webdav.c: dav_head
+      Destroy request *after* retrieving information.
+    * cache.h, cache.c: dav_node
+      Added dirty flag (mtime not always indicates changes).
+    * cache.c, webdav.c, webdav.h:
+      On PUT set Execute property before HEAD (IIS
+      changes Etag on PROPPATCH).
+    * Set utime on creation of files and directories.
+
+2006-10-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * Added umount helper umount.davfs and man page.
+
+2006-10-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: is_cached, clean_tree, update_cache_file
+      Removed access()-call.
+    * mount_davfs.h, mount_davfs.c, cache.h, cache.c,
+      davfs2.conf, davfs2.conf.template:
+      Added option gui_optimize, adjusted names and
+      semantics of cache times.
+
+2006-10-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: update_node, dav_tidy_cache, move_dirty
+      Update node->utime for regular files.
+
+2006-10-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, cache.h, dav_fuse5.c, dav_fuse7.c:
+      Removed O_FSYNC (Debian Bug report logs - #394845).
+      It is BSD feature and not necessary.
+
+2006-10-18 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: dav_init_cache
+      If connections fails with EAGAIN, try a second time.
+    * webdav.c, webdav.h, mount_davfs.c, mount_davfs.h,
+      defaults.h, debug.h:
+      Make 'Expect: 100-Continue' header a configuration option.
+
+2006-10-16 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: dav_init_webdav
+      Initialize lock_timeout.
+
+2006-10-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * Released version 1.1.2
+
+2006-10-08 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: prop_result
+      Normalize result->path.
+
+2006-10-07 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: prop_result
+      test length of href and log error if too short
+    * mount_davfs.c: read_secrets
+      Added patch to allow lines without password [ 1572771 ]
+
+2006-10-07 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c:
+      Fixed bug in treating missing trailing slash in
+      collection urls.
+
+2006-10-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.h, mount_davfs.c, webdav.h, webdav.c:
+      Add configuration option use_displayname, use_proxy,
+      ask_auth and locks to configuration file.
+      useproxy, askauth and locks deprecated on
+      command line and in fstab. They are no longer
+      check in check_fstab.
+
+2006-10-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: dav_get_collection
+      Check path for trailing slash; ctx.path must always
+      have a trailing slash.
+
+2006-10-05 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: dav_write
+      Check for write errors.
+    * dav_coda2.c, kernel_interface.c:
+      Disable coda2 interface if pointers are 64 bit.
+    * dav_fuse5.c, dav_fuse7.c: fuse_write
+      Properly cast size_t into 32-bit member out->size.
+
+2006-10-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * coda2.h, coda3.h:
+      Commented out include of linux/time.h
+
+2006-10-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * Makefile.in, mount_davfs.c, README:
+      Wrong directory for documentation fixed.
+      (now: $prefix/share/doc/davfs2)
+    * Fixed bug in uninstall target.
+
+2006-10-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * Makefile.in: missing mount.davfs.8.in
+    * Version 1.1.1 released
+
+2006-10-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * Version 1.1.0 released.
+
+2006-09-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: is_created, is_dirty, backup_node
+      Test for existence of cache_path.
+    * cache.c, cache.h, dav_fuse5.c, dav_fuse7.c:
+      dav_read, dav_write: removed parameter pid.
+
+2006-09-28 Werner Baumann (werner.baumann@onlinehome.de)
+    * kernel-interface.c, kernel-interface.h, dav_fuse5.c,
+      dav_fuse7.c, mount_davfs.c, mount_davfs.h:
+      Evaluate fuse version by trial mounts.
+      Call specific kernel_interface msg_loop from main.
+    * cache.c, cache.h, dav_coda2.c, dav_coda3.c, dav_fuse5.c,
+      dav_fuse7.c:
+      Added parameter off to dav_write_dir_entry_fn, to
+      satisfy fuse7.
+    * mount_davfs.h, mount_davfs.c, webdav.c:
+      Added option lock_owner.
+      Added sections to davfs2.conf to allow different
+      settings for each mountable file system.
+    * mount_davfs.c:
+      No more URL encoding of urls. Use octal escapes in
+      fstab, escapes or quoting on the shell and in the
+      config files.
+
+2006-09-24 Werner Baumann (werner.baumann@onlinehome.de)
+    * Added support for fuse kernel fs.
+    * Added large file support.
+    * Added dav_fuse7.c, dav_fuse5.c, dav_coda2.c, dav_coda3.c,
+      kernel_interface.c, fuse5_kernel.h, fuse7_kernel.h, coda2.h,
+      coda3.h, kernel_interface.h.
+    * Removed dav_coda.c, dav_coda.h.
+    * Fixed some illegal pointer bugs.
+
+2006-08-27 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c, coda_setattr()
+      Added atime.
+    * cache.c, dav_rename()
+      Adjust smtime after MOVE.
+    * cache.c:
+      Changed delete_cache() into clean_cache().
+    * dav_coda.c: coda_open_by_fd()
+      Ignore O_CREATE and O_EXCL flags.
+    * cache.c: update_cache_file()
+      Only PUT if not locked.
+    * cache.c, write_node(), clean_cache():
+      Fixed bugs in writing backup files and cleaning
+      cache.
+
+2006-08-25 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.h, dav_coda.c:
+      Fixed 64-bit alignment bug in struct Coda3Fid.
+      Clear padding before setting FID in response to
+      upcalls.
+
+2006-08-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c: Fixed bug in run_messageloop().
+    * cache.c: update_node()
+      Test for change in smtime and flush if changed.
+
+2006-08-22 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, dav_coda.c:
+      Replaced dav_coda_flush() call back by a pointer
+      to flush flag.
+
+2006-08-21 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: Remove cache file of parent directory and
+      set utime = 0, whenever a node is removed or added.
+      Issue a flush() call when this changes are not
+      initiated by the kernel.
+
+2006-08-20 Werner Baumann (werner.baumann@onlinehome.de)
+    * Added configuration options.
+      Updated config files.
+
+2006-08-20 Werner Baumann (werner.baumann@onlinehome.de)
+    * Reviewed internal interfaces.
+      Removed circular dependencies from header files.
+    * Added support for neon-0.2.6.
+    * Removed bug in handling "displayname".
+
+2006-07-23 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c, cache.h: removed variable notify, cleaner
+      code for calling flush_nodes()
+
+2006-07-11 Werner Baumann (werner.baumann@onlinehome.de)
+    * webdav.c: prop_result()
+      Only http-unescape href once.
+
+2006-07-09 Werner Baumann (werner.baumann@onlinehome.de)
+    * Cleared up interfaces between dav_coda.c, cache.c and
+      mount_davfs.c to reduce dependencies and prepare
+      for integration of fuse module.
+    * Fixed path in lock_discover.
+    * Remove null resources from dav_props.
+    * Use CODA_FLUSH for downcall (zap and purge do not seem
+      to work as expected).
+
+2006-06-17 Werner Baumann (werner.baumann@onlinehome.de)
+    * mount_davfs.c: check_mountpoint()
+      Fixed error when testing for foreign home directories.
+
+2006-06-06 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c: fixed potential security risk
+      Ownership and mode of devices /dev/cfs0 to /dev/cfs4
+      will no longer be changed by mount.davfs if the 
+      devices already exist. If mount.davfs has to create
+      them, they will be set "crw- --- --- root root".
+
+2006-06-04 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: check_cache_dir()
+      Include host name in name of cache directory.
+
+2006-06-03 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.in:
+      Clarified help string for option enable-debug.
+
+2006-06-02 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c, cache.c, cache.h, configure.in:
+      Using size_t instead of int/uint as index into
+      table and when casting from pointer.
+      Removed AC_CHECK_SIZEOF([void *], [], []).
+      (Should now work on 32- and 64-bit systems without
+      compiler warnings.)
+
+2006-05-31 Werner Baumann (werner.baumann@onlinehome.de)
+    * cache.c: dav_idle() renamed dav_tidy_cache()
+      New algorithm for writing back and resizing cache.
+    * dav_coda.c: dav_run_messageloop()
+      Call dav_tidy_cache() recurrently until there is
+      nothing left to tidy or an upcall from coda.
+
+2006-05-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * dav_coda.c: offset[UID][0]
+      Use cr_euid for coda-kernel-version 2 instead of cr_uid.
+
+2006-04-30 Werner Baumann (werner.baumann@onlinehome.de)
+    * Removed Large File Support on 32-bit systems because
+      of too many problems. There is probably not much need
+      to transfer files bigger than 20 GB.
+    * Fixed: Don't change node->size when 304 Not_modified.
+             Unlock when no more open for write and file
+             is unchanged.
+    * Released version 1.0.2 (still beta)
+
+2006-04-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * configure.in:
+      Added AC_SYS_LARGEFILE
+
+2006-04-29 Werner Baumann (werner.baumann@onlinehome.de)
+    * fixed support for neon 0.25
+    * added dav_sync()
+
+2006-04-01 Werner Baumann (werner.baumann@onlinehome.de)
+    * released version 1.0.1 (beta)
+
+Copyright (C) 2006, 2007, 2008, 2009 Werner Baumann
+
+Copying and distribution of this file, with or without modification, are
+permitted in any medium without royalty provided the copyright notice
+and this notice are preserved.

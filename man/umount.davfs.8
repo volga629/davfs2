@@ -1,0 +1,94 @@
+.TH u@PROGRAM_NAME@ 8 "2014-08-23" @PACKAGE_STRING@
+
+.SH NAME
+
+u@PROGRAM_NAME@ \- Umount-helper to unmount a @PACKAGE@ file system
+
+
+.SH SYNOPSIS
+
+.B u@PROGRAM_NAME@ [-h | --help] [-V | --version]
+.br
+.BI "umount " dir
+
+
+.SH SYNOPSIS (root only)
+
+.BI "u@PROGRAM_NAME@ " dir
+
+
+.SH DESCRIPTION
+
+\fBu@PROGRAM_NAME@\fR is a umount helper program. It is called by the
+\fBumount\fR(8) command. Its purpose is to prevent the umount command
+from returning unless \fB@PROGRAM_NAME@\fR has synchronized all its
+cached files with the webdav server.
+
+.PP
+\fIdir\fP is the mountpoint where the WebDAV resource is mounted on.
+It may be an absolute or relative path.
+
+.PP
+While for local file systems \fBumount\fR(8) will only return when all
+cached data have been written to disk, this is not automatically true
+for a mounted \fB@PACKAGE@\fR file system. With this umount helper the
+user can rely on the familiar behaviour of \fBumount\fR(8). To inform
+the operating system that the file system uses a network connection,
+you should always use the \fB_netdev\fR option, when mounting as
+\fB@PACKAGE@\fR file system.
+
+.PP
+Depending on the amount of data and the quality of the connection, unmounting
+a \fB@PACKAGE@\fR file system may take some seconds up to some hours.
+
+.PP
+If the \fB@PROGRAM_NAME@\fR daemon encountered serious errors,
+\fBu@PROGRAM_NAME@\fR may return an error instead of unmounting the file
+system. In this case try \fBumount -i\fR. The \fB-i\fR option will prevent
+\fBumount\fR(8) from calling \fBu@PROGRAM_NAME@\fR.
+
+
+.SH OPTIONS
+
+.TP
+.B -V --version
+Output version.
+
+.TP
+.B -h --help
+Print a help message.
+
+.TP
+.B -f -l -n -r -v -t
+This options are \fBignored\fR. They are only recognized for compatibility
+with \fBumount\fR(8).
+
+
+.SH FILES
+
+.TP
+.I @SYS_RUN@
+PID-files of running \fBu@PROGRAM_NAME@\fR processes are looked up here.
+
+
+.SH BUGS
+
+No known bugs.
+
+
+.SH AUTHORS
+
+This man page was written by Werner Baumann <werner.baumann@onlinehome.de>.
+
+
+.SH DAVFS2 HOME
+
+@PACKAGE_BUGREPORT@
+
+
+.SH SEE ALSO
+
+.BR @PROGRAM_NAME@ (8),
+.BR umount (8),
+.BR @CONFIGFILE@ (5),
+.BR fstab (5)
